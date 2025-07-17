@@ -1,9 +1,5 @@
 # Merchant Profile
 
-Created: April 8, 2025 12:29 PM
-Status: Done
-author: Akshaya S
-
 ### **Merchant Configuration (White-Label Admin Guide)**
 
 As a white-label admin, you have full access to view and configure processing settings for any of your merchants. This includes managing allowed currencies, payment methods, and other key configurations.

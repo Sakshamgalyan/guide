@@ -1,9 +1,5 @@
 # Rule Engine
 
-Created: March 19, 2025 12:01 PM
-Status: Done
-author: Utkarsh G
-
 **Rule Engine User Manual**
 
 **Overview**

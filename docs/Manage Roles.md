@@ -1,9 +1,5 @@
 # Manage Roles
 
-Created: May 13, 2025 1:31 PM
-Status: Done
-author: Akshaya S
-
 This module allows white-label admins to **view**, **manage**, and **add new merchants** under their account.
 
 ![Screenshot 2025-05-16 at 5.52.41 PM.png](/img/Screenshot_2025-05-16_at_5.52.41_PM.png)

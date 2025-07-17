@@ -1,9 +1,5 @@
 # Banks
 
-Created: April 8, 2025 12:29 PM
-Status: Done
-author: Akshaya S
-
 ### Overview
 
 The **Bank Menu** displays all the banks connected to your white-label merchant account. For each bank, you can view its name, activity status, and access options to see detailed bank information as well as the Merchant IDs or MIDs associated with each bank

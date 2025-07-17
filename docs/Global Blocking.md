@@ -1,9 +1,5 @@
 # Global Blocking
 
-Created: May 13, 2025 2:16 PM
-Status: Done
-author: Akshaya S
-
 This module enables merchants to **block transactions** based on specific criteria to enhance security and prevent fraudulent activity. Merchants can block transactions originating from particular **MIDs, BINs, Cards, Customer Profiles, Countries**, and **IP addresses**.
 
 ![Screenshot 2025-05-16 at 6.22.36 PM.png](/img/Screenshot_2025-05-16_at_6.22.36_PM.png)

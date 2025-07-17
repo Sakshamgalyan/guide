@@ -5,7 +5,6 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
-
 import styles from './index.module.css';
 
 function HomepageHeader() {
@@ -13,22 +12,22 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <Heading as="h1" className="hero__title">
+        <Heading as="h1" className="hero__title"
+        style={{ color: 'white' }}>
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-            <Link
+          <Link
             className="button button--secondary button--lg"
             to="/docs/White‑Label Merchant Onboarding and Configuration"
-            style={{ 
-              backgroundColor: '#5223BC', 
+            style={{
+              backgroundColor: '#5223BC',
               color: 'white',
-              transition: 'background-color 0.3s ease',
             }}
-            >
+          >
             Get Started with Onboarding
-            </Link>
+          </Link>
         </div>
       </div>
     </header>
@@ -44,16 +43,35 @@ export default function Home(): ReactNode {
     >
       <HomepageHeader />
       <main>
-        <section className="container">
-          <p>
-            Welcome to the Paysecure Guide. This guide will walk you
-            through the process of onboarding and configuring your account
-            on the Paysecure platform.
-          </p>
-          <p>
-            Whether you're new to Paysecure or looking to optimize your setup,
-            you'll find all the information you need here.
-          </p>
+        
+        <section className='cardContainer'
+          style={{
+            marginBottom: '100px', marginTop: '50px'
+          }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+            <Link to="/docs/White‑Label Merchant Onboarding and Configuration"
+            className={styles.merchantDocs}>
+              <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
+                Merchant Docs
+              </div>
+              <div style={{ fontSize: '14px' }}>
+                Get Started →
+              </div>
+              </div>
+            </Link>
+            <Link to="/"
+            className={styles.apiDocs}>
+              <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
+                Alternative Payment Methods(APM) Guide
+              </div>
+              <div style={{ fontSize: '14px' }}>
+                Coming Soon
+              </div>
+              </div>
+            </Link>
+          </div>
         </section>
       </main>
     </Layout>

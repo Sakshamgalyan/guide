@@ -1,9 +1,5 @@
 # Balance
 
-Created: May 13, 2025 2:13 PM
-Status: Done
-author: Akshaya S
-
 ## Overview
 
 The Balance section allows you to keep track of the available funds for each payment method. You can view balances in various currencies as well as the rolling reserve maintained for payouts and other charges.

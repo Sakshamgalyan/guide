@@ -1,9 +1,5 @@
 # Add User
 
-Created: May 13, 2025 2:30 PM
-Status: Done
-author: Akshaya S
-
 This module allows white-label admins to **view**, **manage**, and **add new users** under their white-label account.
 
 ![Screenshot 2025-05-16 at 6.07.32 PM.png](/img/Screenshot_2025-05-16_at_6.07.32_PM.png)

@@ -1,9 +1,5 @@
 # Global Settings
 
-Created: April 8, 2025 12:30 PM
-Status: Done
-author: Akshaya S
-
 ### Overview
 
 This module allows you to configure various global options that affect all your accounts, including transaction limits, error handling, and cascading rules. The available settings are:

@@ -8,15 +8,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 :root {
-  --ifm-color-primary: #8666CF;
+  --ifm-color-primary: #1F1438;
   --ifm-color-primary-dark: #8666CF;
   --ifm-color-primary-darker: #8666CF;
   --ifm-color-primary-darkest: #5223BC;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary-light: #8666CF;
+  --ifm-color-primary-lighter: #8666CF;
+  --ifm-color-primary-lightest: #8666CF;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: #DFF34F;
+   color:  #1F1438;
   --ifm-font-family-base: 'Unbounded', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
@@ -30,6 +31,7 @@
   --ifm-color-primary-lighter: #DACAFF;
   --ifm-color-primary-lightest: #DACAFF;
   --docusaurus-highlighted-code-line-bg: #DFF34F;
+  color:  white;
   --ifm-font-family-base: 'Unbounded', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
@@ -45,3 +47,22 @@ h1, h2, h3, h4, h5, h6 {
 p, li, ul, ol, span, div {
   font-family: 'DM Sans', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
+
+h1{
+  font-weight: 600;
+  font-size: xx-large;
+  color: #5223BC;
+}
+[data-theme='dark'] h1{
+  color: white;
+}
+h2{
+  font-weight: 600;
+  font-size: x-large;
+}
+h3{
+  font-weight: 600;
+  font-size: large;
+}
+
+  

@@ -1,9 +1,5 @@
 # Payouts
 
-Created: March 19, 2025 11:54 AM
-Status: Not started
-author: Utkarsh G
-
 **Payout**
 
 **Overview:**

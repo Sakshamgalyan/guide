@@ -1,9 +1,5 @@
 # Utilities
 
-Created: April 8, 2025 12:30 PM
-Status: Not started
-author: Akshaya S
-
 ## Utilities Module
 
 This module provides account-level configuration options to manage key settings, including processing batch refunds, setting up conversion rates, and handling bank reconciliation.

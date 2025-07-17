@@ -1,9 +1,5 @@
 # Brand Settings
 
-Created: May 13, 2025 1:22 PM
-Status: Done
-author: Akshaya S
-
 This module allows merchants to personalize and manage their customers' checkout experience through PaySecure.
 
 Using this feature, you can:

@@ -1,9 +1,5 @@
 # Reports and Analytics
 
-Created: March 19, 2025 12:11 PM
-Status: Not started
-author: Akshaya S
-
 ## **Introduction**
 
 PaySecure offers a robust and feature-rich **Reporting & Analytics** suite that empowers merchants with real-time visibility and data-driven insights into their business performance.
