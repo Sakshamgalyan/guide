@@ -1,0 +1,169 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Update Customer Details
+
+```bash
+https://api.paysecure.net/api/v1/{customerId}/patchCustomer
+```
+
+Whenever a customer or the merchant updates customer details on the merchant site, a PATCH request must be made to synchronize these changes with Paysecure.
+
+This API endpoint allows you to update the customer details using an HTTP PATCH request. The request should be sent to https://api.paysecure.net/api/v1/{customerId}/patchCustomer.
+
+### Request Body
+
+The request body should be in raw format and include the following parameters:
+
+- `fullName` (string): The full name of the customer.
+- `emailId` (string): The email address of the customer.
+- `dateOfBirth` (string): The date of birth of the customer.
+- `phoneNo` (string): The phone number of the customer.
+- `city` (string): The city of the customer.
+- `stateCode` (string): The state code of the customer.
+- `zipCode` (string): The zip code of the customer.
+- `address` (string): The address of the customer.
+- `country` (string): The country of the customer.
+- `createdOn` (string): Time when the customer was created.
+- `custRegDate` (string): Customer registration date (Non-Mandatory).
+- `successTxn` (string): Success transaction details (Non-Mandatory).
+- `lastActivity` (string): Time of the last activity.
+- `lastUpdated` (string): Time when the last patch was called.
+- `extraParam` (object): Additional parameters including param1, param2, param3, param4 with their respective values.
+
+### Response
+
+The response will contain the updated customer details or a success message upon successful update.
+
+### HEADERS
+___
+
+__Authorization__  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Bearer Token
+
+__BrandId__  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; brand_id_value 
+___
+
+**Body** raw (json)
+
+```json
+{
+  "fullName": "Gouri Shankar3",
+  "emailId": "gouri@paysecure.com",
+  "dateOfBirth": "1990-11-27",
+  "phoneNo": "9413666514",
+  "city": "Dausa",
+  "stateCode": "Raj",
+  "zipCode": "202021",
+  "address": "Somnath Nagar",
+  "country": "IN",
+  "CustRegDate": "Merchant to provide",
+  "SuccessTxn": "Merchant to provide"
+}
+```
+
+### Example Request
+<Tabs>
+    <TabItem value="curl" label="cURL" default>
+    <Tabs>
+    <TabItem value="success" label="Success" default>
+       ```bash
+        curl --location -g --request PATCH 'https://api.paysecure.net/api/v1/{custoemrId}/patchCustomer' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'BrandId: brand_id_value' \
+--header 'Authorisation: Bearer Token' \
+--data-raw '{
+  "fullName": "Akshaya Singhal",
+  "emailId": "testuserabcd@gmail.com",
+  "dateOfBirth": "1995-11-27",
+  "phoneNo": "2222222222",
+  "city": "jaipur",
+  "stateCode": "ra",
+  "zipCode": "202020",
+  "address": "Mansarovar Jaipur",
+  "country": "IN",
+  "custRegDate": "2024-11-27",
+  "successTxn": "32"
+  //   "extraParam":
+//     {
+//         "param1":"value1",
+//         "param2":"value2",
+//         "param3":"value3",
+//         "param4":"value4"
+//     }
+}'
+```
+### Example Response
+
+```json
+{
+  "customerId": "customerId",
+  "merchatCustomerID": "merchantProvidedCustomerId",
+  "brandId": "brandId",
+  "fullName": "Akshaya Singhal",
+  "emailId": "testuserabcd@gmail.com",
+  "dateOfBirth": "1995-11-27",
+  "phoneNo": "2222222222",
+  "city": "jaipur",
+  "stateCode": "ra",
+  "zipCode": "202020",
+  "address": "Mansarovar Jaipur",
+  "country": "IN",
+  "createdOn": "2025-02-27",
+  "custRegDate": "2024-11-27",
+  "successTrans": 32
+  "lastActivity": "",
+  "lastUpdated": ""
+}
+```
+    
+     </TabItem>
+    </Tabs>
+
+  </TabItem>
+  <TabItem value="java" label="Java" default>
+  <Tabs>
+  <TabItem value="success" label="Success" default>
+  ```bash
+  OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n  \"fullName\": \"Akshaya Singhal\",\n  \"emailId\": \"testuserabcd@gmail.com\",\n  \"dateOfBirth\": \"1995-11-27\",\n  \"phoneNo\": \"2222222222\",\n  \"city\": \"jaipur\",\n  \"stateCode\": \"ra\",\n  \"zipCode\": \"202020\",\n  \"address\": \"Mansarovar Jaipur\",\n  \"country\": \"IN\",\n  \"custRegDate\": \"2024-11-27\",\n  \"successTxn\": \"32\"\n  //   \"extraParam\":\n//     {\n//         \"param1\":\"value1\",\n//         \"param2\":\"value2\",\n//         \"param3\":\"value3\",\n//         \"param4\":\"value4\"\n//     }\n}");
+Request request = new Request.Builder()
+  .url("https://api.paysecure.net/api/v1/{custoemrId}/patchCustomer")
+  .method("PATCH", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Accept", "*/*")
+  .addHeader("BrandId", "brand_id_value")
+  .addHeader("Authorisation", "Bearer Token")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+### Example Response
+
+```json
+{
+  "customerId": "customerId",
+  "merchatCustomerID": "merchantProvidedCustomerId",
+  "brandId": "brandId",
+  "fullName": "Akshaya Singhal",
+  "emailId": "testuserabcd@gmail.com",
+  "dateOfBirth": "1995-11-27",
+  "phoneNo": "2222222222",
+  "city": "jaipur",
+  "stateCode": "ra",
+  "zipCode": "202020",
+  "address": "Mansarovar Jaipur",
+  "country": "IN",
+  "createdOn": "2025-02-27",
+  "custRegDate": "2024-11-27",
+  "successTrans": 32
+  "lastActivity": "",
+  "lastUpdated": ""
+}
+```
+  </TabItem>
+  </Tabs>
+    </TabItem>
+</Tabs>

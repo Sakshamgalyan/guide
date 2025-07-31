@@ -84,14 +84,14 @@ export default function Home(): ReactNode {
             </Link>
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '40px' }}>
-            <Link to="/"
+            <Link to="/docs/introduction"
             className={styles.apmDocs}>
               <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
                 Alternative Payment Methods(APM) Guide
               </div>
               <div style={{ fontSize: '14px' }}>
-                Coming Soon
+                Start here →
               </div>
               </div>
             </Link>

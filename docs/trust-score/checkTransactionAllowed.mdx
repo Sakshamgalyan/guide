@@ -1,0 +1,544 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Check Transaction Allowed
+
+```bash
+https://api.paysecure.net/api/v1/checkTransAllowed
+```
+
+### General TrustScore
+Request for the checkTransactionAllowed endpoint is identical to the TrustScore API. Only thing different is the response. Instead of detailed score, this endpoint only returns `transactionAllowed` parameter that can have either `YES` or `NO` value.
+
+### Permission
+
+Access to this API has to be given to you by the admin. So please contact your sales representative at Paysecure to get access to this API, if you get a 401 error of "You are not allowed to call this API service".
+
+### Mandatory Parameters (in body)
+
+| Parameters  | Description                                                                            |
+|-------------|----------------------------------------------------------------------------------------|
+| ip          | IP of the user. Both IP4 and IP6 are valid                                             |
+|email	      |	The email id of the user you want to trust score on                                    |
+|url	      | The URL on which the user is trying to purchase or consume a product, service or data. |
+
+### Other optional paramters:
+The optional parameters are self-explanatory and appropriate values can be given in string format.
+
+|  Parameters                   | Values  |
+|-------------------------------|---------|
+|  last_bets                    | String  |
+|  last_wins                    | String  |
+|  total_bonuses                | String  |
+|  last_real_bets               | String  |
+|  last_real_wins               | String  |
+|  total_deposits               | String  |
+|  last_bonus_bets              | String  |
+|  last_bonus_wins              | String  |
+|  average_real_bet             | String  |
+|  last_bets_amount             | String  |
+|  last_wins_amount             | String  |
+|  average_bonus_bet            | String  |
+|  bonus_to_deposits            | String  |
+|  last_deposit_date            | String  |
+|  total_withdrawals            | String  |
+|  is_phone_confirmed           | String  |
+|  money_in_money_out           | String  |
+|  last_deposit_amount          | String  |
+|  last_freespins_date          | String  |
+|  last_freespins_name          | String  |
+|  last_free_bonus_date         | String  |
+|  last_free_bonus_name         | String  |
+|  total_bonuses_amount         | String  |
+|  last_freespins_amount        | String  |
+|  last_freespins_status        | String  |
+|  last_real_bets_amount        | String  |
+|  last_real_wins_amount        | String  |
+|  total_deposits_amount        | String  |
+|  last_bonus_bets_amount       | String  |
+|  last_bonus_wins_amount       | String  |
+|  last_free_bonus_amount       | String  |
+|  last_free_bonus_status       | String  |
+|  last_deposit_bonus_date      | String  |
+|  last_deposit_bonus_name      | String  |
+|  last_freespins_currency      | String  |
+|  last_freespins_wagering      | String  |
+|  withdrawals_to_deposits      | String  |
+|  last_free_bonus_currency     | String  |
+|  last_free_bonus_wagering     | String  |
+|  total_withdrawals_amount     | String  |
+|  withdrawal_ewallet_email     | String  |
+|  last_deposit_bonus_amount    | String  |
+|  last_deposit_bonus_status    | String  |
+|  last_deposit_bonus_currency  | String  |
+|  last_deposit_bonus_wagering  | String  |
+|  session                      | String  |
+|  payment_mode                 | String  |
+|  card_fullname                | String  |
+|  card_bin                     | String  |
+|  card_hash                    | String  |
+|  card_last                    | String  |
+|  card_expire                  | String  |
+|  avs_result                   | String  |
+|  cvv_result                   | String  |
+|  sca_method                   | String  |
+|  user_bank_account            | String  |
+|  user_bank_name               | String  |
+|  user_balance                 | String  |
+|  user_verification_level      | String  |
+|  status_3d                    | String  |
+|  regulation                   | String  |
+|  payment_provider             | String  |
+|  phone_number                 | String  |
+|  transaction_type             | String  |
+|  transaction_amount           | String  |
+|  transaction_currency         | String  |
+|  merchant_id                  | String  |
+|  details_url                  | String  |
+|  name                         | String  |
+|  person_type                  | String  |
+|  gender                       | String  |
+
+### Response
+
+Response contains a single parameter: `transactionAllowed` which can either be `YES` or `NO` .
+
+```json
+{
+"transactionAllowed" : "YES"
+}
+```
+
+If there are any errors then it'll be in the format of :
+
+```json
+{
+    "message": "descriptive error message",
+    "code": "error_code"
+}
+```
+
+### Possible Error Messages
+
+the possible error codes one can get on calling this APIs are:
+
+|  Code                  |
+|------------------------|
+|400, 404, 401, 415, 405 |
+
+for example:
+
+|  Code    | Error Messages                               |
+|----------|----------------------------------------------|
+|  401     | Incorrect secret_key                         |
+|  401     | You are not Allowed to call this API service |
+
+
+**AUTHORIZATION:** Bearer Token
+
+This folder is using Bearer Token from collection [Authentication Guide](../authentication.md)
+
+**Body** raw (json)
+```json
+
+{
+    "requiredinput": {
+        "ip": "111.11.11.11",
+        "email": "test@gmail.com",
+        "url": "https://www.asos.com/"
+    },
+    "optionalInput": {
+        "last_bets": null,
+        "last_wins": "",
+        "total_bonuses": "",
+        "last_real_bets": "",
+        "last_real_wins": "",
+        "total_deposits": "",
+        "last_bonus_bets": "",
+        "last_bonus_wins": "",
+        "average_real_bet": "",
+        "last_bets_amount": "",
+        "last_wins_amount": "",
+        "average_bonus_bet": "",
+        "bonus_to_deposits": "",
+        "last_deposit_date": "",
+        "total_withdrawals": "",
+        "is_phone_confirmed": "",
+        "money_in_money_out": "",
+        "last_deposit_amount": "",
+        "last_freespins_date": "",
+        "last_freespins_name": "",
+        "last_free_bonus_date": "",
+        "last_free_bonus_name": "",
+        "total_bonuses_amount": "",
+        "last_freespins_amount": "",
+        "last_freespins_status": "",
+        "last_real_bets_amount": "",
+        "last_real_wins_amount": "",
+        "total_deposits_amount": "",
+        "last_bonus_bets_amount": "",
+        "last_bonus_wins_amount": "",
+        "last_free_bonus_amount": "",
+        "last_free_bonus_status": "",
+        "last_deposit_bonus_date": "",
+        "last_deposit_bonus_name": "",
+        "last_freespins_currency": "",
+        "last_freespins_wagering": "",
+        "withdrawals_to_deposits": "",
+        "last_free_bonus_currency": "",
+        "last_free_bonus_wagering": "",
+        "total_withdrawals_amount": "",
+        "withdrawal_ewallet_email": "",
+        "last_deposit_bonus_amount": "",
+        "last_deposit_bonus_status": "",
+        "last_deposit_bonus_currency": "",
+        "last_deposit_bonus_wagering": "",
+        "session": "",
+        "payment_mode": "",
+        "card_fullname": "",
+        "card_bin": "",
+        "card_hash": "",
+        "card_last": "",
+        "card_expire": "",
+        "avs_result": "",
+        "cvv_result": "",
+        "sca_method": "",
+        "user_bank_account": "",
+        "user_bank_name": "",
+        "user_balance": "",
+        "user_verification_level": "",
+        "status_3d": "",
+        "regulation": "",
+        "payment_provider": "",
+        "phone_number": "",
+        "transaction_type": "",
+        "transaction_amount": "",
+        "transaction_currency": "",
+        "merchant_id": "",
+        "details_url": "",
+        "name": "",
+        "person_type": "",
+        "gender": ""
+    }
+}
+```
+
+__Example Requests__
+
+<Tabs>
+    <TabItem value='curl' label='cURL'>
+        <Tabs>
+        <TabItem value='TrustScoreExists' label='TrustScoreExists'>
+        ```bash
+        curl --location -g '{{StagingBaseURL}}/checkTransAllowed' \
+--data-raw '{
+    "requiredinput": {
+        "ip": "2001:8004:cc2:fadb:9958:4523:6c42:e3f2",
+        "email": "test@gmail.com",
+        "url": "http://test.com"
+    },
+    "optionalInput": {
+        "last_bets": null,
+        "last_wins": "",
+        "total_bonuses": "",
+        "last_real_bets": "",
+        "last_real_wins": "",
+        "total_deposits": "",
+        "last_bonus_bets": "",
+        "last_bonus_wins": "",
+        "average_real_bet": "",
+        "last_bets_amount": "",
+        "last_wins_amount": "",
+        "average_bonus_bet": "",
+        "bonus_to_deposits": "",
+        "last_deposit_date": "",
+        "total_withdrawals": "",
+        "is_phone_confirmed": "",
+        "money_in_money_out": "",
+        "last_deposit_amount": "",
+        "last_freespins_date": "",
+        "last_freespins_name": "",
+        "last_free_bonus_date": "",
+        "last_free_bonus_name": "",
+        "total_bonuses_amount": "",
+        "last_freespins_amount": "",
+        "last_freespins_status": "",
+        "last_real_bets_amount": "",
+        "last_real_wins_amount": "",
+        "total_deposits_amount": "",
+        "last_bonus_bets_amount": "",
+        "last_bonus_wins_amount": "",
+        "last_free_bonus_amount": "",
+        "last_free_bonus_status": "",
+        "last_deposit_bonus_date": "",
+        "last_deposit_bonus_name": "",
+        "last_freespins_currency": "",
+        "last_freespins_wagering": "",
+        "withdrawals_to_deposits": "",
+        "last_free_bonus_currency": "",
+        "last_free_bonus_wagering": "",
+        "total_withdrawals_amount": "",
+        "withdrawal_ewallet_email": "",
+        "last_deposit_bonus_amount": "",
+        "last_deposit_bonus_status": "",
+        "last_deposit_bonus_currency": "",
+        "last_deposit_bonus_wagering": "",
+        "session": "",
+        "payment_mode": "",
+        "card_fullname": "",
+        "card_bin": "",
+        "card_hash": "",
+        "card_last": "",
+        "card_expire": "",
+        "avs_result": "",
+        "cvv_result": "",
+        "sca_method": "",
+        "user_bank_account": "",
+        "user_bank_name": "",
+        "user_balance": "",
+        "user_verification_level": "",
+        "status_3d": "",
+        "regulation": "",
+        "payment_provider": "",
+        "phone_number": "",
+        "transaction_type": "",
+        "transaction_amount": "",
+        "transaction_currency": "",
+        "merchant_id": "",
+        "details_url": "",
+        "name": "",
+        "person_type": "",
+        "gender": ""
+    }
+}'
+```
+__Example Response__
+
+            <Tabs>
+            <TabItem value='body' label='Body'>
+            ```json
+            {
+  "transactionAllowed": "YES"
+}
+```
+</TabItem>
+<TabItem value='headers' label='Headers'>
+
+| Headers                |   Values                                           |
+|--------------------------|-------------------------------------------------------------|
+| Date                   | Sun, 29 Oct 2023 09:21:22 GMT                       |
+|Content-Type            | application/json                                    |
+|Transfer-Encoding       | chunked                                             |
+|Connection              | keep-alive                                          |
+|X-Content-Type-Options  | nosniff                                             |
+|X-XSS-Protection        | 1; mode=block                                       |
+|Cache-Control           | no-cache, no-store, max-age=0, must-revalidate      |
+|Pragma                  | no-cache                                            |
+|Expires                 | 0                                                   |
+|X-Frame-Options         | DENY                                                |
+|CF-Cache-Status         | DYNAMIC                                             |
+|Report-To               | `{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=r2%2FuLwSilxdD1lpiI1VqpgF0Tu9etiNhupySeBHl0zcU8XV1z8kwR%2FJ00ti4xpMdrTXW%2BkqZkLGrkkaUnMWFsaYlg%2FfA9UC4wIKwmc9LHUwna491EmnC3b3vlabzhUJ11CMpnVmicUE%3D"}],"group":"cf-nel","max_age":604800}` |
+|NEL                     | `{"success_fraction":0,"report_to":"cf-nel","max_age":604800}` |
+|Server                  | cloudflare                                    |
+|CF-RAY                  |  81da590e8d4345a0-LHR |
+|alt-svc                 | h3=":443"; ma=86400 |
+
+</TabItem>
+            </Tabs>
+                </TabItem>
+                <TabItem value='trustScoreError' label='Trust Score Error'>
+                ```bash
+                    curl --location -g '{{StagingBaseURL}}/checkTransAllowed' \
+                    --data-raw '{
+                        "requiredinput": {
+                            "ip": "2001:8004:cc2:fadb:9958:4523:6c42:e3f2",
+                            "email": "test@gmail.com",
+                            "url": "http://test.com"
+                            },
+                            "optionalInput": {
+                                "last_bets": null,
+                                "last_wins": "",
+                                "total_bonuses": "",
+                                "last_real_bets": "",
+                                "last_real_wins": "",
+                                "total_deposits": "",
+                                "last_bonus_bets": "",
+                                "last_bonus_wins": "",
+                                "average_real_bet": "",
+                                "last_bets_amount": "",
+                                "last_wins_amount": "",
+                                "average_bonus_bet": "",
+                                "bonus_to_deposits": "",
+                                "last_deposit_date": "",
+                                "total_withdrawals": "",
+                                "is_phone_confirmed": "",
+                                "money_in_money_out": "",
+                                "last_deposit_amount": "",
+                                "last_freespins_date": "",
+                                "last_freespins_name": "",
+                                "last_free_bonus_date": "",
+                                "last_free_bonus_name": "",
+                                "total_bonuses_amount": "",
+                                "last_freespins_amount": "",
+                                "last_freespins_status": "",
+                                "last_real_bets_amount": "",
+                                "last_real_wins_amount": "",
+                                "total_deposits_amount": "",
+                                "last_bonus_bets_amount": "",
+                                "last_bonus_wins_amount": "",
+                                "last_free_bonus_amount": "",
+                                "last_free_bonus_status": "",
+                                "last_deposit_bonus_date": "",
+                                "last_deposit_bonus_name": "",
+                                "last_freespins_currency": "",
+                                "last_freespins_wagering": "",
+                                "withdrawals_to_deposits": "",
+                                "last_free_bonus_currency": "",
+                                "last_free_bonus_wagering": "",
+                                "total_withdrawals_amount": "",
+                                "withdrawal_ewallet_email": "",
+                                "last_deposit_bonus_amount": "",
+                                "last_deposit_bonus_status": "",
+                                "last_deposit_bonus_currency": "",
+                                "last_deposit_bonus_wagering": "",
+                                "session": "",
+                                "payment_mode": "",
+                                "card_fullname": "",
+                                "card_bin": "",
+                                "card_hash": "",
+                                "card_last": "",
+                                "card_expire": "",
+                                "avs_result": "",
+                                "cvv_result": "",
+                                "sca_method": "",
+                                "user_bank_account": "",
+                                "user_bank_name": "",
+                                "user_balance": "",
+                                "user_verification_level": "",
+                                "status_3d": "",
+                                "regulation": "",
+                                "payment_provider": "",
+                                "phone_number": "",
+                                "transaction_type": "",
+                                "transaction_amount": "",
+                                "transaction_currency": "",
+                                "merchant_id": "",
+                                "details_url": "",
+                                "name": "",
+                                "person_type": "",
+                                "gender": ""
+                            }
+                        }'
+```
+            __Example Response__
+
+            ```json
+            {
+            "message": "Incorrect secret_key",
+            "code": "authentication_failed"
+            }
+            ```
+                </TabItem>
+            </Tabs>
+        </TabItem>
+        <TabItem value='java' label='Java'>
+            <Tabs>
+                <TabItem value='trustScoreExists' label='Trust Score Exists'>
+                    ```bash
+                    OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"requiredinput\": {\r\n        \"ip\": \"2001:8004:cc2:fadb:9958:4523:6c42:e3f2\",\r\n        \"email\": \"test@gmail.com\",\r\n        \"url\": \"http://test.com\"\r\n    },\r\n    \"optionalInput\": {\r\n        \"last_bets\": null,\r\n        \"last_wins\": \"\",\r\n        \"total_bonuses\": \"\",\r\n        \"last_real_bets\": \"\",\r\n        \"last_real_wins\": \"\",\r\n        \"total_deposits\": \"\",\r\n        \"last_bonus_bets\": \"\",\r\n        \"last_bonus_wins\": \"\",\r\n        \"average_real_bet\": \"\",\r\n        \"last_bets_amount\": \"\",\r\n        \"last_wins_amount\": \"\",\r\n        \"average_bonus_bet\": \"\",\r\n        \"bonus_to_deposits\": \"\",\r\n        \"last_deposit_date\": \"\",\r\n        \"total_withdrawals\": \"\",\r\n        \"is_phone_confirmed\": \"\",\r\n        \"money_in_money_out\": \"\",\r\n        \"last_deposit_amount\": \"\",\r\n        \"last_freespins_date\": \"\",\r\n        \"last_freespins_name\": \"\",\r\n        \"last_free_bonus_date\": \"\",\r\n        \"last_free_bonus_name\": \"\",\r\n        \"total_bonuses_amount\": \"\",\r\n        \"last_freespins_amount\": \"\",\r\n        \"last_freespins_status\": \"\",\r\n        \"last_real_bets_amount\": \"\",\r\n        \"last_real_wins_amount\": \"\",\r\n        \"total_deposits_amount\": \"\",\r\n        \"last_bonus_bets_amount\": \"\",\r\n        \"last_bonus_wins_amount\": \"\",\r\n        \"last_free_bonus_amount\": \"\",\r\n        \"last_free_bonus_status\": \"\",\r\n        \"last_deposit_bonus_date\": \"\",\r\n        \"last_deposit_bonus_name\": \"\",\r\n        \"last_freespins_currency\": \"\",\r\n        \"last_freespins_wagering\": \"\",\r\n        \"withdrawals_to_deposits\": \"\",\r\n        \"last_free_bonus_currency\": \"\",\r\n        \"last_free_bonus_wagering\": \"\",\r\n        \"total_withdrawals_amount\": \"\",\r\n        \"withdrawal_ewallet_email\": \"\",\r\n        \"last_deposit_bonus_amount\": \"\",\r\n        \"last_deposit_bonus_status\": \"\",\r\n        \"last_deposit_bonus_currency\": \"\",\r\n        \"last_deposit_bonus_wagering\": \"\",\r\n        \"session\": \"\",\r\n        \"payment_mode\": \"\",\r\n        \"card_fullname\": \"\",\r\n        \"card_bin\": \"\",\r\n        \"card_hash\": \"\",\r\n        \"card_last\": \"\",\r\n        \"card_expire\": \"\",\r\n        \"avs_result\": \"\",\r\n        \"cvv_result\": \"\",\r\n        \"sca_method\": \"\",\r\n        \"user_bank_account\": \"\",\r\n        \"user_bank_name\": \"\",\r\n        \"user_balance\": \"\",\r\n        \"user_verification_level\": \"\",\r\n        \"status_3d\": \"\",\r\n        \"regulation\": \"\",\r\n        \"payment_provider\": \"\",\r\n        \"phone_number\": \"\",\r\n        \"transaction_type\": \"\",\r\n        \"transaction_amount\": \"\",\r\n        \"transaction_currency\": \"\",\r\n        \"merchant_id\": \"\",\r\n        \"details_url\": \"\",\r\n        \"name\": \"\",\r\n        \"person_type\": \"\",\r\n        \"gender\": \"\"\r\n    }\r\n}");
+Request request = new Request.Builder()
+  .url("{{StagingBaseURL}}/checkTransAllowed")
+  .method("POST", body)
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+__Example Response__
+
+            <Tabs>
+            <TabItem value='body' label='Body'>
+            ```json
+            {
+  "transactionAllowed": "YES"
+}
+```
+</TabItem>
+<TabItem value='headers' label='Headers'>
+
+| Headers                |   Values                                           |
+|--------------------------|-------------------------------------------------------------|
+| Date                   | Sun, 29 Oct 2023 09:21:22 GMT                       |
+|Content-Type            | application/json                                    |
+|Transfer-Encoding       | chunked                                             |
+|Connection              | keep-alive                                          |
+|X-Content-Type-Options  | nosniff                                             |
+|X-XSS-Protection        | 1; mode=block                                       |
+|Cache-Control           | no-cache, no-store, max-age=0, must-revalidate      |
+|Pragma                  | no-cache                                            |
+|Expires                 | 0                                                   |
+|X-Frame-Options         | DENY                                                |
+|CF-Cache-Status         | DYNAMIC                                             |
+|Report-To               | `{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=r2%2FuLwSilxdD1lpiI1VqpgF0Tu9etiNhupySeBHl0zcU8XV1z8kwR%2FJ00ti4xpMdrTXW%2BkqZkLGrkkaUnMWFsaYlg%2FfA9UC4wIKwmc9LHUwna491EmnC3b3vlabzhUJ11CMpnVmicUE%3D"}],"group":"cf-nel","max_age":604800}` |
+|NEL                     | `{"success_fraction":0,"report_to":"cf-nel","max_age":604800}` |
+|Server                  | cloudflare                                    |
+|CF-RAY                  |  81da590e8d4345a0-LHR |
+|alt-svc                 | h3=":443"; ma=86400 |
+
+</TabItem>
+            </Tabs>
+
+                </TabItem>
+                <TabItem value='trustScoreError' label='Trust Score Error'>
+                    ```bash
+                    OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"requiredinput\": {\r\n        \"ip\": \"2001:8004:cc2:fadb:9958:4523:6c42:e3f2\",\r\n        \"email\": \"test@gmail.com\",\r\n        \"url\": \"http://test.com\"\r\n    },\r\n    \"optionalInput\": {\r\n        \"last_bets\": null,\r\n        \"last_wins\": \"\",\r\n        \"total_bonuses\": \"\",\r\n        \"last_real_bets\": \"\",\r\n        \"last_real_wins\": \"\",\r\n        \"total_deposits\": \"\",\r\n        \"last_bonus_bets\": \"\",\r\n        \"last_bonus_wins\": \"\",\r\n        \"average_real_bet\": \"\",\r\n        \"last_bets_amount\": \"\",\r\n        \"last_wins_amount\": \"\",\r\n        \"average_bonus_bet\": \"\",\r\n        \"bonus_to_deposits\": \"\",\r\n        \"last_deposit_date\": \"\",\r\n        \"total_withdrawals\": \"\",\r\n        \"is_phone_confirmed\": \"\",\r\n        \"money_in_money_out\": \"\",\r\n        \"last_deposit_amount\": \"\",\r\n        \"last_freespins_date\": \"\",\r\n        \"last_freespins_name\": \"\",\r\n        \"last_free_bonus_date\": \"\",\r\n        \"last_free_bonus_name\": \"\",\r\n        \"total_bonuses_amount\": \"\",\r\n        \"last_freespins_amount\": \"\",\r\n        \"last_freespins_status\": \"\",\r\n        \"last_real_bets_amount\": \"\",\r\n        \"last_real_wins_amount\": \"\",\r\n        \"total_deposits_amount\": \"\",\r\n        \"last_bonus_bets_amount\": \"\",\r\n        \"last_bonus_wins_amount\": \"\",\r\n        \"last_free_bonus_amount\": \"\",\r\n        \"last_free_bonus_status\": \"\",\r\n        \"last_deposit_bonus_date\": \"\",\r\n        \"last_deposit_bonus_name\": \"\",\r\n        \"last_freespins_currency\": \"\",\r\n        \"last_freespins_wagering\": \"\",\r\n        \"withdrawals_to_deposits\": \"\",\r\n        \"last_free_bonus_currency\": \"\",\r\n        \"last_free_bonus_wagering\": \"\",\r\n        \"total_withdrawals_amount\": \"\",\r\n        \"withdrawal_ewallet_email\": \"\",\r\n        \"last_deposit_bonus_amount\": \"\",\r\n        \"last_deposit_bonus_status\": \"\",\r\n        \"last_deposit_bonus_currency\": \"\",\r\n        \"last_deposit_bonus_wagering\": \"\",\r\n        \"session\": \"\",\r\n        \"payment_mode\": \"\",\r\n        \"card_fullname\": \"\",\r\n        \"card_bin\": \"\",\r\n        \"card_hash\": \"\",\r\n        \"card_last\": \"\",\r\n        \"card_expire\": \"\",\r\n        \"avs_result\": \"\",\r\n        \"cvv_result\": \"\",\r\n        \"sca_method\": \"\",\r\n        \"user_bank_account\": \"\",\r\n        \"user_bank_name\": \"\",\r\n        \"user_balance\": \"\",\r\n        \"user_verification_level\": \"\",\r\n        \"status_3d\": \"\",\r\n        \"regulation\": \"\",\r\n        \"payment_provider\": \"\",\r\n        \"phone_number\": \"\",\r\n        \"transaction_type\": \"\",\r\n        \"transaction_amount\": \"\",\r\n        \"transaction_currency\": \"\",\r\n        \"merchant_id\": \"\",\r\n        \"details_url\": \"\",\r\n        \"name\": \"\",\r\n        \"person_type\": \"\",\r\n        \"gender\": \"\"\r\n    }\r\n}");
+Request request = new Request.Builder()
+  .url("{{StagingBaseURL}}/checkTransAllowed")
+  .method("POST", body)
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+__Example Response__
+
+            <Tabs>
+            <TabItem value='body' label='Body'>
+            ```json
+            {
+  "message": "Incorrect secret_key",
+  "code": "authentication_failed"
+}
+```
+</TabItem>
+<TabItem value='headers' label='Headers'>
+
+| Headers                |   Values                                           |
+|--------------------------|-------------------------------------------------------------|
+| Date                   | Sun, 29 Oct 2023 09:21:22 GMT                       |
+|Content-Type            | application/json                                    |
+|Transfer-Encoding       | chunked                                             |
+|Connection              | keep-alive                                          |
+|X-Content-Type-Options  | nosniff                                             |
+|X-XSS-Protection        | 1; mode=block                                       |
+|Cache-Control           | no-cache, no-store, max-age=0, must-revalidate      |
+|Pragma                  | no-cache                                            |
+|Expires                 | 0                                                   |
+|X-Frame-Options         | DENY                                                |
+|CF-Cache-Status         | DYNAMIC                                             |
+|Report-To               | `{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=r2%2FuLwSilxdD1lpiI1VqpgF0Tu9etiNhupySeBHl0zcU8XV1z8kwR%2FJ00ti4xpMdrTXW%2BkqZkLGrkkaUnMWFsaYlg%2FfA9UC4wIKwmc9LHUwna491EmnC3b3vlabzhUJ11CMpnVmicUE%3D"}],"group":"cf-nel","max_age":604800}` |
+|NEL                     | `{"success_fraction":0,"report_to":"cf-nel","max_age":604800}` |
+|Server                  | cloudflare                                    |
+|CF-RAY                  |  81da590e8d4345a0-LHR |
+|alt-svc                 | h3=":443"; ma=86400 |
+
+</TabItem>
+            </Tabs>
+                </TabItem>
+            </Tabs>
+        </TabItem>
+        </Tabs>

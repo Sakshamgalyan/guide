@@ -1,0 +1,62 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+# Check Status
+
+```bash
+https://staging.paysecure.net/api/v1/purchases/{Session ID}/
+```
+
+This endpoint retrieves the details of a purchase identified by the provided session ID.
+
+`Note that this API only respond once the SessionURL, received in the reposne for session API, is clicked.`
+
+**AUTHORIZATION** Bearer Token
+
+___
+
+__Token__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `{{API Key}}`
+
+### HEADERS
+
+___
+
+__Authorization__  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   `{{API Key}}`
+
+ 
+
+### Example Request
+
+<Tabs>
+    <TabItem value='curl' label='cURL'>
+        <Tabs>
+            <TabItem value='checkStatus' label='Check Status'>
+                ```bash
+                curl --location -g 'https://staging.paysecure.net/api/v1/purchases/{Session ID}/' \
+--header 'Authorization: {{API Key}}' \
+--data ''
+    ```
+            </TabItem>
+        </Tabs>
+    </TabItem>
+    <TabItem value='java' label='Java'>
+        <Tabs>
+            <TabItem value='checkStatus' label='Check Status'>
+                ```bash
+                OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("https://staging.paysecure.net/api/v1/purchases/{Session ID}/")
+  .method("GET", body)
+  .addHeader("Authorization", "{{API Key}}")
+  .build();
+Response response = client.newCall(request).execute();
+    ```
+            </TabItem>
+        </Tabs>
+    </TabItem>
+
+</Tabs>

@@ -1,0 +1,180 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Get Customer details
+
+```bash
+https://api.paysecure.net/api/v1/customer
+```
+
+This endpoint makes an HTTP GET request to retrieve customer information from the Paysecure API.
+
+### Request
+
+The request does not include any query parameters, but it uses a raw request body with the following payload:
+
+```
+json
+{
+  "merchantCustomerId": "merchantCustomerId"
+}
+```
+
+### Response
+
+The response of this request can be documented as a JSON schema.
+
+
+### HEADERS
+___
+
+__Authorization__  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Bearer Token
+
+__BrandId__  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; brand_id_value 
+___
+
+
+**Body** raw (json)
+___
+
+```
+{
+  "merchantCustomerId": "merchantCustomerId"
+}
+```
+
+<Tabs>
+  <TabItem value="curl" label="cURL" default>
+
+    <Tabs>
+      <TabItem value="success" label="Success" default>
+
+      ```bash
+      curl --location --request GET 'https://api.paysecure.net/api/v1/customer' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'BrandId: brand_id_value' \
+--header 'Authorization: Bearer Token' \
+--data-raw '{
+   "merchantCustomerId": "testuser@gmail.com"
+  }'
+      ```
+      ### Example Response
+
+```bash
+{
+  "customerId": "67c54bff81fd9953719186ff",
+  "merchantCustomerId": "testuser@gmail.com",
+  "fullName": "Akshaya Singhal",
+  "emailId": "testuser@gmail.com",
+  "dateOfBirth": "1995-11-27",
+  "phoneNo": "2222222222",
+  "brandID": "db8414b4-e527-4be6-b2bf-df5cb7a646c7",
+  "city": "jaipur",
+  "zipCode": "202020",
+  "address": "Mansarovar Jaipur",
+  "country": "IN",
+  "stateCode": "ra",
+  "custRegDate": "2024-11-27",
+  "successTrans": 32
+}
+```
+</TabItem>
+
+  <TabItem value="invalidCustomer" label="Invalid Customer">
+  ```bash
+  curl --location --request GET 'https://api.paysecure.net/api/v1/customer' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'BrandId: brand_id_value' \
+--header 'Authorization: Bearer Token' \
+--data-raw '{
+   "merchantCustomerId": "testuserabc@gmail.com"
+  }'
+  ```
+
+  ### Example Response
+
+```bash
+{
+  "message": "Customer with this information does not exist",
+  "code": "customer_does_not_exist"
+}
+```
+
+</TabItem>
+</Tabs>
+</TabItem> 
+
+<TabItem value="java" label="Java">
+<Tabs>
+      <TabItem value="success" label="Success" default>
+
+```bash
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n   \"merchantCustomerId\": \"testuser@gmail.com\"\n  }");
+Request request = new Request.Builder()
+  .url("https://api.paysecure.net/api/v1/customer")
+  .method("GET", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Accept", "*/*")
+  .addHeader("BrandId", "brand_id_value")
+  .addHeader("Authorization", "Bearer Token")
+  .build();
+Response response = client.newCall(request).execute();
+```
+### Example Response
+
+```bash
+{
+  "customerId": "67c54bff81fd9953719186ff",
+  "merchantCustomerId": "testuser@gmail.com",
+  "fullName": "Akshaya Singhal",
+  "emailId": "testuser@gmail.com",
+  "dateOfBirth": "1995-11-27",
+  "phoneNo": "2222222222",
+  "brandID": "db8414b4-e527-4be6-b2bf-df5cb7a646c7",
+  "city": "jaipur",
+  "zipCode": "202020",
+  "address": "Mansarovar Jaipur",
+  "country": "IN",
+  "stateCode": "ra",
+  "custRegDate": "2024-11-27",
+  "successTrans": 32
+}
+```
+</TabItem>
+<TabItem value="invalidCustomer" label="Invalid Customer">
+  ```bash
+  OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n   \"merchantCustomerId\": \"testuserabc@gmail.com\"\n  }");
+Request request = new Request.Builder()
+  .url("https://api.paysecure.net/api/v1/customer")
+  .method("GET", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Accept", "*/*")
+  .addHeader("BrandId", "brand_id_value")
+  .addHeader("Authorization", "Bearer Token")
+  .build();
+Response response = client.newCall(request).execute();
+  ```
+
+  ### Example Response
+
+```bash
+{
+  "message": "Customer with this information does not exist",
+  "code": "customer_does_not_exist"
+}
+```
+
+</TabItem>
+</Tabs>
+</TabItem> 
+
+
+</Tabs>

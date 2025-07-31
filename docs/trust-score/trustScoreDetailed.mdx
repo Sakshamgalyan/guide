@@ -1,0 +1,511 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# TrustScore Detailed
+
+```bash
+https://api.paysecure.net/api/v1/trustScore
+```
+
+### Overview
+
+Paysecure TrustScore's proprietary API combines email, phone number, IP and URL so that you can request and receive a user trust score from our enriched data, rules, and scoring in a single API call.
+Our take on Trust is different from the usual approach to fraud. This API tells you how much you can trust this user. It’s based on 100+ data points to which we have access. We use complex algorithms based on data sanity and customer behaviour in our partner network.
+Also, the additional optional parameter would be used to boost the accuracy of our response. So the more data we get the better we can ascertain the users' trust. So please endeavour to send as much information about the user as possible.
+
+### Trust Score & Usage
+
+TrustScore offers two distinct endpoints: General and Detailed.
+The General endpoint provides basic information by indicating whether a transaction is permitted or not. It gives a simple 'yes' or 'no' response regarding whether the transaction can proceed.
+On the other hand, the Detailed endpoint offers a more comprehensive evaluation. It furnishes an in-depth analysis of the transaction's authenticity, providing a detailed assessment beyond a simple allowance or denial, offering nuanced insights and information about the transaction's legitimacy.
+
+### Detailed TrustScore
+
+Trust scores range from 0 to 5. A trust score of 0 indicates that we have limited information about the user, and it corresponds to the lowest level of trust. In addition to the TrustScore, we offer eight other flags to help assess the user's overall profile and determine appropriate actions to take. We suggest flagging or blocking users, transactions, or clicks as high risk based on a combination of the following factors: email deliverability, proxy usage, VPN usage, Tor usage, and recent abusive behavior.
+Every company has a unique target audience, so you might achieve better results by only flagging or blocking entities with low trust scores and recent instances of abuse. Keep in mind that mobile IP addresses are frequently misused and recycled by mobile carriers. Therefore, for mobile lookups, we advise giving more weight to the trust score, VPN usage, and Tor usage, as opposed to proxy usage.
+
+### Permission
+
+Access to this API has to be given to you by the admin. So please contact your sales representative at PaySecure to get access to this API, if you get a 401 error of "You are not allowed to call this API service".
+
+### Mandatory Parameters (in body)`
+
+|  Parameters  |  Description	                                                                         |
+|--------------|-----------------------------------------------------------------------------------------|
+|  ip          | IP of the user. Both IP4 and IP6 are valid                                              |
+|  email       | The email id of the user you want to trust score on                                     |
+|  url         | The URL on which the user is trying to purchase or consume a product, service or data.  |
+
+
+### Other optional paramters:
+
+The optional parameters are self-explanatory and appropriate values can be given in string format.
+
+|  Parameters                   | Values  |
+|-------------------------------|---------|
+|  last_bets                    | String  |
+|  last_wins                    | String  |
+|  total_bonuses                | String  |
+|  last_real_bets               | String  |
+|  last_real_wins               | String  |
+|  total_deposits               | String  |
+|  last_bonus_bets              | String  |
+|  last_bonus_wins              | String  |
+|  average_real_bet             | String  |
+|  last_bets_amount             | String  |
+|  last_wins_amount             | String  |
+|  average_bonus_bet            | String  |
+|  bonus_to_deposits            | String  |
+|  last_deposit_date            | String  |
+|  total_withdrawals            | String  |
+|  is_phone_confirmed           | String  |
+|  money_in_money_out           | String  |
+|  last_deposit_amount          | String  |
+|  last_freespins_date          | String  |
+|  last_freespins_name          | String  |
+|  last_free_bonus_date         | String  |
+|  last_free_bonus_name         | String  |
+|  total_bonuses_amount         | String  |
+|  last_freespins_amount        | String  |
+|  last_freespins_status        | String  |
+|  last_real_bets_amount        | String  |
+|  last_real_wins_amount        | String  |
+|  total_deposits_amount        | String  |
+|  last_bonus_bets_amount       | String  |
+|  last_bonus_wins_amount       | String  |
+|  last_free_bonus_amount       | String  |
+|  last_free_bonus_status       | String  |
+|  last_deposit_bonus_date      | String  |
+|  last_deposit_bonus_name      | String  |
+|  last_freespins_currency      | String  |
+|  last_freespins_wagering      | String  |
+|  withdrawals_to_deposits      | String  |
+|  last_free_bonus_currency     | String  |
+|  last_free_bonus_wagering     | String  |
+|  total_withdrawals_amount     | String  |
+|  withdrawal_ewallet_email     | String  |
+|  last_deposit_bonus_amount    | String  |
+|  last_deposit_bonus_status    | String  |
+|  last_deposit_bonus_currency  | String  |
+|  last_deposit_bonus_wagering  | String  |
+|  session                      | String  |
+|  payment_mode                 | String  |
+|  card_fullname                | String  |
+|  card_bin                     | String  |
+|  card_hash                    | String  |
+|  card_last                    | String  |
+|  card_expire                  | String  |
+|  avs_result                   | String  |
+|  cvv_result                   | String  |
+|  sca_method                   | String  |
+|  user_bank_account            | String  |
+|  user_bank_name               | String  |
+|  user_balance                 | String  |
+|  user_verification_level      | String  |
+|  status_3d                    | String  |
+|  regulation                   | String  |
+|  payment_provider             | String  |
+|  phone_number                 | String  |
+|  transaction_type             | String  |
+|  transaction_amount           | String  |
+|  transaction_currency         | String  |
+|  merchant_id                  | String  |
+|  details_url                  | String  |
+|  name                         | String  |
+|  person_type                  | String  |
+|  gender                       | String  |
+
+### Response
+
+In the response examples, you can observe both instances of a successful TrustScore response and an unsuccessful one.
+Please note that there are a lot of parameters to determine the trust level and give you some additional details on the email and IP of the user.
+in a successful trust score call the following data would be provided:
+
+|  Response Item  | Description                                                                                                                                                                                                            | Possible Values  |
+|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|
+|  trustScore     | The trust score attributed to the user by our algorithms                                                                                                                                                               | Integer 0 to 5   |
+|  deliverable    | Whether the email is deliverable, usually false means it wouldn't be a trustable user.                                                                                                                                 | Boolean          |
+|  proxy          | Is this IP address suspected to be a proxy? (SOCKS, Elite, Anonymous, VPN, Tor, etc.)                                                                                                                                  | Boolean          |
+|  vpn            | Is this IP suspected of being a VPN connection? This can include data center ranges which can become active VPNs at any time. The "proxy" status will always be true when this value is true.                          | Boolean          |
+|  tor            | Is this IP suspected of being a TOR connection? This can include previously active TOR nodes and exits which can become active TOR exits at any time. The "proxy" status will always be true when this value is true.  | Boolean          |
+|  active_vpn     | Identifies active VPN connections used by popular VPN services and private VPN servers.                                                                                                                                | Boolean          |
+|  active_tor     | Identifies active TOR exits on the TOR network.                                                                                                                                                                        | Boolean          |
+|  recent_abuse   | This value indicates whether the IP address has been associated with any recently verified abuse on our network, such as a confirmed chargeback, compromised device, or fake app install.                              | Boolean          |
+|  bot_status     | Shows whether bots or non-human traffic recently used this IP address to engage in automated fraud. This provides strong evidence that the IP address is suspicious.                                                   | Boolean          |
+
+### Errors
+
+If there are any errors then it'll be in the format of :
+
+```json
+{
+    "message": "descriptive error message",
+    "code": "error_code"
+}
+```
+
+### Possible Error Messages
+
+the possible error codes one can get on calling this APIs are:
+
+|  Code                  |
+|------------------------|
+|400, 404, 401, 415, 405 |
+
+for example:
+
+|  Code    | Error Messages                               |
+|----------|----------------------------------------------|
+|  401     | Incorrect secret_key                         |
+|  401     | You are not Allowed to call this API service |
+
+
+**AUTHORIZATION:** Bearer Token
+
+This folder is using Bearer Token from collection [Authentication Guide](../authentication.md)
+
+**Body** raw (json)
+
+```json
+{
+    "requiredinput": {
+        "ip": "111.11.11.11",
+        "email": "test@gmail.com",
+        "url": "https://www.asos.com/"
+    },
+    "optionalInput": {
+        "last_bets": null,
+        "last_wins": "",
+        "total_bonuses": "",
+        "last_real_bets": "",
+        "last_real_wins": "",
+        "total_deposits": "",
+        "last_bonus_bets": "",
+        "last_bonus_wins": "",
+        "average_real_bet": "",
+        "last_bets_amount": "",
+        "last_wins_amount": "",
+        "average_bonus_bet": "",
+        "bonus_to_deposits": "",
+        "last_deposit_date": "",
+        "total_withdrawals": "",
+        "is_phone_confirmed": "",
+        "money_in_money_out": "",
+        "last_deposit_amount": "",
+        "last_freespins_date": "",
+        "last_freespins_name": "",
+        "last_free_bonus_date": "",
+        "last_free_bonus_name": "",
+        "total_bonuses_amount": "",
+        "last_freespins_amount": "",
+        "last_freespins_status": "",
+        "last_real_bets_amount": "",
+        "last_real_wins_amount": "",
+        "total_deposits_amount": "",
+        "last_bonus_bets_amount": "",
+        "last_bonus_wins_amount": "",
+        "last_free_bonus_amount": "",
+        "last_free_bonus_status": "",
+        "last_deposit_bonus_date": "",
+        "last_deposit_bonus_name": "",
+        "last_freespins_currency": "",
+        "last_freespins_wagering": "",
+        "withdrawals_to_deposits": "",
+        "last_free_bonus_currency": "",
+        "last_free_bonus_wagering": "",
+        "total_withdrawals_amount": "",
+        "withdrawal_ewallet_email": "",
+        "last_deposit_bonus_amount": "",
+        "last_deposit_bonus_status": "",
+        "last_deposit_bonus_currency": "",
+        "last_deposit_bonus_wagering": "",
+        "session": "",
+        "payment_mode": "",
+        "card_fullname": "",
+        "card_bin": "",
+        "card_hash": "",
+        "card_last": "",
+        "card_expire": "",
+        "avs_result": "",
+        "cvv_result": "",
+        "sca_method": "",
+        "user_bank_account": "",
+        "user_bank_name": "",
+        "user_balance": "",
+        "user_verification_level": "",
+        "status_3d": "",
+        "regulation": "",
+        "payment_provider": "",
+        "phone_number": "",
+        "transaction_type": "",
+        "transaction_amount": "",
+        "transaction_currency": "",
+        "merchant_id": "",
+        "details_url": "",
+        "name": "",
+        "person_type": "",
+        "gender": ""
+    }
+}
+```
+
+__Example Requests__
+
+<Tabs>
+    <TabItem value='curl' label='cURL'>
+        <Tabs>
+        <TabItem value='TrustScoreExists' label='TrustScoreExists'>
+        ```bash
+        curl --location -g '{{StagingBaseURL}}/trustScore' \
+ --data-raw '{
+    "requiredinput": {
+        "ip": "2001:8004:cc2:fadb:9958:4523:6c42:e3f2",
+        "email": "test@gmail.com",
+        "url": "http://test.com"
+    },
+    "optionalInput": {
+        "last_bets": null,
+        "last_wins": "",
+        "total_bonuses": "",
+        "last_real_bets": "",
+        "last_real_wins": "",
+        "total_deposits": "",
+        "last_bonus_bets": "",
+        "last_bonus_wins": "",
+        "average_real_bet": "",
+        "last_bets_amount": "",
+        "last_wins_amount": "",
+        "average_bonus_bet": "",
+        "bonus_to_deposits": "",
+        "last_deposit_date": "",
+        "total_withdrawals": "",
+        "is_phone_confirmed": "",
+        "money_in_money_out": "",
+        "last_deposit_amount": "",
+        "last_freespins_date": "",
+        "last_freespins_name": "",
+        "last_free_bonus_date": "",
+        "last_free_bonus_name": "",
+        "total_bonuses_amount": "",
+        "last_freespins_amount": "",
+        "last_freespins_status": "",
+        "last_real_bets_amount": "",
+        "last_real_wins_amount": "",
+        "total_deposits_amount": "",
+        "last_bonus_bets_amount": "",
+        "last_bonus_wins_amount": "",
+        "last_free_bonus_amount": "",
+        "last_free_bonus_status": "",
+        "last_deposit_bonus_date": "",
+        "last_deposit_bonus_name": "",
+        "last_freespins_currency": "",
+        "last_freespins_wagering": "",
+        "withdrawals_to_deposits": "",
+        "last_free_bonus_currency": "",
+        "last_free_bonus_wagering": "",
+        "total_withdrawals_amount": "",
+        "withdrawal_ewallet_email": "",
+        "last_deposit_bonus_amount": "",
+        "last_deposit_bonus_status": "",
+        "last_deposit_bonus_currency": "",
+        "last_deposit_bonus_wagering": "",
+        "session": "",
+        "payment_mode": "",
+        "card_fullname": "",
+        "card_bin": "",
+        "card_hash": "",
+        "card_last": "",
+        "card_expire": "",
+        "avs_result": "",
+        "cvv_result": "",
+        "sca_method": "",
+        "user_bank_account": "",
+        "user_bank_name": "",
+        "user_balance": "",
+        "user_verification_level": "",
+        "status_3d": "",
+        "regulation": "",
+        "payment_provider": "",
+        "phone_number": "",
+        "transaction_type": "",
+        "transaction_amount": "",
+        "transaction_currency": "",
+        "merchant_id": "",
+        "details_url": "",
+        "name": "",
+        "person_type": "",
+        "gender": ""
+    }
+}'
+```
+
+__Example Response__
+
+```json
+{
+  "trustScore": 0,
+  "deliverable": "false",
+  "proxy": "false",
+  "vpn": "false",
+  "tor": "false",
+  "active_vpn": "false",
+  "active_tor": "false",
+  "recent_abuse": "false",
+  "bot_status": "false"
+}
+```
+            </TabItem>
+            <TabItem value='TrustScoreError' label='TrustScoreError'>
+
+            ```bash
+            curl --location -g '{{StagingBaseURL}}/trustScore' \
+--data-raw '{
+    "requiredinput": {
+        "ip": "2001:8004:cc2:fadb:9958:4523:6c42:e3f2",
+        "email": "test@gmail.com",
+        "url": "http://test.com"
+    },
+    "optionalInput": {
+        "last_bets": null,
+        "last_wins": "",
+        "total_bonuses": "",
+        "last_real_bets": "",
+        "last_real_wins": "",
+        "total_deposits": "",
+        "last_bonus_bets": "",
+        "last_bonus_wins": "",
+        "average_real_bet": "",
+        "last_bets_amount": "",
+        "last_wins_amount": "",
+        "average_bonus_bet": "",
+        "bonus_to_deposits": "",
+        "last_deposit_date": "",
+        "total_withdrawals": "",
+        "is_phone_confirmed": "",
+        "money_in_money_out": "",
+        "last_deposit_amount": "",
+        "last_freespins_date": "",
+        "last_freespins_name": "",
+        "last_free_bonus_date": "",
+        "last_free_bonus_name": "",
+        "total_bonuses_amount": "",
+        "last_freespins_amount": "",
+        "last_freespins_status": "",
+        "last_real_bets_amount": "",
+        "last_real_wins_amount": "",
+        "total_deposits_amount": "",
+        "last_bonus_bets_amount": "",
+        "last_bonus_wins_amount": "",
+        "last_free_bonus_amount": "",
+        "last_free_bonus_status": "",
+        "last_deposit_bonus_date": "",
+        "last_deposit_bonus_name": "",
+        "last_freespins_currency": "",
+        "last_freespins_wagering": "",
+        "withdrawals_to_deposits": "",
+        "last_free_bonus_currency": "",
+        "last_free_bonus_wagering": "",
+        "total_withdrawals_amount": "",
+        "withdrawal_ewallet_email": "",
+        "last_deposit_bonus_amount": "",
+        "last_deposit_bonus_status": "",
+        "last_deposit_bonus_currency": "",
+        "last_deposit_bonus_wagering": "",
+        "session": "",
+        "payment_mode": "",
+        "card_fullname": "",
+        "card_bin": "",
+        "card_hash": "",
+        "card_last": "",
+        "card_expire": "",
+        "avs_result": "",
+        "cvv_result": "",
+        "sca_method": "",
+        "user_bank_account": "",
+        "user_bank_name": "",
+        "user_balance": "",
+        "user_verification_level": "",
+        "status_3d": "",
+        "regulation": "",
+        "payment_provider": "",
+        "phone_number": "",
+        "transaction_type": "",
+        "transaction_amount": "",
+        "transaction_currency": "",
+        "merchant_id": "",
+        "details_url": "",
+        "name": "",
+        "person_type": "",
+        "gender": ""
+    }
+}'
+```
+
+__Example Response__
+
+```json
+{
+  "message": "Incorrect secret_key",
+  "code": "authentication_failed"
+}
+```
+            </TabItem>
+        </Tabs>
+    </TabItem>
+    <TabItem value='java' label='Java'>
+    <Tabs>
+    <TabItem value='trustScoreExists' label='TrustScoreExists'>
+    ```bash
+    OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"requiredinput\": {\r\n        \"ip\": \"2001:8004:cc2:fadb:9958:4523:6c42:e3f2\",\r\n        \"email\": \"test@gmail.com\",\r\n        \"url\": \"http://test.com\"\r\n    },\r\n    \"optionalInput\": {\r\n        \"last_bets\": null,\r\n        \"last_wins\": \"\",\r\n        \"total_bonuses\": \"\",\r\n        \"last_real_bets\": \"\",\r\n        \"last_real_wins\": \"\",\r\n        \"total_deposits\": \"\",\r\n        \"last_bonus_bets\": \"\",\r\n        \"last_bonus_wins\": \"\",\r\n        \"average_real_bet\": \"\",\r\n        \"last_bets_amount\": \"\",\r\n        \"last_wins_amount\": \"\",\r\n        \"average_bonus_bet\": \"\",\r\n        \"bonus_to_deposits\": \"\",\r\n        \"last_deposit_date\": \"\",\r\n        \"total_withdrawals\": \"\",\r\n        \"is_phone_confirmed\": \"\",\r\n        \"money_in_money_out\": \"\",\r\n        \"last_deposit_amount\": \"\",\r\n        \"last_freespins_date\": \"\",\r\n        \"last_freespins_name\": \"\",\r\n        \"last_free_bonus_date\": \"\",\r\n        \"last_free_bonus_name\": \"\",\r\n        \"total_bonuses_amount\": \"\",\r\n        \"last_freespins_amount\": \"\",\r\n        \"last_freespins_status\": \"\",\r\n        \"last_real_bets_amount\": \"\",\r\n        \"last_real_wins_amount\": \"\",\r\n        \"total_deposits_amount\": \"\",\r\n        \"last_bonus_bets_amount\": \"\",\r\n        \"last_bonus_wins_amount\": \"\",\r\n        \"last_free_bonus_amount\": \"\",\r\n        \"last_free_bonus_status\": \"\",\r\n        \"last_deposit_bonus_date\": \"\",\r\n        \"last_deposit_bonus_name\": \"\",\r\n        \"last_freespins_currency\": \"\",\r\n        \"last_freespins_wagering\": \"\",\r\n        \"withdrawals_to_deposits\": \"\",\r\n        \"last_free_bonus_currency\": \"\",\r\n        \"last_free_bonus_wagering\": \"\",\r\n        \"total_withdrawals_amount\": \"\",\r\n        \"withdrawal_ewallet_email\": \"\",\r\n        \"last_deposit_bonus_amount\": \"\",\r\n        \"last_deposit_bonus_status\": \"\",\r\n        \"last_deposit_bonus_currency\": \"\",\r\n        \"last_deposit_bonus_wagering\": \"\",\r\n        \"session\": \"\",\r\n        \"payment_mode\": \"\",\r\n        \"card_fullname\": \"\",\r\n        \"card_bin\": \"\",\r\n        \"card_hash\": \"\",\r\n        \"card_last\": \"\",\r\n        \"card_expire\": \"\",\r\n        \"avs_result\": \"\",\r\n        \"cvv_result\": \"\",\r\n        \"sca_method\": \"\",\r\n        \"user_bank_account\": \"\",\r\n        \"user_bank_name\": \"\",\r\n        \"user_balance\": \"\",\r\n        \"user_verification_level\": \"\",\r\n        \"status_3d\": \"\",\r\n        \"regulation\": \"\",\r\n        \"payment_provider\": \"\",\r\n        \"phone_number\": \"\",\r\n        \"transaction_type\": \"\",\r\n        \"transaction_amount\": \"\",\r\n        \"transaction_currency\": \"\",\r\n        \"merchant_id\": \"\",\r\n        \"details_url\": \"\",\r\n        \"name\": \"\",\r\n        \"person_type\": \"\",\r\n        \"gender\": \"\"\r\n    }\r\n}");
+Request request = new Request.Builder()
+  .url("{{StagingBaseURL}}/trustScore")
+  .method("POST", body)
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+__Example Response__ 
+
+```json
+{
+  "trustScore": 0,
+  "deliverable": "false",
+  "proxy": "false",
+  "vpn": "false",
+  "tor": "false",
+  "active_vpn": "false",
+  "active_tor": "false",
+  "recent_abuse": "false",
+  "bot_status": "false"
+}
+``` 
+            </TabItem>
+            <TabItem value='trustScoreError' label='TrustScoreError'>
+                ```bash
+                OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"requiredinput\": {\r\n        \"ip\": \"2001:8004:cc2:fadb:9958:4523:6c42:e3f2\",\r\n        \"email\": \"test@gmail.com\",\r\n        \"url\": \"http://test.com\"\r\n    },\r\n    \"optionalInput\": {\r\n        \"last_bets\": null,\r\n        \"last_wins\": \"\",\r\n        \"total_bonuses\": \"\",\r\n        \"last_real_bets\": \"\",\r\n        \"last_real_wins\": \"\",\r\n        \"total_deposits\": \"\",\r\n        \"last_bonus_bets\": \"\",\r\n        \"last_bonus_wins\": \"\",\r\n        \"average_real_bet\": \"\",\r\n        \"last_bets_amount\": \"\",\r\n        \"last_wins_amount\": \"\",\r\n        \"average_bonus_bet\": \"\",\r\n        \"bonus_to_deposits\": \"\",\r\n        \"last_deposit_date\": \"\",\r\n        \"total_withdrawals\": \"\",\r\n        \"is_phone_confirmed\": \"\",\r\n        \"money_in_money_out\": \"\",\r\n        \"last_deposit_amount\": \"\",\r\n        \"last_freespins_date\": \"\",\r\n        \"last_freespins_name\": \"\",\r\n        \"last_free_bonus_date\": \"\",\r\n        \"last_free_bonus_name\": \"\",\r\n        \"total_bonuses_amount\": \"\",\r\n        \"last_freespins_amount\": \"\",\r\n        \"last_freespins_status\": \"\",\r\n        \"last_real_bets_amount\": \"\",\r\n        \"last_real_wins_amount\": \"\",\r\n        \"total_deposits_amount\": \"\",\r\n        \"last_bonus_bets_amount\": \"\",\r\n        \"last_bonus_wins_amount\": \"\",\r\n        \"last_free_bonus_amount\": \"\",\r\n        \"last_free_bonus_status\": \"\",\r\n        \"last_deposit_bonus_date\": \"\",\r\n        \"last_deposit_bonus_name\": \"\",\r\n        \"last_freespins_currency\": \"\",\r\n        \"last_freespins_wagering\": \"\",\r\n        \"withdrawals_to_deposits\": \"\",\r\n        \"last_free_bonus_currency\": \"\",\r\n        \"last_free_bonus_wagering\": \"\",\r\n        \"total_withdrawals_amount\": \"\",\r\n        \"withdrawal_ewallet_email\": \"\",\r\n        \"last_deposit_bonus_amount\": \"\",\r\n        \"last_deposit_bonus_status\": \"\",\r\n        \"last_deposit_bonus_currency\": \"\",\r\n        \"last_deposit_bonus_wagering\": \"\",\r\n        \"session\": \"\",\r\n        \"payment_mode\": \"\",\r\n        \"card_fullname\": \"\",\r\n        \"card_bin\": \"\",\r\n        \"card_hash\": \"\",\r\n        \"card_last\": \"\",\r\n        \"card_expire\": \"\",\r\n        \"avs_result\": \"\",\r\n        \"cvv_result\": \"\",\r\n        \"sca_method\": \"\",\r\n        \"user_bank_account\": \"\",\r\n        \"user_bank_name\": \"\",\r\n        \"user_balance\": \"\",\r\n        \"user_verification_level\": \"\",\r\n        \"status_3d\": \"\",\r\n        \"regulation\": \"\",\r\n        \"payment_provider\": \"\",\r\n        \"phone_number\": \"\",\r\n        \"transaction_type\": \"\",\r\n        \"transaction_amount\": \"\",\r\n        \"transaction_currency\": \"\",\r\n        \"merchant_id\": \"\",\r\n        \"details_url\": \"\",\r\n        \"name\": \"\",\r\n        \"person_type\": \"\",\r\n        \"gender\": \"\"\r\n    }\r\n}");
+Request request = new Request.Builder()
+  .url("{{StagingBaseURL}}/trustScore")
+  .method("POST", body)
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+__Example Response__
+
+```json 
+{
+  "message": "Incorrect secret_key",
+  "code": "authentication_failed"
+}
+```
+            </TabItem>
+        </Tabs>
+    </TabItem>
+
+</Tabs>

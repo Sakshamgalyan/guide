@@ -1,0 +1,305 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Payin
+
+```bash
+https://api.paysecure.net/api/v1/createSession
+```
+
+### **Overview**
+
+The `createSession` API is designed to initiate a payment session for a customer after their profile has been created via the __createCustomer__ API. The session is automatically generated at the backend on the merchant’s checkout URL. This session allows the customer to continue with their transaction without having to manually interact with the session URL, and ensures the session remains active until the payment is completed or the session expires.
+
+This API improves the user experience by reducing transaction failures and enhancing the overall payment process, thus reducing transaction churn rates
+
+### Mandatory Parameters
+|  Parameter       | 	Type      |  Description	                                                  | Example                                |
+|------------------|------------|-----------------------------------------------------------------|----------------------------------------|
+|  customerId      |  String    | The unique ID of the customer (generated from createCustomer).  | "6731a609b6bb5a43ad66c4a6"             |
+|  brandId         |  String    | The unique ID of the merchant's brand.                          | "88cb97c5-ac56-4d7f-b8db-77430c5b3cb1" |
+
+### Extra Parameters
+| Parameter                       | Type   |  Description	                                                                                                            |Example                       |
+|---------------------------------|--------|----------------------------------------------------------------------------------------------------------------------------|------------------------------|
+| extraParam.showCryptoConversion | String | This optional parameter allows customer to see crypto value equivelant to the Fiat amount the customer is planning to pay  | "Yes"                        |
+| extraParam.cryptoCurrencies     | String | Pass here the allowed crypto tokens on the cashier, where custeomr can see the the conversion value                        | "[\"BTC\",\"ETH\",\"USDT\"]" |
+
+### Usage Flow
+1. __Customer completes the `createCustomer` API__: Once the customer is created via the `createCustomer` API, the merchant proceeds to call the `createSession` API to generate a session.
+
+2. __Merchant sends `createSession` request__: The merchant sends a `POST` request to the `createSession` API with the customer’s `customerId` and the merchant’s `brandId`.
+
+3. __Session created automatically on the checkout URL__: PaySecure creates the session and associates it with the merchant’s checkout page. This session remains active on the backend, allowing the customer to continue the payment process without interruption.
+
+4. __Customer proceeds to checkout__: The customer is redirected to the checkout page as part of the merchant's payment flow, where the session is automatically validated. The session remains active for a set period, allowing the customer to complete the payment without needing to manually interact with the session URL.
+
+5. __Session Expiry__: The session expires after the set expiration time (`expiryOn`), ensuring the payment process is completed within the defined window.
+
+___
+
+### Benefits
+
+- __Seamless Checkout__: The session URL is automatically generated and active at the backend, ensuring a smoother and uninterrupted customer experience.
+
+- __Reduced Transaction Failures__: By ensuring the session remains active during the payment process, the chances of transaction failures due to session timeouts are minimized.
+
+- __Improved User Experience__: The customer does not need to click on a session URL or navigate away from the page, leading to faster and more secure payment processing.
+
+**AUTHORIZATION** Bearer Token
+___
+__Token__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `<token>`
+
+### HEADERS
+___
+
+__Authorization__  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Bearer Token
+
+__BrandId__  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+30f7ce6e-3b7e-46a2-9b50-484fc55be689
+___
+
+**Body** raw (json)
+
+```json
+{
+	"customerId": "67ebdacff8817d799c967ec1",
+    "currency" : "USD",
+    "products": [
+        {
+            "name": "Product1",
+            "price": "10"
+        },
+        {
+            "name": "Product2",
+            "price": "10"
+        }
+    ],
+    "success_redirect": "https://your.success.redirect.com",
+    "failure_redirect": "https://your.failure.redirect.com",
+    "success_callback": "https://your.success.callback.com",
+	"failure_callback": "https://your.failure.callback.com"
+}
+```
+
+### Example Request
+
+<Tabs>
+<TabItem value="curl" label="cURL" default>
+ <Tabs>
+      <TabItem value="success" label="Success" default>
+      ```bash
+curl --location 'https://api.paysecure.net/api/v1/createSession' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'BrandId: brand_id_value' \
+--header 'Authorization: Bearer Token' \
+--data '{
+	"customerId": "67c54bff81fd9953719186ff",
+    "currency" : "USD",
+    "products": [
+        {
+            "name": "Product1",
+            "price": "10"
+        },
+        {
+            "name": "Product2",
+            "price": "10"
+        }
+    ],
+    "extraParam":{
+        },
+    "success_redirect": "https://your.success.redirect.com",
+    "failure_redirect": "https://your.failure.redirect.com",
+    "success_callback": "https://your.success.callback.com",
+	"failure_callback": "https://your.failure.callback.com"
+}'
+```
+### Example Response
+
+```json
+{
+  "sessionUrl": "https://staging.paysecure.net/session/67c553cc8dbb596aa20df944/",
+  "brandId": "db8414b4-e527-4be6-b2bf-df5cb7a646c7",
+  "customerId": "67c54bff81fd9953719186ff",
+  "sessionId": "67c553cc8dbb596aa20df944",
+  "expiryOn": 1740986192,
+  "createdOn": 1740985292
+}
+```
+ </TabItem>
+
+ <TabItem value="Session" label="Session with CryptoConv">
+ ```bash
+ curl --location 'https://api.paysecure.net/api/v1/createSession' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'BrandId: brand_id_value' \
+--header 'Authorization: Bearer Token' \
+--data '{
+	"customerId": "67c54bff81fd9953719186ff",
+    "currency" : "USD",
+    "products": [
+        {
+            "name": "Product1",
+            "price": "10"
+        },
+        {
+            "name": "Product2",
+            "price": "10"
+        }
+    ],
+    "extraParam":{
+        "showCryptoConversion": "Yes",
+        "cryptoCurrencies": "[\"BTC\",\"ETH\",\"USDT\"]"
+        },
+    "success_redirect": "https://your.success.redirect.com",
+    "failure_redirect": "https://your.failure.redirect.com",
+    "success_callback": "https://your.success.callback.com",
+	"failure_callback": "https://your.failure.callback.com"
+}'
+```
+
+### Example Response
+
+```json
+{
+  "sessionUrl": "https://staging.paysecure.net/session/67c553cc8dbb596aa20df944/",
+  "brandId": "db8414b4-e527-4be6-b2bf-df5cb7a646c7",
+  "customerId": "67c54bff81fd9953719186ff",
+  "sessionId": "67c553cc8dbb596aa20df944",
+  "expiryOn": 1740986192,
+  "createdOn": 1740985292
+}
+```
+ </TabItem>
+ <TabItem value="invalid_session" label="Invalid Session">
+
+ ```bash
+ curl --location 'https://api.paysecure.net/api/v1/createSession' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'BrandId: brand_id_value' \
+--header 'Authorization: Bearer Token' \
+--data '{
+	"customerId": "67c54bff81fd9953719186",
+    "currency" : "USD",
+    "products": [
+        {
+            "name": "Product1",
+            "price": "10"
+        },
+        {
+            "name": "Product2",
+            "price": "10"
+        }
+    ],
+    "success_redirect": "https://your.success.redirect.com",
+    "failure_redirect": "https://your.failure.redirect.com",
+    "success_callback": "https://your.success.callback.com",
+	"failure_callback": "https://your.failure.callback.com"
+}'\'''
+```
+
+### Example Response
+
+```json
+{
+  "message": "Customer does not exist with this Customer Id",
+  "code": "Customer Id is invalid"
+}
+```
+ </TabItem>
+    </Tabs>
+  </TabItem>
+  <TabItem value="java" label="Java">
+  <Tabs>
+  <TabItem value="success" label="Success">
+  ```bash
+  OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n\t\"customerId\": \"67c54bff81fd9953719186ff\",\r\n    \"currency\" : \"USD\",\r\n    \"products\": [\r\n        {\r\n            \"name\": \"Product1\",\r\n            \"price\": \"10\"\r\n        },\r\n        {\r\n            \"name\": \"Product2\",\r\n            \"price\": \"10\"\r\n        }\r\n    ],\r\n    \"extraParam\":{\r\n        },\r\n    \"success_redirect\": \"https://your.success.redirect.com\",\r\n    \"failure_redirect\": \"https://your.failure.redirect.com\",\r\n    \"success_callback\": \"https://your.success.callback.com\",\r\n\t\"failure_callback\": \"https://your.failure.callback.com\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://api.paysecure.net/api/v1/createSession")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Accept", "*/*")
+  .addHeader("BrandId", "brand_id_value")
+  .addHeader("Authorization", "Bearer Token")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+### Example Response
+
+```json
+{
+  "sessionUrl": "https://staging.paysecure.net/session/67c553cc8dbb596aa20df944/",
+  "brandId": "db8414b4-e527-4be6-b2bf-df5cb7a646c7",
+  "customerId": "67c54bff81fd9953719186ff",
+  "sessionId": "67c553cc8dbb596aa20df944",
+  "expiryOn": 1740986192,
+  "createdOn": 1740985292
+}
+```
+  </TabItem>
+  <TabItem value='session' label='Session with CryptoConv'>
+  ```bash
+  OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n\t\"customerId\": \"67c54bff81fd9953719186ff\",\r\n    \"currency\" : \"USD\",\r\n    \"products\": [\r\n        {\r\n            \"name\": \"Product1\",\r\n            \"price\": \"10\"\r\n        },\r\n        {\r\n            \"name\": \"Product2\",\r\n            \"price\": \"10\"\r\n        }\r\n    ],\r\n    \"extraParam\":{\r\n        \"showCryptoConversion\": \"Yes\",\r\n        \"cryptoCurrencies\": \"[\\\"BTC\\\",\\\"ETH\\\",\\\"USDT\\\"]\"\r\n        },\r\n    \"success_redirect\": \"https://your.success.redirect.com\",\r\n    \"failure_redirect\": \"https://your.failure.redirect.com\",\r\n    \"success_callback\": \"https://your.success.callback.com\",\r\n\t\"failure_callback\": \"https://your.failure.callback.com\"\r\n}");
+Request request = new Request.Builder()
+  .url("https://api.paysecure.net/api/v1/createSession")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Accept", "*/*")
+  .addHeader("BrandId", "brand_id_value")
+  .addHeader("Authorization", "Bearer Token")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+### Example Response
+
+```json
+{
+  "sessionUrl": "https://staging.paysecure.net/session/67c553cc8dbb596aa20df944/",
+  "brandId": "db8414b4-e527-4be6-b2bf-df5cb7a646c7",
+  "customerId": "67c54bff81fd9953719186ff",
+  "sessionId": "67c553cc8dbb596aa20df944",
+  "expiryOn": 1740986192,
+  "createdOn": 1740985292
+}
+```
+  </TabItem>
+  <TabItem value='invalid_session' label="invalid_session">
+  ```bash
+  OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n\t\"customerId\": \"67c54bff81fd9953719186\",\r\n    \"currency\" : \"USD\",\r\n    \"products\": [\r\n        {\r\n            \"name\": \"Product1\",\r\n            \"price\": \"10\"\r\n        },\r\n        {\r\n            \"name\": \"Product2\",\r\n            \"price\": \"10\"\r\n        }\r\n    ],\r\n    \"success_redirect\": \"https://your.success.redirect.com\",\r\n    \"failure_redirect\": \"https://your.failure.redirect.com\",\r\n    \"success_callback\": \"https://your.success.callback.com\",\r\n\t\"failure_callback\": \"https://your.failure.callback.com\"\r\n}'");
+Request request = new Request.Builder()
+  .url("https://api.paysecure.net/api/v1/createSession")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Accept", "*/*")
+  .addHeader("BrandId", "brand_id_value")
+  .addHeader("Authorization", "Bearer Token")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+### Example Response
+
+```json
+{
+  "message": "Customer does not exist with this Customer Id",
+  "code": "Customer Id is invalid"
+}
+```
+  </TabItem>
+  </Tabs>
+  </TabItem>
+</Tabs>

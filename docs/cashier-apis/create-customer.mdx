@@ -1,0 +1,318 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Create Customer
+
+### **Overview**
+
+The __createCustomer__ API allows merchants to create a customer profile on PaySecure when a user visits their website, facilitating a seamless payment experience by pre-filling the customer's details, on the PaySecure Cashier. The API takes in customer information and returns a unique customerID that can be passed in purchase payload, eliminating the need for customers to manually enter their details during transactions.
+
+### **Request**
+
+- **Method:** `POST`
+- **URL:** `https://api.paysecure.net/api/v1/customer`
+- **Headers:**
+  - `Content-Type: application/json`
+  - `Accept: */*`
+  - `BrandId: brand_id_value` (If this parameter is passed in the header, a unique customer will be created under that particular Brand Name. else, the customer will be created under the main merchant (irrespective of the brands))
+  - `Authorization: Bearer Token`
+
+| Parameter            | 	Type      |  Description	                                                          | Example                                      |
+|----------------------|------------|-------------------------------------------------------------------------|----------------------------------------------|
+|  merchantCustomerId  |  String    | unique customer ID provided by merchant                                 | This can be email, mobile or an alphanumeric |
+|  fullName            |  String    | Full name of the customer.                                              | Test User                                    |
+|  emailId             |  String    | Email address of the customer.                                          | "test3@paysecure.net"                        |
+|  dateOfBirth         |  String    | Customer's date of birth in YYYY-MM-DD format.                          | "1995-38-27"                                 |
+|  phoneNo             |  String    | Customer's phone number.                                                | "797639082"                                  |
+|  city                |  String    | City of the customer.                                                   | "jaipur"                                     |
+|  stateCode           |  String    | State code of the customer.                                             | "ra"                                         |
+|  zipCode             |  String    | Postal code of the customer's location.                                 | "202020"                                     |
+|  address             |  String    | Full address of the customer.                                           | "Jaipur"                                     |
+|  country             |  String    | Country code (ISO 3166-1 alpha-2).                                      | "IN"                                         |
+|  custRegDate         |  String    | Customer registration date on merchant site                             | "2023-38-27"                                 |
+|  successTxn          |  String    | number of successful transactions customer has carried on merchant site | "32"                                         |
+
+`Mercahnt can add upto 20 additional parameters in this request.`
+
+#### User Flow
+
+1. __Customer visits merchant's website__: The customer selects the product or service and proceeds to checkout page.
+2. __Merchant calls the `createCustomer` API__: The merchant sends a `POST` request to the PaySecure API with the customer's details.
+3. __Customer ID generation__: PaySecure processes the request and generates a unique `customerId` which is returned in the response.
+4. __Payment Process__: The merchant uses the `customerId` for subsequent transactions, ensuring the customer doesn’t need to re-enter their details for future payments.
+
+___
+
+#### Benefits
+
+- __Seamless user experience__: The customer does not have to enter their details manually for every purchase.
+- __Faster Checkout__: The merchant can use the `customerId` for faster payment processing.
+- __Data Security__: Customer details are stored securely and can be reused across transactions, reducing the chances of errors.
+
+#### Implementing createCustomer on merchant site:
+
+The `createCustomer` can be implemented on merchant site in one of two ways, depending on merchant’s integration flow:
+
+##### At Checkout:
+
+When a customer initiates the checkout process, your system should invoke the `createCustomer` API, before actually starting the session.
+
+- __Call `createCustomer`****__: This API call generates a unique customer ID.
+- __Use of Customer ID__: Pass the returned customer ID in Session API, when creating a payment session.
+
+##### Upon Customer Login:
+
+Alternatively, merchants may choose to call `createCustomer` at the time of customer login on their site.
+
+- __Persistent Customer Profiles__: This approach can help build or maintain a persistent customer profile, ensuring the customer ID is available for any subsequent payment sessions without needing to call `createCustomer` again.
+- __Integration Flexibility__: This is useful for merchants who want to initialize customer data early in the customer journey rather than during checkout.
+
+`This method is not advised for white-label merchants who want to manage different customerIDs for each brand. `
+
+The method you choose depends on your business requirements and how your system is architected. Regardless of when you call it, the resulting customer ID must be passed to the `createSession` API to initiate a payment session.
+
+### HEADERS
+___
+
+Authorization  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Bearer Token
+
+BrandId  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; brand_id_value 
+___
+
+**Body** raw (json)
+  ```json
+  {
+    "merchantCustomerId": "Merchant to provide", //mandatory
+    "fullName": "Akshaya Singhal",
+    "emailId": "akshayas@paysecure.net",
+    "dateOfBirth": "1995-11-27",
+    "phoneNo": "7976390821",
+    "city": "jaipur",
+    "stateCode": "ra",
+    "zipCode": "202020",
+    "address": "Mansarovar Jaipur",
+    "country": "IN",
+    "custRegDate": "Merchant to provide", //non-mandatory - customer registration date on merchant site
+    "successTxn": "Merchant to provide", //non-mandatory - total successful customer orders on merchant site
+    "extraParam": {
+        "param1": "value1",
+        "param2": "value2",
+        "param3": "value3",
+        "param4": "value4"
+    }
+}
+```
+<Tabs>
+  <TabItem value="curl" label="cURL" default>
+
+    <Tabs>
+      <TabItem value="success" label="Success" default>
+
+```bash
+curl --location 'https://api.paysecure.net/api/v1/customer' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'BrandId: brand_id_value' \
+--header 'Authorization: Bearer Token' \
+--data-raw '{
+  "merchantCustomerId": "testuser@gmail.com",
+  "fullName": "Akshaya Singhal",
+  "emailId": "testuser@gmail.com",
+  "dateOfBirth": "1995-11-27",
+  "phoneNo": "2222222222",
+  "city": "jaipur",
+  "stateCode": "ra",
+  "zipCode": "202020",
+  "address": "Mansarovar Jaipur",
+  "country": "IN",
+  "custRegDate": "2024-11-27",
+  "successTxn": "32"
+}'
+```
+
+__Example Response__
+
+```bash
+
+{
+  "customerId": "67c54bff81fd9953719186ff",
+  "merchantCustomerId": "testuser@gmail.com",
+  "fullName": "Akshaya Singhal",
+  "emailId": "testuser@gmail.com",
+  "dateOfBirth": "1995-11-27",
+  "phoneNo": "2222222222",
+  "brandID": "db8414b4-e527-4be6-b2bf-df5cb7a646c7",
+  "city": "jaipur",
+  "zipCode": "202020",
+  "address": "Mansarovar Jaipur",
+  "country": "IN",
+  "stateCode": "ra",
+  "custRegDate": "2024-11-27",
+  "successTrans": 32
+}
+```
+  </TabItem>
+
+  <TabItem value="failure" label="Failure">
+
+```bash
+curl --location 'https://api.paysecure.net/api/v1/customer' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'BrandId: brand_id_value' \
+--header 'Authorization: Bearer Token' \
+--data-raw '{
+  "merchantCustomerId": "testuser@gmail.com",
+  "fullName": "Akshaya Singhal",
+  "emailId": "testusergmail.com",
+  "dateOfBirth": "1995-11-27",
+  "phoneNo": "2222222222",
+  "city": "jaipur",
+  "stateCode": "ra",
+  "zipCode": "202020",
+  "address": "Mansarovar Jaipur",
+  "country": "IN",
+  "custRegDate": "2024-11-27"
+}'
+```
+
+__Example Response__
+
+```bash
+{
+  "message": "Invalid Email Format",
+  "code": "invalid_email"
+}
+```
+</TabItem>
+
+<TabItem value="existingCustomer" label="Existing Customer">
+```bash
+curl --location 'https://api.paysecure.net/api/v1/customer' \
+--header 'Content-Type: application/json' \
+--header 'Accept: */*' \
+--header 'BrandId: brand_id_value' \
+--header 'Authorization: Bearer Token' \
+--data-raw '{
+  "merchantCustomerId": "testuser@gmail.com",
+  "fullName": "Akshaya Singhal",
+  "emailId": "testuser@gmail.com",
+  "dateOfBirth": "1995-11-27",
+  "phoneNo": "2222222222",
+  "city": "jaipur",
+  "stateCode": "ra",
+  "zipCode": "202020",
+  "address": "Mansarovar Jaipur",
+  "country": "IN",
+  "custRegDate": "2024-11-27",
+  "successTxn": "32"
+//   "extraParam":
+//     {
+//         "param1":"value1",
+//         "param2":"value2",
+//         "param3":"value3",
+//         "param4":"value4"
+//     }
+}'
+```
+
+__Example Response__
+
+```bash
+{
+  "message": "Customer already exists with this information",
+  "code": "customer_already_exists"
+}
+```
+</TabItem>
+</Tabs>
+</TabItem> 
+<TabItem value="java" label="Java">
+<Tabs>
+      <TabItem value="success" label="Success" default>
+
+```bash
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.paysecure.net/api/v1/customer")
+  .header("Content-Type", "application/json")
+  .header("Accept", "*/*")
+  .header("BrandId", "brand_id_value")
+  .header("Authorization", "Bearer Token")
+  .body("{\r\n  \"merchantCustomerId\": \"testuser@gmail.com\",\r\n  \"fullName\": \"Akshaya Singhal\",\r\n  \"emailId\": \"testuser@gmail.com\",\r\n  \"dateOfBirth\": \"1995-11-27\",\r\n  \"phoneNo\": \"2222222222\",\r\n  \"city\": \"jaipur\",\r\n  \"stateCode\": \"ra\",\r\n  \"zipCode\": \"202020\",\r\n  \"address\": \"Mansarovar Jaipur\",\r\n  \"country\": \"IN\",\r\n  \"custRegDate\": \"2024-11-27\",\r\n  \"successTxn\": \"32\"\r\n  //   \"extraParam\":\r\n//     {\r\n//         \"param1\":\"value1\",\r\n//         \"param2\":\"value2\",\r\n//         \"param3\":\"value3\",\r\n//         \"param4\":\"value4\"\r\n//     }\r\n}")
+  .asString();
+
+```
+
+__Example Response__
+
+```bash
+{
+  "customerId": "67c54bff81fd9953719186ff",
+  "merchantCustomerId": "testuser@gmail.com",
+  "fullName": "Akshaya Singhal",
+  "emailId": "testuser@gmail.com",
+  "dateOfBirth": "1995-11-27",
+  "phoneNo": "2222222222",
+  "brandID": "db8414b4-e527-4be6-b2bf-df5cb7a646c7",
+  "city": "jaipur",
+  "zipCode": "202020",
+  "address": "Mansarovar Jaipur",
+  "country": "IN",
+  "stateCode": "ra",
+  "custRegDate": "2024-11-27",
+  "successTrans": 32
+}
+```
+  </TabItem>
+
+  <TabItem value="failure" label="Failure">
+
+```bash
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.paysecure.net/api/v1/customer")
+  .header("Content-Type", "application/json")
+  .header("Accept", "*/*")
+  .header("BrandId", "brand_id_value")
+  .header("Authorization", "Bearer Token")
+  .body("{\r\n  \"merchantCustomerId\": \"testuser@gmail.com\",\r\n  \"fullName\": \"Akshaya Singhal\",\r\n  \"emailId\": \"testusergmail.com\",\r\n  \"dateOfBirth\": \"1995-11-27\",\r\n  \"phoneNo\": \"2222222222\",\r\n  \"city\": \"jaipur\",\r\n  \"stateCode\": \"ra\",\r\n  \"zipCode\": \"202020\",\r\n  \"address\": \"Mansarovar Jaipur\",\r\n  \"country\": \"IN\",\r\n  \"custRegDate\": \"2024-11-27\",\r\n  \"successTxn\": \"32\"\r\n//   \"extraParam\":\r\n//     {\r\n//         \"param1\":\"value1\",\r\n//         \"param2\":\"value2\",\r\n//         \"param3\":\"value3\",\r\n//         \"param4\":\"value4\"\r\n//     }\r\n}\r\n")
+  .asString();
+
+```
+
+__Example Response__
+
+```bash
+{
+  "message": "Invalid Email Format",
+  "code": "invalid_email"
+}
+```
+</TabItem>
+
+<TabItem value="existingCustomer" label="Existing Customer">
+```bash
+Unirest.setTimeouts(0, 0);
+HttpResponse<String> response = Unirest.post("https://api.paysecure.net/api/v1/customer")
+  .header("Content-Type", "application/json")
+  .header("Accept", "*/*")
+  .header("BrandId", "brand_id_value")
+  .header("Authorization", "Bearer Token")
+  .body("{\r\n  \"merchantCustomerId\": \"testuser@gmail.com\",\r\n  \"fullName\": \"Akshaya Singhal\",\r\n  \"emailId\": \"testuser@gmail.com\",\r\n  \"dateOfBirth\": \"1995-11-27\",\r\n  \"phoneNo\": \"2222222222\",\r\n  \"city\": \"jaipur\",\r\n  \"stateCode\": \"ra\",\r\n  \"zipCode\": \"202020\",\r\n  \"address\": \"Mansarovar Jaipur\",\r\n  \"country\": \"IN\",\r\n  \"custRegDate\": \"2024-11-27\",\r\n  \"successTxn\": \"32\"\r\n//   \"extraParam\":\r\n//     {\r\n//         \"param1\":\"value1\",\r\n//         \"param2\":\"value2\",\r\n//         \"param3\":\"value3\",\r\n//         \"param4\":\"value4\"\r\n//     }\r\n}")
+  .asString();
+
+```
+
+__Example Response__
+
+```bash
+{
+  "message": "Customer already exists with this information",
+  "code": "customer_already_exists"
+}
+```
+</TabItem>
+</Tabs>
+</TabItem> 
+
+
+</Tabs>

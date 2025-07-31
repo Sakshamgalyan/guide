@@ -8,19 +8,16 @@ const config: Config = {
   title: 'Paysecure Guide',
   tagline: 'Your guide to Paysecure onboarding and configuration',
   favicon: 'img/favicon.ico',
+  url: 'https://guide.paysecure.net',
+  baseUrl: '/',
+  organizationName: 'Paysecure',
+  projectName: 'paysecureGuide',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
 
   future: {
     v4: true,
   },
-
-  url: 'https://guide.paysecure.net',
-  baseUrl: '/',
-
-  organizationName: 'Paysecure',
-  projectName: 'paysecureGuide',
-
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
 
   i18n: {
     defaultLocale: 'en',
@@ -29,7 +26,7 @@ const config: Config = {
 
   presets: [
     [
-      'classic',
+      '@docusaurus/preset-classic',
       {
         docs: {
           sidebarPath: './sidebars.ts',
@@ -71,6 +68,13 @@ const config: Config = {
         {
           // Updated type to 'docSidebar' (correct Docusaurus type) and label for clarity
           type: 'docSidebar',
+          sidebarId: 'apmDocs',
+          position: 'left',
+          label: 'APM Docs',
+        }, 
+        {
+          // Updated type to 'docSidebar' (correct Docusaurus type) and label for clarity
+          type: 'docSidebar',
           sidebarId: 'api',
           position: 'left',
           label: 'API Reference',
@@ -100,8 +104,21 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Introduction',
+              label: 'Onboarding and Configuration',
               to: '/docs/White‑Label Merchant Onboarding and Configuration',
+            },
+          ],
+        },
+        {
+          title: 'APM Docs',
+          items: [
+            {
+              label: 'Introduction',
+              to: '/docs/introduction',
+            },
+            {
+              label: 'Authentication',
+              to: '/docs/authentication',
             },
           ],
         },
