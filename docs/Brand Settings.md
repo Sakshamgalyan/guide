@@ -1,6 +1,6 @@
-# Brand Settings
+import { CompanyName } from '@site/src/components/EnvVars';
 
-This module allows merchants to personalize and manage their customers' checkout experience through PaySecure.
+This module allows merchants to personalize and manage their customers' checkout experience through <CompanyName/>.
 
 Using this feature, you can:
 

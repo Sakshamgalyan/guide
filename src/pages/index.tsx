@@ -1,11 +1,22 @@
 import type { ReactNode } from 'react';
 import clsx from 'clsx';
-import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
 import styles from './index.module.css';
+import type { ComponentProps } from 'react';
+import OriginalLink from '@docusaurus/Link';
+import OriginalHeading from '@theme/Heading';
+import OriginalLayout from '@theme/Layout';
+
+const Layout = OriginalLayout as (props: ComponentProps<'div'> & {
+  title?: string;
+  description?: string;
+  children?: React.ReactNode;
+}) => JSX.Element;
+
+
+const Heading = OriginalHeading as (props: ComponentProps<'h1'> & { as: keyof JSX.IntrinsicElements }) => JSX.Element;
+const Link = OriginalLink as (props: ComponentProps<'a'> & { to: string }) => JSX.Element;
+
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -22,8 +33,8 @@ function HomepageHeader() {
             className="button button--secondary button--lg"
             to="/docs/White‑Label Merchant Onboarding and Configuration"
             style={{
-              backgroundColor: '#5223BC',
-              color: 'white',
+              backgroundColor: '#DFF34F',
+              color: '#1F1438',
             }}
           >
             Get Started with Onboarding
@@ -60,8 +71,21 @@ export default function Home(): ReactNode {
               </div>
               </div>
             </Link>
-            <Link to="/"
+            <Link to="/docs/api"
             className={styles.apiDocs}>
+              <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
+                API Reference
+              </div>
+              <div style={{ fontSize: '14px' }}>
+                Try it out →
+              </div>
+              </div>
+            </Link>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '40px' }}>
+            <Link to="/"
+            className={styles.apmDocs}>
               <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
                 Alternative Payment Methods(APM) Guide

@@ -1,4 +1,7 @@
-# Merchant Profile
+---
+id: Merchant Profile
+title: Merchant Profile
+---
 
 ### **Merchant Configuration (White-Label Admin Guide)**
 

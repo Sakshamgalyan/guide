@@ -1,4 +1,4 @@
-# White‑Label Merchant Onboarding and Configuration
+import { CompanyName } from '@site/src/components/EnvVars';
 
 ### Overview
 
@@ -19,7 +19,7 @@ Follow the steps below to ensure a smooth setup process and transition to live t
 
 ### 1.1 Creating a New White‑Label Merchant
 
-To onboard a new merchant, a white‑label account must be created from the Paysecure admin panel. Click on the **Add Role** button and provide the email address of the primary contact for the account. Select the **Role** of the user from the drop-down menu and click **Add Role** to create the account.
+To onboard a new merchant, a white‑label account must be created from the <CompanyName/> admin panel. Click on the **Add Role** button and provide the email address of the primary contact for the account. Select the **Role** of the user from the drop-down menu and click **Add Role** to create the account.
 
 ![Description](/img/Screenshot_2025-02-27_at_4.34.38_PM.png)
 
@@ -47,7 +47,7 @@ After 2FA is successfully registered, the merchant will be prompted to log in ag
 
 ### 1.4 KYB Form Submission
 
-During the account creation process, the merchant will receive KYB requirements from the Paysecure accounts team, which must be filled out and submitted. Upon approval, the merchant can access their full account details via the Paysecure portal.
+During the account creation process, the merchant will receive KYB requirements from the <CompanyName/> accounts team, which must be filled out and submitted. Upon approval, the merchant can access their full account details via the <CompanyName/> portal.
 
 ![Description](/img/Screenshot_2025-02-27_at_5.10.36_PM.png)
 
@@ -124,7 +124,7 @@ The merchant can add multiple users to their account for efficient team manageme
 <aside>
 🗒️
 
-Once the merchant profile is fully set up, they can begin integrating with Paysecure APIs. For integration details and API references, please refer to [developer.paysecure.net](http://developer.paysecure.net/).
+Once the merchant profile is fully set up, they can begin integrating with <CompanyName/> APIs. For integration details and API references, please refer to [developer.paysecure.net](http://developer.paysecure.net/).
 
 </aside>
 
@@ -157,11 +157,11 @@ Merchants can toggle between sandbox (for testing) and production (for live tran
 
 ### 3.2 API Keys
 
-The API Keys module is crucial for authenticating API calls to Paysecure.
+The API Keys module is crucial for authenticating API calls to <CompanyName/>.
 
 **Functionality Overview:**
 
-- **Auth Key (Bearer Token):**Used in the request header for calling any Paysecure API endpoint.
+- **Auth Key (Bearer Token):**Used in the request header for calling any <CompanyName/> API endpoint.
 
 **Steps to Generate an API Key:**
 
@@ -179,7 +179,7 @@ Authorization: Bearer <YOUR_API_KEY>
 
 ### 3.3 Brands Setup
 
-For white‑label merchants, a brand represents the sub‑merchants under the control of the white‑label entity. Many Paysecure API calls require a Brand ID to uniquely identify the merchant brand.
+For white‑label merchants, a brand represents the sub‑merchants under the control of the white‑label entity. Many <CompanyName/> API calls require a Brand ID to uniquely identify the merchant brand.
 
 **How to Generate a Brand ID:**
 
@@ -229,7 +229,7 @@ Webhooks enable real‑time notifications for transaction events.
 
 ### 3.5 Public Key Usage
 
-The public key is used to verifying hash signatures and decrypting payload responses from Paysecure.
+The public key is used to verifying hash signatures and decrypting payload responses from <CompanyName/>.
 
 **How It Works:**
 
@@ -253,7 +253,7 @@ The Settings module allows merchants to adjust parameters for specific payment m
 
 - Set an appropriate expiry time.
 - Clearly communicate the payment window to customers.
-- Reconcile any discrepancies between Paysecure records and customer bank transactions during settlement.
+- Reconcile any discrepancies between <CompanyName/> records and customer bank transactions during settlement.
 
 ![Description](/img/Screenshot_2025-02-27_at_6.40.25_PM.png)
 

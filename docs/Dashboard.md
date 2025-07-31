@@ -1,8 +1,8 @@
-# Dashboard
+import { CompanyName } from '@site/src/components/EnvVars';
 
 ## 1. Introduction
 
-This guide provides a comprehensive explanation of how each module on the Paysecure Dashboard works. You will find detailed instructions for:
+This guide provides a comprehensive explanation of how each module on the <CompanyName/> Dashboard works. You will find detailed instructions for:
 
 - Setting up the account and switching between production and sandbox modes.
 - Generating and managing API keys and Brand IDs.
@@ -73,12 +73,12 @@ Merchants can switch between sandbox (testing) and production (live) environment
 
 ## 3. API Keys
 
-The API Keys module is crucial for authenticating requests to the Paysecure API. For merchants under the whitle-lable merchant, they will see additional tabs on the dashboard to generate API Keys, Brand IDs and more.
+The API Keys module is crucial for authenticating requests to the <CompanyName/> API. For merchants under the whitle-lable merchant, they will see additional tabs on the dashboard to generate API Keys, Brand IDs and more.
 
 ### Functionality Overview
 
 - **Auth Key (Bearer Token):**
-    - Used in the request header for calling any Paysecure API endpoint.
+    - Used in the request header for calling any <CompanyName/> API endpoint.
 
 ### Steps to Generate an API Key
 
@@ -102,9 +102,7 @@ The API Keys module is crucial for authenticating requests to the Paysecure API.
     - Include this key as a Bearer token in the header of every API call.
     - Example HTTP header:
         
-        ```
-        http
-        Copy
+        ```http
         Authorization: Bearer <YOUR_API_KEY>
         ```
         
@@ -115,7 +113,7 @@ The API Keys module is crucial for authenticating requests to the Paysecure API.
 
 ## 4. Brands
 
-Certain Paysecure API calls require a Brand ID, which uniquely identifies the merchant brand.
+Certain <CompanyName/> API calls require a Brand ID, which uniquely identifies the merchant brand.
 
 ### How to Generate a Brand ID
 
@@ -135,7 +133,7 @@ Certain Paysecure API calls require a Brand ID, which uniquely identifies the me
 
 **Usage in API Requests:**
 
-- The Brand ID must be included in the header or request parameters when calling most Paysecure APIs.
+- The Brand ID must be included in the header or request parameters when calling most <CompanyName/> APIs.
 
 *Suggested Image Placeholder: Diagram showing the process of generating a Brand ID and where it appears in the dashboard.*
 
@@ -143,7 +141,7 @@ Certain Paysecure API calls require a Brand ID, which uniquely identifies the me
 
 ## 5. Webhook Configuration
 
-Webhooks enable real-time communication of transaction events from Paysecure to your server.
+Webhooks enable real-time communication of transaction events from <CompanyName/> to your server.
 
 ![Description](/img/Screenshot_2025-05-16_at_5.46.24_PM.png)
 
@@ -217,7 +215,7 @@ The public key plays a crucial role in verifying the hash signature used to decr
 - **Access:**
     - The public key is displayed in the “Public Key” section of the dashboard.
 - **Usage in Transactions:**
-    - It must be used in conjunction with the corresponding private key to validate that the data received from Paysecure is untampered.
+    - It must be used in conjunction with the corresponding private key to validate that the data received from <CompanyName/> is untampered.
 
 *Suggested Image Placeholder: Diagram illustrating the encryption/decryption process using the public key.*
 
@@ -246,4 +244,4 @@ The Settings module allows merchants to fine-tune parameters for specific paymen
     - In some cases, a payment made after the expiry window might still succeed (e.g., if the customer’s bank processes the payment later), leading to discrepancies.
 - **Recommendations:**
     - Set an appropriate expiry time and communicate clearly to customers the required payment window.
-    - In the event of inconsistencies between Paysecure’s records and the customer’s bank, reconciliation is performed during settlement.
+    - In the event of inconsistencies between <CompanyName/>’s records and the customer’s bank, reconciliation is performed during settlement.

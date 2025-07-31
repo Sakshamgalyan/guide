@@ -1,8 +1,8 @@
-# Reports and Analytics
+import { CompanyName } from '@site/src/components/EnvVars';
 
 ## **Introduction**
 
-PaySecure offers a robust and feature-rich **Reporting & Analytics** suite that empowers merchants with real-time visibility and data-driven insights into their business performance.
+<CompanyName/> offers a robust and feature-rich **Reporting & Analytics** suite that empowers merchants with real-time visibility and data-driven insights into their business performance.
 
 Designed to support **business, operations, and finance teams**, this module provides in-depth reporting on transactions, system activity, customer behavior, and payment success trends—enabling smarter decisions, streamlined operations, and improved approval rates.
 
@@ -109,7 +109,7 @@ As per the above filters, the merchant can group these reports by following para
 
 | **Field** | **Description** |
 | --- | --- |
-| `accept_header` | Headers in Paysecure API calls; can be filtered by bank and/or currency. |
+| `accept_header` | Headers in <CompanyName/> API calls; can be filtered by bank and/or currency. |
 | `Accept_language` | Language preference of the user’s browser or device. |
 | `Amount_in_USD` | Transaction amount converted into USD. |
 | `Bankname` | Name of the bank handling the transaction. |
@@ -144,7 +144,7 @@ As per the above filters, the merchant can group these reports by following para
 | `Month` | Month when the transaction occurred. |
 | `Os` | Operating system used by the user (e.g., Windows, macOS, Android). |
 | `Otp` | One-Time Password used for authentication. |
-| `PaySecureDeviceId` | Unique device identifier for Paysecure transactions. |
+| `PaysecureDeviceId` | Unique device identifier for <CompanyName/> transactions. |
 | `PixelDepth` | Pixel depth of the user’s screen. |
 | `ProfileId` | Unique identifier for the user profile making the transaction. |
 | `Referer` | URL of the referring website before initiating the transaction. |

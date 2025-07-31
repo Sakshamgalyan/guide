@@ -1,4 +1,7 @@
-# Add User
+---
+id: Add User
+title: Add User
+---
 
 This module allows white-label admins to **view**, **manage**, and **add new users** under their white-label account.
 

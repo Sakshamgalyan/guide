@@ -16,4 +16,7 @@ module.exports = {
     'Payouts',
     'Reports and Analytics',
   ],
+  api: [
+    'api'
+  ]
 };  

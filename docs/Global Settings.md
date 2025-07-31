@@ -1,4 +1,4 @@
-# Global Settings
+import { CompanyName } from '@site/src/components/EnvVars';
 
 ### Overview
 
@@ -46,18 +46,18 @@ Additionally, you can view test card information along with their associated tes
 
 ### 3. Error Code Mapping
 
-This section allows you to map error codes received from banks or payment processors to predefined Paysecure error codes. You can also create your own custom error codes if needed. A single Paysecure error code can be associated with multiple processor error codes.
+This section allows you to map error codes received from banks or payment processors to predefined <CompanyName/> error codes. You can also create your own custom error codes if needed. A single <CompanyName/> error code can be associated with multiple processor error codes.
 
 **Mapping Process:**
 
 1. **Select the Bank:** Choose the bank from which the error originates.
-2. **Choose a PaySecure Error Code:**
+2. **Choose a <CompanyName/> Error Code:**
     - Pick an error code from the dropdown list.
     - If the error code is not already available, you can create a new one.
-3. **Map Processor Error Codes:** Select the processor error codes that correspond to the chosen PaySecure error code.
+3. **Map Processor Error Codes:** Select the processor error codes that correspond to the chosen <CompanyName/> error code.
 4. **Finalize Mapping:** Click the **Map** button to complete the configuration.
 
-**To create a new PaySecure error code:**
+**To create a new <CompanyName/> error code:**
 
 - Click on the **Add More** button.
 - Type the new error code.
@@ -73,7 +73,7 @@ This feature lets you automate the handling of errors received from processors b
 
 **Steps to Configure an Error Action:**
 
-1. **Select the Error Code:** Choose the PaySecure error code for which you want to define an action.
+1. **Select the Error Code:** Choose the <CompanyName/> error code for which you want to define an action.
 2. **Define the Action:** Choose the specific action to be executed when the error occurs.
 3. **Set the Duration:** Specify how long the action should be active (in minutes, hours, or days).
 4. **Compose a Block Message:** Enter a message that will be shown when the action is triggered.

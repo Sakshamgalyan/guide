@@ -1,4 +1,7 @@
-# Manage Roles
+---
+id: Manage Roles
+title: Manage Roles
+---
 
 This module allows white-label admins to **view**, **manage**, and **add new merchants** under their account.
 

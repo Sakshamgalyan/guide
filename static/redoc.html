@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Create Customer | Paysecure</title>
+
+  <!-- DM Sans Font -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet" />
+
+  <!-- Stoplight Elements -->
+  <script src="https://unpkg.com/@stoplight/elements/web-components.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css" />
+
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #1F1438;
+      --card-bg: #f9f9fb;
+      --border-radius: 12px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-color: #121212;
+        --text-color: #f1f1f1;
+        --card-bg: #1e1e1e;
+      }
+    }
+
+    html, body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'DM Sans', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .api-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 1rem;
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    elements-api {
+      display: block;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="api-container">
+    <elements-api
+      id="sl-api"
+      apiDescriptionUrl="/openapi.yaml"
+      router="hash"
+      layout="stacked"
+      tryIt="true"
+      showConsole="true"
+      hideInternal="true"
+      hideExport="true"
+      hideSchemas="true"
+      hideModels="true"
+      hideSidebar="true"
+      route="api%2Fv1%2Fcustomer%2Fpost"
+    ></elements-api>
+  </div>
+
+  <script>
+    function postHeight() {
+      const height = document.body.scrollHeight;
+      parent.postMessage({ type: 'stoplightHeight', height }, '*');
+    }
+
+    // ResizeObserver for auto height adjustment
+    const ro = new ResizeObserver(() => postHeight());
+    ro.observe(document.body);
+    window.addEventListener('load', postHeight);
+    window.addEventListener('resize', postHeight);
+
+    // Set Stoplight theme
+    const slApi = document.getElementById('sl-api');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    slApi.setAttribute('theme', prefersDark ? 'dark' : 'light');
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      slApi.setAttribute('theme', e.matches ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

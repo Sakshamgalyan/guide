@@ -1,14 +1,14 @@
-# Rule Engine
+import { CompanyName } from '@site/src/components/EnvVars';
 
 **Rule Engine User Manual**
 
 **Overview**
 
-The Rule Engine in Paysecure enables users to create and manage rule categories, set priorities, and define transaction routing logic. It allows dynamic rule-based transaction routing to specific Banks/MIDs based on predefined conditions. The system supports priority-based rule execution and error-driven cascading, optimizing transaction success rates. Users can modify, activate, or deactivate rules, ensuring efficient and secure payment processing.
+The Rule Engine in <CompanyName/> enables users to create and manage rule categories, set priorities, and define transaction routing logic. It allows dynamic rule-based transaction routing to specific Banks/MIDs based on predefined conditions. The system supports priority-based rule execution and error-driven cascading, optimizing transaction success rates. Users can modify, activate, or deactivate rules, ensuring efficient and secure payment processing.
 
 **Accessing the Rule Engine**
 
-1. **Login** to the Paysecure dashboard at [https://app.paysecure.net/login](https://app.paysecure.net/login).
+1. **Login** to the <CompanyName/> dashboard at [https://app.paysecure.net/login](https://app.paysecure.net/login).
 2. On the left-hand panel, navigate to **Rule Engine**.
 
 ![image.png](/img/reimage.png)

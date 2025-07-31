@@ -1,10 +1,10 @@
-# Payouts
+import { CompanyName } from '@site/src/components/EnvVars';
 
-**Payout**
+<!-- **Payout** -->
 
 **Overview:**
 
-The Payout feature in Paysecure enables admins to track, filter, and analyze transactions efficiently. The Dashboard provides an overview of paid, error, and in-process payouts across different timeframes. Users can filter transactions by Purchase ID, Merchant, Bank, MID, Date, Currency, and Status, ensuring seamless tracking. The Payout Analytics Report allows finance teams to generate detailed reports, apply filters, and export data for further analysis.
+The Payout feature in <CompanyName/> enables admins to track, filter, and analyze transactions efficiently. The Dashboard provides an overview of paid, error, and in-process payouts across different timeframes. Users can filter transactions by Purchase ID, Merchant, Bank, MID, Date, Currency, and Status, ensuring seamless tracking. The Payout Analytics Report allows finance teams to generate detailed reports, apply filters, and export data for further analysis.
 
 **Below are the steps to check the payout functionality:**
 

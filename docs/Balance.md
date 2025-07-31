@@ -1,4 +1,4 @@
-# Balance
+import { CompanyName } from '@site/src/components/EnvVars';
 
 ## Overview
 
@@ -8,7 +8,7 @@ The Balance section allows you to keep track of the available funds for each pay
 
 **How to Check Your Merchant Balance:**
 
-1. Log in to your PaySecure portal.
+1. Log in to your <CompanyName/> portal.
 2. In the side menu, click on the **Operations** module and select **Balances**.
 3. The Balance module opens, displaying your available funds.
 4. Select your desired payment method for detailed views.
@@ -19,4 +19,4 @@ The Balance section allows you to keep track of the available funds for each pay
 > 
 > 
 > This module shows the balance accumulated from the start of your payins. The balance does not update automatically upon merchant settlements.
->
+>   

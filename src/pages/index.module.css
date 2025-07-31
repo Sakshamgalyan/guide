@@ -21,7 +21,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  
+}
 
+.buttons:hover {
+  transform: scale(1.05);
 }
 
 .container {
@@ -57,6 +63,23 @@
 }
 
 .apiDocs{
+  background-color: white;
+  color: #5223BC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27%;
+  height: 150px;
+  margin-right: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 2px solid #5223BC;
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+.apmDocs{
   background-color: white;
   color: #5223BC;
   display: flex;

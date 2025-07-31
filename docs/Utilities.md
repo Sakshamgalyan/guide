@@ -1,6 +1,6 @@
-# Utilities
+import { CompanyName } from '@site/src/components/EnvVars';
 
-## Utilities Module
+# Utilities Module
 
 This module provides account-level configuration options to manage key settings, including processing batch refunds, setting up conversion rates, and handling bank reconciliation.
 
@@ -102,13 +102,13 @@ Helpful for setting up **routing rules** based on customer email addresses.
 
 ### **Error Category**
 
-This module allows admins to create and manage **custom error categories** by grouping relevant PaySecure error codes.
+This module allows admins to create and manage **custom error categories** by grouping relevant <CompanyName/> error codes.
 
 **How to Create a New Error Category:**
 
 1. Click **“Add More Category”**.
 2. Enter a **Category Name** and save it.
-3. Map specific **PaySecure error codes** to the newly created category by selecting the codes, choosing the category, and clicking **“Add”**.
+3. Map specific **<CompanyName/> error codes** to the newly created category by selecting the codes, choosing the category, and clicking **“Add”**.
 
 ![Screenshot 2025-06-04 at 4.59.24 PM.png](/img/Screenshot_2025-06-04_at_4.59.24_PM.png)
 
