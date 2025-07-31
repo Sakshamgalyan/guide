@@ -71,19 +71,6 @@ export default function Home(): ReactNode {
               </div>
               </div>
             </Link>
-            <Link to="/docs/api"
-            className={styles.apiDocs}>
-              <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
-                API Reference
-              </div>
-              <div style={{ fontSize: '14px' }}>
-                Try it out →
-              </div>
-              </div>
-            </Link>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '40px' }}>
             <Link to="/docs/introduction"
             className={styles.apmDocs}>
               <div style={{ textAlign: 'center' }}>
@@ -92,6 +79,19 @@ export default function Home(): ReactNode {
               </div>
               <div style={{ fontSize: '14px' }}>
                 Start here →
+              </div>
+              </div>
+            </Link>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '40px' }}>
+            <Link to="/docs/api"
+            className={styles.apiDocs}>
+              <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
+                API Reference
+              </div>
+              <div style={{ fontSize: '14px' }}>
+                Try it out →
               </div>
               </div>
             </Link>
