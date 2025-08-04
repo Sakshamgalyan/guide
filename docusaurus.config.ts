@@ -40,6 +40,7 @@ const config: Config = {
 
   customFields: {
     companyName: process.env.COMPANY_NAME,
+    openaiApiKey: process.env.OPENAI_API_KEY,
   },
 
   themeConfig: {
@@ -59,26 +60,23 @@ const config: Config = {
       },
       items: [
         {
-          // Updated type to 'docSidebar' (correct Docusaurus type) and label for clarity
           type: 'docSidebar',
           sidebarId: 'docs',
           position: 'left',
           label: 'Docs',
         },
         {
-          // Updated type to 'docSidebar' (correct Docusaurus type) and label for clarity
           type: 'docSidebar',
           sidebarId: 'apmDocs',
           position: 'left',
           label: 'APM Docs',
         }, 
         {
-          // Updated type to 'docSidebar' (correct Docusaurus type) and label for clarity
           type: 'docSidebar',
           sidebarId: 'api',
           position: 'left',
           label: 'API Reference',
-        }, 
+        },
         {
           type: 'search',
           position: 'right',
@@ -94,7 +92,7 @@ const config: Config = {
     },
     colorMode: {
       defaultMode: 'dark',
-      disableSwitch: false,
+      disableSwitch: false, 
       respectPrefersColorScheme: true,
     },
     footer: {
@@ -127,7 +125,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/Paysecure/paysecureGuide',
+              href: 'https://github.com/sakshamgalyan/guide',
             },
             {
               label: 'Paysecure',

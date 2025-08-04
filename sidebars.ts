@@ -17,7 +17,7 @@ module.exports = {
     'Reports and Analytics',
   ],
   api: [
-    'api'
+    'api',
   ],
   apmDocs: [
     'introduction',

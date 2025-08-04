@@ -5,18 +5,18 @@ const StoplightWebComponent = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [iframeHeight, setIframeHeight] = useState('350px');
 
+  // Handle dynamic height from iframe
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data?.type === 'stoplightHeight' && typeof event.data.height === 'number') {
         setIframeHeight(`${event.data.height}px`);
       }
     };
-
     window.addEventListener('message', handleMessage);
-
     return () => window.removeEventListener('message', handleMessage);
   }, []);
 
+  // Sync dark/light theme with iframe
   useEffect(() => {
     const observer = new MutationObserver(() => {
       const isDark = document.documentElement.classList.contains('dark');
@@ -35,7 +35,7 @@ const StoplightWebComponent = () => {
   }, []);
 
   return (
-    <div className="w-full flex justify-center items-center py-6 px-2">
+    <div className="w-full flex justify-center items-center py-6 px-2 not-prose">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -46,6 +46,7 @@ const StoplightWebComponent = () => {
           ref={iframeRef}
           src="/redoc.html"
           title="API Reference"
+          loading="lazy"
           style={{
             width: '100%',
             height: iframeHeight,
