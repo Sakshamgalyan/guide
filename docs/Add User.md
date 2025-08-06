@@ -24,4 +24,4 @@ From the user management interface, you can:
 - **Reset Two-Factor Authentication (2FA)** for a user.
 - **Reset Password** if a user is unable to log in.
 
-These tools help you efficiently manage access and maintain account security across your white-label platform..
+These tools help you efficiently manage access and maintain account security across your white-label platform.
