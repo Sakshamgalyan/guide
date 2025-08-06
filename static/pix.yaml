@@ -1,0 +1,274 @@
+openapi: 3.0.3
+info:
+  title: ''
+
+servers:
+  - url: https://api.paysecure.net    
+
+paths:
+  /api/v1/purchases/:
+    post:
+      tags: [PIX]
+      summary: Initiate a new purchase via PIX
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - client
+                - purchase
+                - paymentMethod
+                - merchantRef
+                - brand_id
+                - success_redirect
+                - failure_redirect
+                - success_callback
+                - failure_callback
+              properties:
+                client:
+                  type: object
+                  required:
+                    - email
+                    - full_name
+                    - tax_number
+                  properties:
+                    email: { type: string, format: email, example: test@gmail.com }
+                    full_name: { type: string, example: test test }
+                    tax_number: { type: string, example: "39933551809" }
+                purchase:
+                  type: object
+                  required:
+                    - currency
+                    - products
+                  properties:
+                    currency: { type: string, example: BRL }
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        required: [name, price]
+                        properties:
+                          name: { type: string, example: test }
+                          price: { type: number, example: 10 }
+                paymentMethod: { type: string, example: PIX }
+                merchantRef: { type: string, example: test12 }
+                brand_id: { type: string, format: uuid, example: 90ed108b-6753-465d-8a21-e2cc604ff814 }
+                success_redirect: { type: string, format: uri, example: https://test.com/getResponse.jsp?success=true }
+                failure_redirect: { type: string, format: uri, example: https://test.com/getResponse.jsp?success=false }
+                success_callback: { type: string, format: uri, example: https://test1.com }
+                failure_callback: { type: string, format: uri, example: https://test2.com }
+      responses:
+        '200':
+            description: Purchase Successful
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    purchaseId:
+                      type: string
+                      example: 65f9368cb905381ba207b3c4
+                    client:
+                      type: object
+                      properties:
+                        email:
+                          type: string
+                          example: test@gmail.com
+                        full_name:
+                          type: string
+                          example: Test test
+                        tax_number:
+                          type: string
+                          example: "39933551809"
+                    updated_on:
+                      type: integer
+                      example: 1710831244
+                    type:
+                      type: string
+                      example: purchase
+                    paymentMethod:
+                      type: string
+                      example: PIX
+                    amountUnit:
+                      type: string
+                      example: MAJOR
+                    errorMsg:
+                      type: string
+                      example: ""
+                    redirectType:
+                      type: string
+                      example: POST
+                    force_recurring:
+                      type: boolean
+                      example: false
+                    created_on:
+                      type: integer
+                      example: 1710831244
+                    merchantRef:
+                      type: string
+                      example: 65f9368cb905381ba207b3c4
+                    merchantName:
+                      type: string
+                      example: test
+                    purchase:
+                      type: object
+                      properties:
+                        currency:
+                          type: string
+                          example: USD
+                        products:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              price:
+                                type: number
+                                example: 10
+                        total:
+                          type: number
+                          example: 10
+                        language:
+                          type: string
+                          example: en
+                        total_formatted:
+                          type: number
+                          example: 1
+                        timezone:
+                          type: string
+                          example: MIT
+                    issuer_details:
+                      type: object
+                      properties:
+                        bank_accounts:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              bank_account:
+                                type: string
+                                example: ""
+                              bank_code:
+                                type: string
+                                example: ""
+                        legal_name:
+                          type: string
+                          example: newbrand
+                        brand_name:
+                          type: string
+                          example: newbrand
+                    transaction_data:
+                      type: object
+                      example: {}
+                    status:
+                      type: string
+                      example: CREATED
+                    status_history:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          status:
+                            type: string
+                            example: created
+                          timestamp:
+                            type: integer
+                            example: 1710831244
+                    pix_payload:
+                      type: object
+                      properties:
+                        payload:
+                          type: string
+                          example: "00020101021226800014br.gov.bcb.pix2558pix.asaas.com/..."
+                        qr_code:
+                          type: string
+                          example: iVBORw0KGgoAAAANSUhEUgAAAZ8AAAGfCAIAAAAPgEjDAAAP4UlEQVR4...
+                        expiration_date:
+                          type: string
+                          example: 2025-03-27 23:59:59
+                    is_test:
+                      type: boolean
+                      example: false
+                    brand_id:
+                      type: string
+                      example: 90ed108b-6753-465d-8a21-e2cc604ff814
+                    send_receipt:
+                      type: boolean
+                      example: false
+                    is_recurring_token:
+                      type: boolean
+                      example: false
+                    skip_capture:
+                      type: boolean
+                      example: false
+                    reference_generated:
+                      type: string
+                      example: PS2696
+                    issued:
+                      type: string
+                      example: 2024-03-19
+                    due:
+                      type: integer
+                      example: 1710831244
+                    refund_upto:
+                      type: number
+                      example: 0
+                    cc_descriptor:
+                      type: string
+                      example: ""
+                    fraudScore:
+                      type: string
+                      example: NA
+                    trustScore:
+                      type: string
+                      example: NA
+                    refund_availability:
+                      type: string
+                      example: NONE
+                    refundable_amount:
+                      type: number
+                      example: 0
+                    success_redirect:
+                      type: string
+                      example: https://test.com/getResponse.jsp?success=true
+                    failure_redirect:
+                      type: string
+                      example: https://test.com/getResponse.jsp?success=false
+                    cancel_redirect:
+                      type: string
+                      example: ""
+                    success_callback:
+                      type: string
+                      example: https://test1.com
+                    failure_callback:
+                      type: string
+                      example: https://test2.com
+                    platform:
+                      type: string
+                      example: API
+                    created_from_ip:
+                      type: string
+                      example: 223.182.100.34
+                    checkout_url:
+                      type: string
+                      example: https://api.paysecure.net/payments/65f9368cb905381ba207b3c4/
+
+        '401':
+          description: Authorization Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid Authorization
+                  code:
+                    type: string
+                    example: Invalid_Authorization

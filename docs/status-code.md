@@ -3,7 +3,7 @@ title: Status Code
 sidebar_position: 7
 ---
 
-## HTTP Response Code
+### HTTP Response Code
 
 | **Code** | **Triggering Event**       |
 |----------|----------------------------|
@@ -22,12 +22,11 @@ You will not get Error codes if HTTPS response code is 200 or 202.
 
 ### Error Codes and Messages
 
-### with http code(400,404,401,415,405)
+**with http code(400,404,401,415,405)**  
 Below is the list of possible error codes and the corresponding messages from Paysecure System
 
 Format:
 ```json
-JSON
 {
     "message": "descriptive error message",
     "code": "error_code"

@@ -10,6 +10,14 @@
   overflow: hidden;
 }
 
+.hero__title{
+  color: white;
+}
+
+[data-theme='dark'] .hero__title{
+  color: #1F1438;
+}
+
 @media screen and (max-width: 996px) {
   .heroBanner {
     padding: 2rem;

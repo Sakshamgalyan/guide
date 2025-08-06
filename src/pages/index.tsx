@@ -23,8 +23,8 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <Heading as="h1" className="hero__title"
-        style={{ color: 'white' }}>
+        <Heading as="h1" className={styles.hero__title}
+        >
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
@@ -60,7 +60,7 @@ export default function Home(): ReactNode {
             marginBottom: '100px', marginTop: '50px'
           }}>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-            <Link to="/docs/White‑Label Merchant Onboarding and Configuration"
+            <Link to="http://localhost:3001/"
             className={styles.merchantDocs}>
               <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
@@ -84,7 +84,7 @@ export default function Home(): ReactNode {
             </Link>
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '40px' }}>
-            <Link to="/docs/api"
+            <Link to="/docs/create"
             className={styles.apiDocs}>
               <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>

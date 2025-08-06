@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
-const StoplightWebComponent = () => {
+interface PayinCompProps {
+  src: string; 
+}
+
+const PayinComp: React.FC<PayinCompProps> = ({ src }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [iframeHeight, setIframeHeight] = useState('350px');
 
-  // Handle dynamic height from iframe
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data?.type === 'stoplightHeight' && typeof event.data.height === 'number') {
@@ -14,24 +17,6 @@ const StoplightWebComponent = () => {
     };
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
-  }, []);
-
-  // Sync dark/light theme with iframe
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      const isDark = document.documentElement.classList.contains('dark');
-      iframeRef.current?.contentWindow?.postMessage(
-        { type: 'setTheme', theme: isDark ? 'dark' : 'light' },
-        '*'
-      );
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-
-    return () => observer.disconnect();
   }, []);
 
   return (
@@ -44,7 +29,7 @@ const StoplightWebComponent = () => {
       >
         <iframe
           ref={iframeRef}
-          src="/redoc.html"
+          src={src} 
           title="API Reference"
           loading="lazy"
           style={{
@@ -60,4 +45,4 @@ const StoplightWebComponent = () => {
   );
 };
 
-export default StoplightWebComponent;
+export default PayinComp;

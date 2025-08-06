@@ -40,7 +40,6 @@ const config: Config = {
 
   customFields: {
     companyName: process.env.COMPANY_NAME,
-    openaiApiKey: process.env.OPENAI_API_KEY,
   },
 
   themeConfig: {
@@ -59,12 +58,12 @@ const config: Config = {
         src: 'img/logo.svg',
       },
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'docs',
-          position: 'left',
-          label: 'Docs',
-        },
+        // {
+        //   type: 'docSidebar',
+        //   sidebarId: 'docs',
+        //   position: 'left',
+        //   label: 'Docs',
+        // },
         {
           type: 'docSidebar',
           sidebarId: 'apmDocs',
@@ -83,8 +82,8 @@ const config: Config = {
           className: 'navbar_search_bar',
         },
         {
-          href: 'https://paysecure.net/',
-          label: 'Paysecure',
+          href: 'http://localhost:3001/',
+          label: 'Merchant Guide',
           position: 'right',
           className: 'navbar_link',
         },
@@ -98,15 +97,15 @@ const config: Config = {
     footer: {
       style: 'dark',
       links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Onboarding and Configuration',
-              to: '/docs/White‑Label Merchant Onboarding and Configuration',
-            },
-          ],
-        },
+        // {
+        //   title: 'Docs',
+        //   items: [
+        //     {
+        //       label: 'Onboarding and Configuration',
+        //       to: '/docs/White‑Label Merchant Onboarding and Configuration',
+        //     },
+        //   ],
+        // },
         {
           title: 'APM Docs',
           items: [

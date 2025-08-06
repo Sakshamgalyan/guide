@@ -1,23 +1,30 @@
-
 module.exports = {
-  docs: [
-    'White‑Label Merchant Onboarding and Configuration',
-    'Dashboard',
-    'Manage Roles',
-    'Merchant Profile',
-    'Banks',
-    'Add User',
-    'Global Settings',
-    'Rule Engine',
-    'Global Blocking',
-    'Balance',
-    'Brand Settings',
-    'Utilities',
-    'Payouts',
-    'Reports and Analytics',
-  ],
+  // docs: [
+  //   'White‑Label Merchant Onboarding and Configuration',
+  //   'Dashboard',
+  //   'Manage Roles',
+  //   'Merchant Profile',
+  //   'Banks',
+  //   'Add User',
+  //   'Global Settings',
+  //   'Rule Engine',
+  //   'Global Blocking',
+  //   'Balance',
+  //   'Brand Settings',
+  //   'Utilities',
+  //   'Payouts',
+  //   'Reports and Analytics',
+  // ],
   api: [
-    'api',
+    'create',
+    {
+      type: 'category',
+      label: 'PayIn APIs',       // Group cashier-apis items
+      items: [
+        'payin/interac',
+        'payin/pix',
+      ],
+    },
   ],
   apmDocs: [
     'introduction',
@@ -28,8 +35,6 @@ module.exports = {
     'integration-steps',
     'webhooks',
     'status-code',
-
-
     // {
     //   type: 'category',
     //   label: 'Payment Methods',    // Group payment-methods items
