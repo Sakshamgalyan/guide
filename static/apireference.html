@@ -59,7 +59,7 @@
     window.addEventListener('load', () => {
     // Get query param or set default
     const urlParams = new URLSearchParams(window.location.search);
-    const apiUrl = urlParams.get('api') || '/openapi.yaml';
+    const apiUrl = window.location.hash.substring(1) || '/create.yaml';
 
     const apiComponent = document.getElementById('sl-api');
 
