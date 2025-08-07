@@ -1,209 +1,149 @@
 openapi: 3.0.3
 info:
-  title: ''
+  title: Paysecure Purchase API
+  version: '1.0.0'
 
 servers:
-  - url: https://api.paysecure.net    
+  - url: https://api.paysecure.net
 
 paths:
   /api/v1/purchases/:
     post:
-      tags: [Interac e-Transfer]
-      summary: Initiate a new purchase via Interac e-Transfer
+      summary: Initiate a new purchase
+      tags: [Purchase]
       parameters:
         - in: header
           name: Authorization
           required: true
-          schema: { type: string }
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - client
-                - purchase
-                - paymentMethod
-                - brand_id
-                - success_redirect
-                - failure_redirect
-                - success_callback
-                - failure_callback
-              properties:
-                client:
-                  type: object
-                  required:
-                    - email
-                    - full_name
-                    - phone
-                    - street_address
-                    - city
-                    - zip_code
-                    - country
-                    - stateCode
-                  properties:
-                    email: { type: string, description: The email address of the client, format: email, example: seo2009@test.com }
-                    full_name: { type: string, example: Test test }
-                    phone: { type: string, example: "+447755564318" }
-                    street_address: { type: string, example: "10 New Burlington Street Apt. 214" }
-                    city: { type: string, example: London }
-                    zip_code: { type: string, example: W1S 3BE }
-                    country: { type: string, example: CA }
-                    stateCode: { type: string, example: QLD }
-                purchase:
-                  type: object
-                  required:
-                    - currency
-                    - expireInMin
-                    - products
-                  properties:
-                    currency: { type: string, example: CAD }
-                    expireInMin: { type: string, example: "80" }
-                    products:
-                      type: array
-                      items:
-                        type: object
-                        required: [name, price]
-                        properties:
-                          name: { type: string, example: test }
-                          price: { type: number, example: 100 }
-                paymentMethod: { type: string, example: INTERAC-ETRANSFER }
-                brand_id: { type: string, format: uuid, example: f6aff7d7-bb40-4857-bc84-9b4c8310b043 }
-                success_redirect: { type: string, format: uri, example: https://your.redirect.url/getResponse.jsp?success=true }
-                failure_redirect: { type: string, format: uri, example: https://your.redirect.url/getResponse.jsp?success=false }
-                success_callback: { type: string, format: uri, example: https://your.success.callback.url }
-                failure_callback: { type: string, format: uri, example: https://your.success.failure.url }
+              discriminator:
+                propertyName: paymentMethod
+                mapping:
+                  INTERAC-ETRANSFER: '#/components/schemas/InteracPurchaseRequest'
+                  PIX: '#/components/schemas/PIXPurchaseRequest'
+              oneOf:
+                - $ref: '#/components/schemas/InteracPurchaseRequest'
+                - $ref: '#/components/schemas/PIXPurchaseRequest'
       responses:
-        '200': { description: Purchase created successfully (Interac) }
-        '400': { description: Bad request }
+        '200':
+          description: Purchase created successfully
+        '400':
+          description: Bad request
 
-  # PIX:
-  #   post:
-  #     tags: [PIX]
-  #     summary: Initiate a new purchase via PIX
-  #     parameters:
-  #       - in: header
-  #         name: Authorization
-  #         required: true
-  #         schema: { type: string }
-  #     requestBody:
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             type: object
-  #             required:
-  #               - client
-  #               - purchase
-  #               - paymentMethod
-  #               - merchantRef
-  #               - brand_id
-  #               - success_redirect
-  #               - failure_redirect
-  #               - success_callback
-  #               - failure_callback
-  #             properties:
-  #               client:
-  #                 type: object
-  #                 required:
-  #                   - email
-  #                   - full_name
-  #                   - tax_number
-  #                 properties:
-  #                   email: { type: string, format: email, example: test@gmail.com }
-  #                   full_name: { type: string, example: test test }
-  #                   tax_number: { type: string, example: "39933551809" }
-  #               purchase:
-  #                 type: object
-  #                 required:
-  #                   - currency
-  #                   - products
-  #                 properties:
-  #                   currency: { type: string, example: BRL }
-  #                   products:
-  #                     type: array
-  #                     items:
-  #                       type: object
-  #                       required: [name, price]
-  #                       properties:
-  #                         name: { type: string, example: test }
-  #                         price: { type: number, example: 10 }
-  #               paymentMethod: { type: string, example: PIX }
-  #               merchantRef: { type: string, example: test12 }
-  #               brand_id: { type: string, format: uuid, example: 90ed108b-6753-465d-8a21-e2cc604ff814 }
-  #               success_redirect: { type: string, format: uri, example: https://test.com/getResponse.jsp?success=true }
-  #               failure_redirect: { type: string, format: uri, example: https://test.com/getResponse.jsp?success=false }
-  #               success_callback: { type: string, format: uri, example: https://test1.com }
-  #               failure_callback: { type: string, format: uri, example: https://test2.com }
-  #     responses:
-  #       '200': { description: Purchase created successfully (PIX) }
-  #       '400': { description: Bad request }
-  
-  # FawryPay:
-  #   post:
-  #     tags: [FawryPay]
-  #     summary: Initiate a new purchase via FawryPay
-  #     parameters:
-  #       - in: header
-  #         name: Authorization
-  #         required: true
-  #         schema: { type: string }
-  #     requestBody:
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             type: object
-  #             required:
-  #                   - client
-  #                   - purchase
-  #                   - paymentMethod
-  #                   - brand_id
-  #                   - success_redirect
-  #                   - failure_redirect
-  #                   - success_callback
-  #                   - failure_callback
-  #             properties:
-  #                   client:
-  #                     type: object
-  #                     required:
-  #                       - email
-  #                       - full_name
-  #                       - phone
-  #                       - street_address
-  #                       - city
-  #                       - zip_code
-  #                       - country
-  #                       - stateCode
-  #                     properties:
-  #                       email: { type: string, format: email, example: DEEPAKDEEPAKSINGHAL@gmail.com }
-  #                       full_name: { type: string, example: Test test }
-  #                       phone: { type: string, example: "+447755564318" }
-  #                       street_address: { type: string, example: "10 New Burlington Street Apt. 214" }
-  #                       city: { type: string, example: London }
-  #                       zip_code: { type: string, example: W1S 3BE }
-  #                       country: { type: string, example: EG }
-  #                       stateCode: { type: string, example: QLD }
-  #                   purchase:
-  #                     type: object
-  #                     required: [currency, products]
-  #                     properties:
-  #                       currency: { type: string, example: EGP }
-  #                       products:
-  #                         type: array
-  #                         items:
-  #                           type: object
-  #                           required: [name, price]
-  #                           properties:
-  #                             name: { type: string, example: test }
-  #                             price: { type: number, example: 10 }
-  #                   paymentMethod: { type: string, enum: [FawryPay], example: FawryPay }
-  #                   brand_id: { type: string, format: uuid, example: "{{brand_id}}" }
-  #                   success_redirect: { type: string, format: uri, example: https://your.success.redirect.com/getResponse.jsp?success=true }
-  #                   failure_redirect: { type: string, format: uri, example: https://your.failure.redirect.com/getResponse.jsp?success=false }
-  #                   success_callback: { type: string, format: uri, example: https://your.success.callback.com }
-  #                   failure_callback: { type: string, format: uri, example: https://your.failure.callback.com }
-  #     responses:
-  #       '200': { description: Purchase created successfully }
-  #       '400': { description: Bad request }
+components:
+  schemas:
+    InteracPurchaseRequest:
+      title: INTERAC-ETRANSFER
+      type: object
+      required:
+        - paymentMethod
+        - client
+        - purchase
+        - brand_id
+        - success_redirect
+        - failure_redirect
+        - success_callback
+        - failure_callback
+      properties:
+        paymentMethod:
+          type: string
+          enum: [INTERAC-ETRANSFER]
+          example: INTERAC-ETRANSFER
+        client:
+          type: object
+          required:
+            - email
+            - full_name
+            - phone
+            - street_address
+            - city
+            - zip_code
+            - country
+            - stateCode
+          properties:
+            email: { type: string, format: email, example: seo2009@test.com }
+            full_name: { type: string, example: Test test }
+            phone: { type: string, example: "+447755564318" }
+            street_address: { type: string, example: "10 New Burlington Street Apt. 214" }
+            city: { type: string, example: London }
+            zip_code: { type: string, example: W1S 3BE }
+            country: { type: string, example: CA }
+            stateCode: { type: string, example: QLD }
+        purchase:
+          type: object
+          required:
+            - currency
+            - expireInMin
+            - products
+          properties:
+            currency: { type: string, example: CAD }
+            expireInMin: { type: string, example: "80" }
+            products:
+              type: array
+              items:
+                type: object
+                required: [name, price]
+                properties:
+                  name: { type: string, example: test }
+                  price: { type: number, example: 100 }
+        brand_id: { type: string, format: uuid, example: f6aff7d7-bb40-4857-bc84-9b4c8310b043 }
+        success_redirect: { type: string, format: uri, example: https://your.redirect.url/getResponse.jsp?success=true }
+        failure_redirect: { type: string, format: uri, example: https://your.redirect.url/getResponse.jsp?success=false }
+        success_callback: { type: string, format: uri, example: https://your.success.callback.url }
+        failure_callback: { type: string, format: uri, example: https://your.success.failure.url }
+
+    PIXPurchaseRequest:
+      title: PIX
+      type: object
+      required:
+        - paymentMethod
+        - client
+        - purchase
+        - merchantRef
+        - brand_id
+        - success_redirect
+        - failure_redirect
+        - success_callback
+        - failure_callback
+      properties:
+        paymentMethod:
+          type: string
+          enum: [PIX]
+          example: PIX
+        client:
+          type: object
+          required:
+            - email
+            - full_name
+            - tax_number
+          properties:
+            email: { type: string, format: email, example: test@gmail.com }
+            full_name: { type: string, example: test test }
+            tax_number: { type: string, example: "39933551809" }
+        purchase:
+          type: object
+          required:
+            - currency
+            - products
+          properties:
+            currency: { type: string, example: BRL }
+            products:
+              type: array
+              items:
+                type: object
+                required: [name, price]
+                properties:
+                  name: { type: string, example: test }
+                  price: { type: number, example: 10 }
+        merchantRef: { type: string, example: test12 }
+        brand_id: { type: string, format: uuid, example: 90ed108b-6753-465d-8a21-e2cc604ff814 }
+        success_redirect: { type: string, format: uri, example: https://test.com/getResponse.jsp?success=true }
+        failure_redirect: { type: string, format: uri, example: https://test.com/getResponse.jsp?success=false }
+        success_callback: { type: string, format: uri, example: https://test1.com }
+        failure_callback: { type: string, format: uri, example: https://test2.com }

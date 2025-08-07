@@ -7,7 +7,7 @@ interface PayinCompProps {
 
 const PayinComp: React.FC<PayinCompProps> = ({ src }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [iframeHeight, setIframeHeight] = useState('350px');
+  const [iframeHeight, setIframeHeight] = useState('600px');
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
