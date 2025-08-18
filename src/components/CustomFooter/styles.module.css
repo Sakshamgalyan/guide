@@ -1,0 +1,94 @@
+.footer {
+  background-color: #1b0d3f;
+  color: white;
+  padding: 2rem 0;
+  background-image: url('/img/fotter.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.container {
+  margin-left: 70px;
+  margin-right: 70px;
+  padding: 0 1rem;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Logo column */
+.logoSection {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+}
+
+.logo {
+  max-height: 40px;
+}
+
+/* Quick links column */
+.linksSection {
+  flex: 1;
+}
+
+.quickLinksTitle {
+  margin-top: 10px;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.linksSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linksSection li {
+  margin: 0.3rem 0;
+}
+
+.linksSection a {
+  color: white;
+  text-decoration: none;
+}
+
+.linksSection a:hover {
+  color: #8666CF;
+  transition: transform 0.3s ease, color 0.3s ease;
+  transform: scale(1.05);
+}
+
+/* Contact column */
+.contactSection {
+  flex: 1;
+  text-align: right;
+}
+
+.contactTitle {
+  margin-top: 10px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #d1bdff;
+}
+
+.contactSection a {
+  color: white;
+  text-decoration: none;
+}
+
+.contactSection a:hover {
+  color: #8666CF;
+}
+
+.copyright {
+  text-align: center;
+  font-size: 0.85rem;
+  margin-top: 1.5rem;
+  opacity: 0.8;
+  color: #8F8E8A;
+}

@@ -8,7 +8,7 @@ const config: Config = {
   title: 'Paysecure Guide',
   tagline: 'Your guide to Paysecure onboarding and configuration',
   favicon: 'img/favicon.ico',
-  url: 'https://guide.paysecure.net',
+  url: 'https://docs.paysecure.net',
   baseUrl: '/',
   organizationName: 'Paysecure',
   projectName: 'paysecureGuide',
@@ -38,43 +38,40 @@ const config: Config = {
     ],
   ],
 
+  themes: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+      },
+    ],
+  ],
+
   customFields: {
     companyName: process.env.COMPANY_NAME,
   },
 
   themeConfig: {
-    algolia: {
-      appId: '85705598-8aa0-4975-bba8-5ac349bb1a95',
-      apiKey: '92bba9f8d7f9d230c91fbfa5ed1db26a',
-      indexName: 'instant_search',
-      contextualSearch: true,
-      searchParameters: {},
-    },
     navbar: {
-      title: 'Paysecure Guide',
+      title: 'Paysecure',
       logo: {
-        alt: 'Paysecure Guide Logo',
-        className: 'navbar_logo',
+        alt: 'Paysecure Logo',
         src: 'img/logo.svg',
       },
       items: [
-        // {
-        //   type: 'docSidebar',
-        //   sidebarId: 'docs',
-        //   position: 'left',
-        //   label: 'Docs',
-        // },
         {
           type: 'docSidebar',
           sidebarId: 'apmDocs',
           position: 'left',
           label: 'APM Docs',
-        }, 
+          className: 'navbar_api',
+        },
         {
           type: 'docSidebar',
           sidebarId: 'api',
           position: 'left',
           label: 'API Reference',
+          className: 'navbar_api',
         },
         {
           type: 'search',
@@ -82,30 +79,21 @@ const config: Config = {
           className: 'navbar_search_bar',
         },
         {
-          href: 'http://localhost:3001/',
-          label: 'Merchant Guide',
+          href: 'https://paysecure.net/',
+          label: 'Paysecure',
           position: 'right',
           className: 'navbar_link',
         },
       ],
     },
     colorMode: {
-      defaultMode: 'dark',
-      disableSwitch: false, 
-      respectPrefersColorScheme: true,
+      defaultMode: 'light',
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
     },
     footer: {
       style: 'dark',
       links: [
-        // {
-        //   title: 'Docs',
-        //   items: [
-        //     {
-        //       label: 'Onboarding and Configuration',
-        //       to: '/docs/White‑Label Merchant Onboarding and Configuration',
-        //     },
-        //   ],
-        // },
         {
           title: 'APM Docs',
           items: [
@@ -120,7 +108,8 @@ const config: Config = {
           ],
         },
         {
-          title: 'More',
+          title: 'Paysecure',
+
           items: [
             {
               label: 'GitHub',
@@ -134,11 +123,16 @@ const config: Config = {
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Paysecure, Inc. Built by Saksham.`,
+
     },
     prism: {
-      theme: prismThemes.github,
+      // theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
+    // Add custom text color for the site
+    customCss: [
+      './src/css/custom.css',
+    ],
   } satisfies Preset.ThemeConfig,
 };
 

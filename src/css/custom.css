@@ -108,7 +108,11 @@ h3 {
 }
 
 .navbar_search_bar:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
+}
+
+.navbar_logo {
+  color: #ffffff !important;
 }
 
 [data-theme='dark'] .navbar_Docs {
@@ -120,9 +124,23 @@ h3 {
   transform: scale(1.1);
 }
 
-[data-theme='dark'] .navbar_link {
-  color: #DACAFF;
+.navbar_api{
+  color: #ffffff;
+  transition: color 0.3s, transform 0.3s;
+}
 
+.navbar_api:hover {
+  color: #8666CF;
+  transform: scale(1.1);
+}
+.navbar_link {
+  color: #ffffff;
+  transition: color 0.3s, transform 0.3s;
+  margin-right: 15px;
+}
+
+[data-theme='dark'] .navbar_link {
+  color: #ffffff;
 }
 
 .navbar_link:hover {
@@ -130,3 +148,36 @@ h3 {
   transform: scale(1.1);
 }
 
+.navbar {
+  background-image: url('/img/hero.png'); 
+  background-size: cover; 
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.7); 
+  color:#ffffff
+}
+
+.navbar__title {
+  color: #ffffff;
+  font-size: 1.2rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.navbar__title.theme-change {
+  transition: transform 0.5s ease, color 0.5s ease;
+  transform: scale(1.1);
+}
+
+
+.theme-layout-footer{
+  background-image: url('/img/fotter.png');
+  background-size: cover; 
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.7); 
+  color:#ffffff
+}
+.dropdownMenu_qbY6 {
+  color: black;
+}
+
+/* class="clean-btn menu__caret" */
+/* class="navbar__search-input searchInput_YFbd input_FOTf"  clean-btn toggleButton_gllP theme-layout-footer footer footer--dark */

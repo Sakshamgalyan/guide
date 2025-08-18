@@ -19,27 +19,37 @@ const Link = OriginalLink as (props: ComponentProps<'a'> & { to: string }) => JS
 
 
 function HomepageHeader() {
+  // const SearchBar = (require('@theme/SearchBar') as any).default || require('@theme/SearchBar');
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className={styles.hero__title}
-        >
-          {siteConfig.title}
+    <header
+      className={clsx('hero hero--primary', styles.heroBanner)}
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        height: '40vh',
+      }}
+    >
+      {/* Background image */}
+      <img
+        src="/img/heroBanner.png"
+        alt=""
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      />
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        <Heading as="h1" className={styles.hero__title}>
+          Paysecure Merchant Guide
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/White‑Label Merchant Onboarding and Configuration"
-            style={{
-              backgroundColor: '#DFF34F',
-              color: '#1F1438',
-            }}
-          >
-            Get Started with Onboarding
-          </Link>
-        </div>
+        <p className={styles.hero__subtitle}>Your guide to Paysecure onboarding and configuration</p>
       </div>
     </header>
   );
@@ -53,48 +63,100 @@ export default function Home(): ReactNode {
       description="Comprehensive guide for merchant onboarding and configuration on Paysecure."
     >
       <HomepageHeader />
-      <main>
-        
+      <main style={{ backgroundColor: 'white' }}>
         <section className='cardContainer'
           style={{
-            marginBottom: '100px', marginTop: '50px'
+            marginBottom: '50px', marginTop: '50px'
           }}>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-            <Link to="http://localhost:3001/"
-            className={styles.merchantDocs}>
-              <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
-                Merchant Docs
-              </div>
-              <div style={{ fontSize: '14px' }}>
-                Get Started →
-              </div>
-              </div>
-            </Link>
-            <Link to="/docs/introduction"
-            className={styles.apmDocs}>
-              <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
-                Alternative Payment Methods(APM) Guide
-              </div>
-              <div style={{ fontSize: '14px' }}>
-                Start here →
-              </div>
-              </div>
-            </Link>
+
+          {/* quickfindDocs */}
+
+          {/* Quickfind Docs */}
+          <div className={styles.quickLinks}>
+            <div className={styles.quickfindDocs}>Quickfind Docs</div>
+            <div className={styles.quickDocsGrid}>
+              <Link to='/' className={styles.docs}>
+                <div className={styles.docsHeader}>
+                  <img src="/img/nohoverprofile.svg" alt="" className={`${styles.docsIcon}  ${styles.activedocsIcon1}` } />
+                  <img src="/img/nohoverarrow.svg" alt="" className={styles.arrowIcon} />
+                </div>
+                <div className={styles.docsText}>
+                  <span className={styles.docsTitle}>Merchant Docs</span>
+                  <span className={styles.docsDesc}>Integrate and manage payments.</span>
+                </div>
+              </Link>
+
+              <Link to='/docs/introduction' className={styles.docs}>
+                <div className={styles.docsHeader}>
+                  <img src="/img/wallet.svg" alt="" className={`${styles.docsIcon}  ${styles.activedocsIcon2}` } />
+                  <img src="/img/nohoverarrow.svg" alt="" className={styles.arrowIcon} />
+                </div>
+                <div className={styles.docsText}>
+                  <span className={styles.docsTitle}>Alternative Payment Methods (APM)</span>
+                  <span className={styles.docsDesc}>Set up and optimize APMs.</span>
+                </div>
+              </Link>
+
+              <Link to='/docs/introduction' className={styles.docs}>
+                <div className={styles.docsHeader}>
+                  <img src="/img/api.svg" alt="" className={`${styles.docsIcon}  ${styles.activedocsIcon3}` } />
+                  <img src="/img/nohoverarrow.svg" alt="" className={styles.arrowIcon} />
+                </div>
+                <div className={styles.docsText}>
+                  <span className={styles.docsTitle}>Set-up & optimize APMs</span>
+                  <span className={styles.docsDesc}>Set up and optimize APMs.</span>
+                </div>
+              </Link>
+            </div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '40px' }}>
-            <Link to="/docs/create"
-            className={styles.apiDocs}>
-              <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>
-                API Reference
+
+          {/* Developer Tools */}
+          <div className={styles.developerTools}>
+            <div className={styles.developerToolsTitle}>Developer Tools</div>
+            <div className={styles.devGrid}>
+              <div className={styles.devLeft}>
+                <div className={`${styles.developercards} ${styles.activeCard}`} >
+                  <span className={`${styles.linkText} ${styles.activeLink} ${styles.activeCard}`}>Payin APIs</span>
+                  <img src="/img/nohoverarrow.svg" alt="arrow" className={styles.arrowIcon} />
+                </div>
+
+                <div className={`${styles.developercards} ${styles.activeCard}`}>
+                  <span className={`${styles.linkText} ${styles.activeLink}`}>Payout APIs</span>
+                  <img src="/img/nohoverarrow.svg" alt="arrow" className={styles.arrowIcon} />
+                </div>
+
+                <div className={`${styles.developercards} ${styles.activeCard}`}>
+                  <span className={`${styles.linkText} ${styles.activeLink}`}>Authentication</span>
+                  <img src="/img/nohoverarrow.svg" alt="arrow" className={styles.arrowIcon} />
+                </div>
+
+                <div className={`${styles.developercards} ${styles.activeCard}`}>
+                  <span className={`${styles.linkText} ${styles.activeLink}`}>Refund</span>
+                  <img src="/img/nohoverarrow.svg" alt="arrow" className={styles.arrowIcon} />
+                </div>
+
+                <div className={`${styles.developercards} ${styles.activeCard}`}>
+                  <span className={`${styles.linkText} ${styles.activeLink}`}>Cashier</span>
+                  <img src="/img/nohoverarrow.svg" alt="arrow" className={styles.arrowIcon} />
+                </div>
+
+                <div className={`${styles.developercards} ${styles.activeCard}`}>
+                  <span className={`${styles.linkText} ${styles.activeLink}`}>Verify Status</span>
+                  <img src="/img/nohoverarrow.svg" alt="arrow" className={styles.arrowIcon} />
+                </div>
               </div>
-              <div style={{ fontSize: '14px' }}>
-                Try it out →
+
+              <div className={styles.aiCard}>
+                <div className={styles.aiIcon}>✨</div>
+                <div className={styles.aiText}>
+                  <h4>Need help? Just ask.</h4>
+                  <p>Get instant answers on payments, integrations, and more — powered by AI.</p>
+                </div>
+                <button className={styles.aiButton}>
+                  Ask AI Agent
+                </button>
               </div>
-              </div>
-            </Link>
+            </div>
           </div>
         </section>
       </main>

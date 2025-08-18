@@ -1,7 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Paysecure Purchase API
-  version: '1.0.0'
+  title: ""
 
 servers:
   - url: https://api.paysecure.net
