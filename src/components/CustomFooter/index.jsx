@@ -21,16 +21,16 @@ export default function CustomFooter() {
           </div>
 
           {/* Column 2 - Quick Links */}
-          <div className={styles.linksSection}>
-            <h4 className={styles.quickLinksTitle}>Quick Links</h4>
-            <ul>
-              <li><Link to="/">Merchant Docs</Link></li>
-              <li><Link to="/docs/introduction">Alternative Payment Methods (APM)</Link></li>
-              <li><Link to="/docs/create">Set-up & optimize APMs</Link></li>
-            </ul>
-          </div>
+                <div className={`${styles.linksSection} ${styles.alignRight}`}>
+                <h4 className={styles.quickLinksTitle}>Quick Links</h4>
+                <ul>
+                  <li><Link to="/">Merchant Docs</Link></li>
+                  <li><Link to="/docs/overview">Alternative Payment Methods (APM)</Link></li>
+                  <li><Link to="/docs/create">Set-up & optimize APMs</Link></li>
+                </ul>
+                </div>
 
-          {/* Column 3 - Contact */}
+                {/* Column 3 - Contact */}
           <div className={styles.contactSection}>
             <h4 className={styles.contactTitle}>Contact Us</h4>
             <p><a href="mailto:info@paysecure.net">info@paysecure.net</a></p>

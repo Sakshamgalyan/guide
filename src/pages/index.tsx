@@ -32,7 +32,7 @@ function HomepageHeader() {
     >
       {/* Background image */}
       <img
-        src="/img/heroBanner.png"
+        src="/img/bghome.png"
         alt=""
         style={{
           position: 'absolute',
@@ -86,7 +86,7 @@ export default function Home(): ReactNode {
                 </div>
               </Link>
 
-              <Link to='/docs/introduction' className={styles.docs}>
+              <Link to='/docs/overview' className={styles.docs}>
                 <div className={styles.docsHeader}>
                   <img src="/img/wallet.svg" alt="" className={`${styles.docsIcon}  ${styles.activedocsIcon2}` } />
                   <img src="/img/nohoverarrow.svg" alt="" className={styles.arrowIcon} />
@@ -97,7 +97,7 @@ export default function Home(): ReactNode {
                 </div>
               </Link>
 
-              <Link to='/docs/introduction' className={styles.docs}>
+              <Link to='/docs/create' className={styles.docs}>
                 <div className={styles.docsHeader}>
                   <img src="/img/api.svg" alt="" className={`${styles.docsIcon}  ${styles.activedocsIcon3}` } />
                   <img src="/img/nohoverarrow.svg" alt="" className={styles.arrowIcon} />

@@ -98,12 +98,12 @@ const config: Config = {
           title: 'APM Docs',
           items: [
             {
-              label: 'Introduction',
-              to: '/docs/introduction',
+              label: 'Overview',
+              to: '/docs/overview',
             },
             {
-              label: 'Authentication',
-              to: '/docs/authentication',
+              label: 'Environment',
+              to: '/docs/environment',
             },
           ],
         },
