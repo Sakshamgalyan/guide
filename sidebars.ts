@@ -12,7 +12,7 @@ module.exports = {
   ],
   apmDocs: [
     'overview',
-    'Environments',
+    'environments',
     'Integration Steps',
     'Webhook and Status Codes',
     {
