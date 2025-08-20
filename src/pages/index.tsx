@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
@@ -6,6 +6,7 @@ import type { ComponentProps } from 'react';
 import OriginalLink from '@docusaurus/Link';
 import OriginalHeading from '@theme/Heading';
 import OriginalLayout from '@theme/Layout';
+import ChatbotModal from '../components/ChatbotModal';
 
 const Layout = OriginalLayout as (props: ComponentProps<'div'> & {
   title?: string;
@@ -57,6 +58,20 @@ function HomepageHeader() {
 
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
+  const [open, setOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+   useEffect(() => {
+    const match = window.matchMedia("(prefers-color-scheme: dark)");
+    setIsDark(match.matches);
+    const listener = (e: MediaQueryListEvent) => setIsDark(e.matches);
+    match.addEventListener("change", listener);
+    return () => match.removeEventListener("change", listener);
+  }, []);
+
+  const handleClick = () => {
+    setOpen(true); 
+  };
+  
   return (
     <Layout
       title={siteConfig.title}
@@ -115,35 +130,35 @@ export default function Home(): ReactNode {
             <div className={styles.developerToolsTitle}>Developer Tools</div>
             <div className={styles.devGrid}>
               <div className={styles.devLeft}>
-                <div className={`${styles.developercards} ${styles.activeCard}`} >
+                <Link to='/docs/payin/pix' className={`${styles.developercards} ${styles.activeCard}`} >
                   <span className={`${styles.linkText} ${styles.activeLink} ${styles.activeCard}`}>Payin APIs</span>
                   <img src="/img/nohoverarrow.svg" alt="arrow" className={styles.arrowIcon} />
-                </div>
+                </Link>
 
-                <div className={`${styles.developercards} ${styles.activeCard}`}>
+                <Link to='/docs/payin/pix' className={`${styles.developercards} ${styles.activeCard}`}>
                   <span className={`${styles.linkText} ${styles.activeLink}`}>Payout APIs</span>
                   <img src="/img/nohoverarrow.svg" alt="arrow" className={styles.arrowIcon} />
-                </div>
+                </Link>
 
-                <div className={`${styles.developercards} ${styles.activeCard}`}>
+                <Link to='/docs/payin/pix' className={`${styles.developercards} ${styles.activeCard}`}>
                   <span className={`${styles.linkText} ${styles.activeLink}`}>Authentication</span>
                   <img src="/img/nohoverarrow.svg" alt="arrow" className={styles.arrowIcon} />
-                </div>
+                </Link>
 
-                <div className={`${styles.developercards} ${styles.activeCard}`}>
+                <Link to='/docs/payin/pix' className={`${styles.developercards} ${styles.activeCard}`}>
                   <span className={`${styles.linkText} ${styles.activeLink}`}>Refund</span>
                   <img src="/img/nohoverarrow.svg" alt="arrow" className={styles.arrowIcon} />
-                </div>
+                </Link>
 
-                <div className={`${styles.developercards} ${styles.activeCard}`}>
+                <Link to='/docs/payin/pix' className={`${styles.developercards} ${styles.activeCard}`}>
                   <span className={`${styles.linkText} ${styles.activeLink}`}>Cashier</span>
                   <img src="/img/nohoverarrow.svg" alt="arrow" className={styles.arrowIcon} />
-                </div>
+                </Link>
 
-                <div className={`${styles.developercards} ${styles.activeCard}`}>
+                <Link to='/docs/payin/pix' className={`${styles.developercards} ${styles.activeCard}`}>
                   <span className={`${styles.linkText} ${styles.activeLink}`}>Verify Status</span>
                   <img src="/img/nohoverarrow.svg" alt="arrow" className={styles.arrowIcon} />
-                </div>
+                </Link>
               </div>
 
               <div className={styles.aiCard}>
@@ -152,7 +167,7 @@ export default function Home(): ReactNode {
                   <h4>Need help? Just ask.</h4>
                   <p>Get instant answers on payments, integrations, and more — powered by AI.</p>
                 </div>
-                <button className={styles.aiButton}>
+                <button className={styles.aiButton} onClick={handleClick}>
                   Ask AI Agent
                 </button>
               </div>
@@ -160,6 +175,7 @@ export default function Home(): ReactNode {
           </div>
         </section>
       </main>
+      <ChatbotModal open={open} onClose={() => setOpen(false)} isDark={isDark} />
     </Layout>
   );
 }

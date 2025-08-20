@@ -14,7 +14,8 @@ module.exports = {
     'overview',
     'environments',
     'Integration Steps',
-    'Webhook and Status Codes',
+    'Webhook',
+    'Status and Error Codes',
     {
       type: 'category',
       label: 'Alternate Payment Methods',       // Group cashier-apis items
@@ -29,6 +30,10 @@ module.exports = {
         'apm/Crypto Bridge',
         'apm/Neosurf',
         'apm/PayID',
+        'apm/Bank Transfer',
+        'apm/OnRamp',
+        'apm/Openbanking',
+        'apm/Crypto Wallet'
       ],
     },
     {

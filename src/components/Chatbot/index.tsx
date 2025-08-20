@@ -297,7 +297,7 @@
 
 import React, { useEffect, useState } from 'react';
 
-const ChatbotModal = () => {
+const Chatbot = () => {
   const [open, setOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
@@ -441,4 +441,4 @@ const ChatbotModal = () => {
   );
 };
 
-export default ChatbotModal;
+export default Chatbot;

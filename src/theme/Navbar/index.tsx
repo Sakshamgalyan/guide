@@ -1,13 +1,13 @@
 import React from 'react';
 import OriginalNavbar from '@theme-original/Navbar';
-import ChatbotModal from '@site/src/components/ChatbotModal';
+import ChatbotButton from '@site/src/components/ChatbotButton';
 
 export default function Navbar(props) {
   return (
     <>
       <OriginalNavbar {...props} />
       <div className='chatbotContainer'>
-        <ChatbotModal />
+        <ChatbotButton />
       </div>
     </>
   );
