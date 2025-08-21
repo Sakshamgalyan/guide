@@ -21,8 +21,13 @@ module.exports = {
     'Webhook',
     'Status and Error Codes',
     {
+      type: 'html',
+      value: '<div class="sidebar-section-label">Payment Methods</div>',
+    },
+    {
       type: 'category',
-      label: 'Payment Methods',       // Group cashier-apis items
+      label: 'Alternative Payment Methods',
+      className: 'sidebar-alternative',
       items: [
         'apm/Cards',
         'apm/Interac E-Transfer',
@@ -35,6 +40,17 @@ module.exports = {
         'apm/Crypto Wallet',
         'apm/FawryPay',
         'apm/PayID',
+        'apm/Bank Transfer',
+        'apm/OnRamp',
+        'apm/Openbanking',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Cards',
+      className: 'sidebar-cards',
+      items: [
+        'apm/Cards',
         'apm/Bank Transfer',
         'apm/OnRamp',
         'apm/Openbanking',

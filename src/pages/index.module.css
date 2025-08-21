@@ -94,6 +94,16 @@
 .docs:hover {
   transform: scale(1.03);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-image: url('/img/cardpic.png');
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.docs:hover .docsTitle{
+  color: white;
+}
+
+.docs:hover .docsDesc{
+  color: white;
 }
 
 .docs:hover .arrowIcon{
