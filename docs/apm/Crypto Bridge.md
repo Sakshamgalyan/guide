@@ -1,4 +1,4 @@
-# Crypto Bridge
+# Crypto Bridge (Global)
 
 ## Overview
 

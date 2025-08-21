@@ -26,12 +26,10 @@ You have the opportunity to test the APIs by performing test Purchases. To facil
 - **Expiry Date**: any expiry larger or equal to the current month/year
 - **CVC**: 345
 
-<aside>
-⚠️
 
+:::note
 Currently, only card payment testing is supported in the sandbox environment. Testing of Alternative Payment Methods (APMs) is not available in the sandbox at this time.
-
-</aside>
+:::
 
 ## Step 3. Create and test credentials on the Live Mode
 

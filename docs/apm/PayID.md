@@ -1,4 +1,4 @@
-# PayID
+# PayID (Australia)
 
 ## Overview
 

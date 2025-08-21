@@ -1,0 +1,162 @@
+openapi: 3.0.3
+info:
+  title: ''
+
+servers:
+  - url: https://staging.paysecure.net    
+
+paths:
+  /api/v1/purchases:
+    post:
+      tags: [CRYPTO-BRIDGE]
+      summary: Initiate a new purchase via CRYPTO-BRIDGE
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - client
+                - purchase
+                - paymentMethod
+                - merchantRef
+                - brand_id
+                - success_redirect
+                - failure_redirect
+                - success_callback
+                - failure_callback
+              properties:
+                client:
+                  type: object
+                  required: [email, full_name, country, city, stateCode, street_address, zip_code]
+                  properties:
+                    email: { type: string, format: email, example: client@email.com }
+                    full_name: { type: string, example: Client Name }
+                    country: { type: string, example: US }
+                    city: { type: string, example: New York }
+                    stateCode: { type: string, example: NYC }
+                    street_address: { type: string, example: 123 5th Ave, New York, NY 10010 }
+                    zip_code: { type: string, example: 10010 }
+                purchase:
+                  type: object
+                  required: [currency, products]
+                  properties:
+                    currency: { type: string, example: USD }
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        required: [name, price]
+                        properties:
+                          name: { type: string, example: product name }
+                          price: { type: number, example: 5.86 }
+                paymentMethod: { type: string, example: CRYPTO-BRIDGE }
+                merchantRef: { type: string, example: rsfwerfsaes }
+                brand_id: { type: string, format: uuid, example: 30f7ce6e-3b7e-46a2-9b50-484fc55be689 }
+                success_redirect: { type: string, format: uri, example: https://your.success.redirect.com }
+                failure_redirect: { type: string, format: uri, example: https://your.failure.redirect.com }
+                pending_redirect: { type: string, format: uri, example: https://your.pending.redirect.com }
+                success_callback: { type: string, format: uri, example: https://your.success.callback.com }
+                failure_callback: { type: string, format: uri, example: https://your.failure.callback.com }
+                expiryinmin: { type: string, example: "30" }
+                extraParam:
+                  type: object
+                  properties:
+                    clientFee: { type: number, example: 0.1 }
+      responses:
+        '200':
+          description: Purchase Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  purchaseId: { type: string, example: 689c4734c9c8654e26bfa611 }
+                  client:
+                    type: object
+                    properties:
+                      email: { type: string, example: client@email.com }
+                      full_name: { type: string, example: Client Name }
+                      country: { type: string, example: US }
+                      city: { type: string, example: New York }
+                      stateCode: { type: string, example: NYC }
+                      street_address: { type: string, example: 123 5th Ave, New York, NY 10010 }
+                      zip_code: { type: string, example: 10010 }
+                  updated_on: { type: integer, example: 1755072309 }
+                  type: { type: string, example: purchase }
+                  paymentMethod: { type: string, example: CRYPTO-BRIDGE }
+                  amountUnit: { type: string, example: MAJOR }
+                  errorMsg: { type: string, example: "" }
+                  redirectType: { type: string, example: POST }
+                  force_recurring: { type: boolean, example: false }
+                  created_on: { type: integer, example: 1755072308 }
+                  extraParam:
+                    type: object
+                    properties:
+                      clientFee: { type: number, example: 0.1 }
+                  merchantRef: { type: string, example: rsfwerfsaes }
+                  merchantName: { type: string, example: arunsinghal }
+                  purchase:
+                    type: object
+                    properties:
+                      currency: { type: string, example: USD }
+                      products:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name: { type: string, example: product name }
+                            quantity: { type: integer, example: 1 }
+                            price: { type: number, example: 5.86 }
+                      total: { type: number, example: 5.86 }
+                      language: { type: string, example: en }
+                      total_formatted: { type: number, example: 1 }
+                  payment:
+                    type: object
+                    properties:
+                      amount: { type: number, example: 5.86 }
+                      currency: { type: string, example: USD }
+                      net_amount: { type: number, example: 5.86 }
+                      paid_on: { type: integer, example: 1755072309 }
+                  issuer_details:
+                    type: object
+                    properties:
+                      legal_name: { type: string, example: test6 }
+                      brand_name: { type: string, example: test6 }
+                  transaction_data:
+                    type: object
+                    properties:
+                      flow: { type: string, example: payform }
+                      extra:
+                        type: object
+                        properties:
+                          amount: { type: number, example: 5.86 }
+                          masked_pan: { type: string, example: CRYPTO-BRIDGE }
+                  status: { type: string, example: PAYMENT_IN_PROCESS }
+                  status_history:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status: { type: string, example: created }
+                        timestamp: { type: integer, example: 1755072308 }
+                  is_test: { type: boolean, example: false }
+                  brand_id: { type: string, example: 30f7ce6e-3b7e-46a2-9b50-484fc55be689 }
+                  reference_generated: { type: string, example: PS1159 }
+                  issued: { type: string, example: 2025-08-13 }
+                  checkout_url: { type: string, example: https://api.choicepay.ca/payments/689c4734c9c8654e26bfa611/ }
+        '401':
+          description: Authorization Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: Invalid Authorization }
+                  code: { type: string, example: Invalid_Authorization }

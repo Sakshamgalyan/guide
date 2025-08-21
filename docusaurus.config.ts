@@ -126,8 +126,8 @@ const config: Config = {
 
     },
     prism: {
-      // theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: prismThemes.jettwaveLight,
+      // darkTheme: prismThemes.gruvboxMaterialLight,
     },
     // Add custom text color for the site
     customCss: [

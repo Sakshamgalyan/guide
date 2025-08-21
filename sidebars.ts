@@ -5,8 +5,12 @@ module.exports = {
       type: 'category',
       label: 'PayIn APIs',       // Group cashier-apis items
       items: [
-        'payin/interac',
-        'payin/pix',
+        'api/cryptobridge',
+        'api/mobilemoney',
+        'api/neosurf',
+        'api/spei',
+        'api/interacetransfer',
+        'api/interacexpress',
       ],
     },
   ],
@@ -18,22 +22,22 @@ module.exports = {
     'Status and Error Codes',
     {
       type: 'category',
-      label: 'Alternate Payment Methods',       // Group cashier-apis items
+      label: 'Payment Methods',       // Group cashier-apis items
       items: [
+        'apm/Cards',
         'apm/Interac E-Transfer',
         'apm/Interac Express',
         'apm/PIX',
         'apm/Mobile Money',
         'apm/SPEI',
-        'apm/FawryPay',
-        'apm/Cards',
-        'apm/Crypto Bridge',
         'apm/Neosurf',
+        'apm/Crypto Bridge',
+        'apm/Crypto Wallet',
+        'apm/FawryPay',
         'apm/PayID',
         'apm/Bank Transfer',
         'apm/OnRamp',
         'apm/Openbanking',
-        'apm/Crypto Wallet'
       ],
     },
     {

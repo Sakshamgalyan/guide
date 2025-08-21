@@ -1,0 +1,161 @@
+openapi: 3.0.3
+info:
+  title: ''
+
+servers:
+  - url: https://api.paysecure.net    
+
+paths:
+  /api/v1/purchases:
+    post:
+      tags: [NEOSURF]
+      summary: Initiate a new purchase via NEOSURF
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - client
+                - purchase
+                - paymentMethod
+                - merchantRef
+                - brand_id
+                - success_redirect
+                - failure_redirect
+                - success_callback
+                - failure_callback
+              properties:
+                client:
+                  type: object
+                  required: [email, full_name, country, city, stateCode, street_address, zip_code, phone]
+                  properties:
+                    email: { type: string, format: email, example: client@email.com }
+                    full_name: { type: string, example: Client Name }
+                    country: { type: string, example: AU }
+                    city: { type: string, example: Sydney }
+                    stateCode: { type: string, example: SD }
+                    street_address: { type: string, example: 123 5th Ave, Sydney, Australia 10010 }
+                    zip_code: { type: string, example: 10010 }
+                    phone: { type: string, example: "9999999999" }
+                purchase:
+                  type: object
+                  required: [currency, products]
+                  properties:
+                    currency: { type: string, example: AUD }
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        required: [name, price]
+                        properties:
+                          name: { type: string, example: product name }
+                          price: { type: number, example: 1 }
+                paymentMethod: { type: string, example: NEOSURF }
+                merchantRef: { type: string, example: rsfwefrfsaes }
+                brand_id: { type: string, format: uuid, example: 30f7ce6e-3b7e-46a2-9b50-484fc55be689 }
+                success_redirect: { type: string, format: uri, example: https://your.success.redirect.com }
+                failure_redirect: { type: string, format: uri, example: https://your.failure.redirect.com }
+                pending_redirect: { type: string, format: uri, example: https://your.pending.redirect.com }
+                success_callback: { type: string, format: uri, example: https://your.success.callback.com }
+                failure_callback: { type: string, format: uri, example: https://your.failure.callback.com }
+                expiryinmin: { type: string, example: "30" }
+      responses:
+        '200':
+          description: Purchase Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  purchaseId: { type: string, example: 689c4e3997281b45aac76a60 }
+                  client:
+                    type: object
+                    properties:
+                      email: { type: string, example: client@email.com }
+                      phone: { type: string, example: "9999999999" }
+                      full_name: { type: string, example: Client Name }
+                      country: { type: string, example: AU }
+                      city: { type: string, example: Sydney }
+                      stateCode: { type: string, example: SD }
+                      street_address: { type: string, example: 123 5th Ave, Sydney, Australia 10010 }
+                      zip_code: { type: string, example: 10010 }
+                  updated_on: { type: integer, example: 1755074106 }
+                  type: { type: string, example: purchase }
+                  paymentMethod: { type: string, example: NEOSURF }
+                  amountUnit: { type: string, example: MAJOR }
+                  errorMsg: { type: string, example: "" }
+                  redirectType: { type: string, example: POST }
+                  force_recurring: { type: boolean, example: false }
+                  created_on: { type: integer, example: 1755074105 }
+                  merchantRef: { type: string, example: rsfwefrfsaes }
+                  merchantName: { type: string, example: arunsinghal }
+                  purchase:
+                    type: object
+                    properties:
+                      currency: { type: string, example: AUD }
+                      products:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name: { type: string, example: product name }
+                            quantity: { type: integer, example: 1 }
+                            price: { type: number, example: 1 }
+                            discount: { type: number, example: 0 }
+                            tax_percent: { type: string, example: "0.00" }
+                      total: { type: number, example: 1 }
+                      language: { type: string, example: en }
+                      total_formatted: { type: number, example: 1 }
+                      taxAmount: { type: number, example: 0 }
+                  payment:
+                    type: object
+                    properties:
+                      amount: { type: number, example: 1 }
+                      currency: { type: string, example: AUD }
+                      net_amount: { type: number, example: 1 }
+                      fee_amount: { type: number, example: 0 }
+                      paid_on: { type: integer, example: 1755074105 }
+                  issuer_details:
+                    type: object
+                    properties:
+                      legal_name: { type: string, example: test6 }
+                      brand_name: { type: string, example: test6 }
+                  transaction_data:
+                    type: object
+                    properties:
+                      flow: { type: string, example: payform }
+                      extra:
+                        type: object
+                        properties:
+                          amount: { type: number, example: 1 }
+                          masked_pan: { type: string, example: NEOSURF }
+                  status: { type: string, example: PAYMENT_IN_PROCESS }
+                  status_history:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status: { type: string, example: created }
+                        timestamp: { type: integer, example: 1755074105 }
+                  is_test: { type: boolean, example: false }
+                  brand_id: { type: string, example: 30f7ce6e-3b7e-46a2-9b50-484fc55be689 }
+                  reference_generated: { type: string, example: PS1167 }
+                  issued: { type: string, example: 2025-08-13 }
+                  checkout_url: { type: string, example: https://api.choicepay.ca/payments/689c4e3997281b45aac76a60/ }
+                  refundable_amount: { type: number, example: 1 }
+        '401':
+          description: Authorization Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string, example: Invalid Authorization }
+                  code: { type: string, example: Invalid_Authorization }

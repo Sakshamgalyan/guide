@@ -6,11 +6,9 @@ These are the BaseUrl for the APIs on different environments:
 | --- | --- |
 | **Production & Sandbox** | [https://api.paysecure.net/api/v1](https://api.paysecure.net/api/v1/) |
 
-<aside>
-
+:::note
 **Note:** Set the Sandbox flag true (checked) in your merchant account, as shown in the image below
-
-</aside>
+:::
 
 ## **Authentication**
 

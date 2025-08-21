@@ -80,6 +80,11 @@ h3 {
   font-size: large;
 }
 
+.markdown {
+  padding-left: 40px;
+  padding-right: 20px;
+}
+
 .markdown img {
   max-width: 100%;
   height: auto;
@@ -98,9 +103,11 @@ h3 {
 
 /* Change background + border for tip admonition */
 .theme-admonition.theme-admonition-tip {
-  background-color: white ;
-  border-left: 4px solid #d4d5d9; /* red left border */
-  border-radius: 8px; /* rounded corners */
+  background-color: white;
+  border-left: 4px solid #d4d5d9;
+  /* red left border */
+  border-radius: 8px;
+  /* rounded corners */
   padding: 12px 16px;
   color: #1F1438;
 }
@@ -109,10 +116,12 @@ h3 {
 .theme-admonition.theme-admonition-tip .admonition-icon {
   display: none;
 }
-.admonitionIcon_Rf37{
+
+.admonitionIcon_Rf37 {
   display: none;
 }
-.admonitionHeading_Gvgb{
+
+.admonitionHeading_Gvgb {
   display: none;
 }
 
@@ -161,36 +170,34 @@ h3 {
   transform: scale(1.1);
 }
 
-.navbar_api{
+.navbar_api {
   color: #ffffff;
-  transition: color 0.3s, transform 0.3s;
+  /* transition: color 0.3s, transform 0.3s; */
 }
 
-.navbar_api:hover {
-  color: #8666CF;
-  transform: scale(1.1);
+.navbar__link--active {
+  background-color: #AF9AE0;
+  border-radius: 6px;
+  color: #3A1985;
 }
+
 .navbar_link {
   color: #ffffff;
   transition: color 0.3s, transform 0.3s;
   margin-right: 15px;
 }
 
-[data-theme='dark'] .navbar_link {
-  color: #ffffff;
-}
 
 .navbar_link:hover {
   color: #8666CF;
-  transform: scale(1.1);
 }
 
 .navbar {
-  background-image: url('/img/hero.png'); 
-  background-size: cover; 
+  background-image: url('/img/hero.png');
+  background-size: cover;
   background-position: center;
-  background-color: rgba(0, 0, 0, 0.7); 
-  color:#ffffff
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffffff
 }
 
 .navbar__title {
@@ -205,16 +212,40 @@ h3 {
 }
 
 
-.theme-layout-footer{
+.theme-layout-footer {
   background-image: url('/img/fotter.png');
-  background-size: cover; 
+  background-size: cover;
   background-position: center;
-  background-color: rgba(0, 0, 0, 0.7); 
-  color:#ffffff
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffffff
 }
+
 .dropdownMenu_qbY6 {
   color: black;
 }
 
+.table-of-contents__link--active {
+  color: #772391;
+}
+
+
+.menu__link {
+  margin-left: 2px;
+  color: #7B7C7F;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.menu__link--active {
+  color: #5223BC;
+  background-color: #EEE9F8;
+  font-size: 16px;
+}
+
+.menu__link:hover {
+  background-color: #EEE9F8;
+}
+
+/* menu__link menu__link--active */
+/* table-of-contents__link toc-highlight table-of-contents__link--active */
 /* class="clean-btn menu__caret" */
 /* class="navbar__search-input searchInput_YFbd input_FOTf"  clean-btn toggleButton_gllP theme-layout-footer footer footer--dark */
