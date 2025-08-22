@@ -1,0 +1,324 @@
+# openapi: 3.0.3
+# info:
+#   title: ''
+
+# servers:
+#   - url: https://api.paysecure.net
+
+# paths:
+#   /api/v1/customer:
+#     post:
+#       operationId: createCustomer
+#       tags: [Create Customers]
+#       summary: It creates a customer
+#       parameters:
+#         - in: header
+#           name: BrandId
+#           required: true
+#           schema:
+#             type: string
+#         - in: header
+#           name: Authorization
+#           required: true
+#           schema:
+#             type: string
+#       requestBody:
+#         required: true
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#               required: [merchantCustomerId, fullName, emailId]
+#               properties:
+#                 merchantCustomerId:
+#                   type: string
+#                   example: testuser@gmail.com
+#                 fullName:
+#                   type: string
+#                   example: Akshaya Singhal
+#                 emailId:
+#                   type: string
+#                   example: testuser@gmail.com
+#                 dateOfBirth:
+#                   type: string
+#                   format: date
+#                   example: 1995-11-27
+#                 phoneNo:
+#                   type: string
+#                   example: "2222222222"
+#                 city:
+#                   type: string
+#                   example: Jaipur
+#                 stateCode:
+#                   type: string
+#                   example: RJ
+#                 zipCode:
+#                   type: string
+#                   example: "202020"
+#                 address:
+#                   type: string
+#                   example: Mansarovar Jaipur
+#                 country:
+#                   type: string
+#                   example: IN
+#                 custRegDate:
+#                   type: string
+#                   format: date
+#                   example: 2024-11-27
+#                 successTxn:
+#                   type: string
+#                   example: "32"
+#       responses:
+#         '200':
+#           description: Customer created successfully
+#           content:
+#             application/json:
+#               schema:
+#                 type: object
+#                 properties:
+#                   customerId:
+#                     type: string
+#                     example: 67c54bff81fd9953719186ff
+#                   merchantCustomerId:
+#                     type: string
+#                     example: testuser@gmail.com
+#                   fullName:
+#                     type: string
+#                     example: Akshaya Singhal
+#                   emailId:
+#                     type: string
+#                     example: testuser@gmail.com
+#                   dateOfBirth:
+#                     type: string
+#                     format: date
+#                     example: 1995-11-27
+#                   phoneNo:
+#                     type: string
+#                     example: "2222222222"
+#                   brandID:
+#                     type: string
+#                     example: db8414b4-e527-4be6-b2bf-df5cb7a646c7
+#                   city:
+#                     type: string
+#                     example: jaipur
+#                   zipCode:
+#                     type: string
+#                     example: "202020"
+#                   address:
+#                     type: string
+#                     example: Mansarovar Jaipur
+#                   country:
+#                     type: string
+#                     example: IN
+#                   stateCode:
+#                     type: string
+#                     example: ra
+#                   custRegDate:
+#                     type: string
+#                     format: date
+#                     example: 2024-11-27
+#                   successTrans:
+#                     type: integer
+#                     example: 32
+#         '400':
+#           description: Invalid input
+#           content:
+#             application/json:
+#               schema:
+#                 type: object
+#                 properties:
+#                   message:
+#                     type: string
+#                     example: Invalid Email Format
+#                   code:
+#                     type: string
+#                     example: invalid_email
+#         '401':
+#           description: Customer already exists
+#           content:
+#             application/json:
+#               schema:
+#                 type: object
+#                 properties:
+#                   message:
+#                     type: string
+#                     example: Customer already exists with this information
+#                   code:
+#                     type: string
+#                     example: customer_already_exists
+openapi: 3.0.3
+info:
+  title: ""
+  description: |
+    The createCustomer API allows merchants to create a customer profile on PaySecure when a user visits their website, facilitating a seamless payment experience by pre-filling the customer’s details, on the PaySecure Cashier. The API takes in customer information and returns a unique customerID that can be passed in purchase payload, eliminating the need for customers to manually enter their details during transactions.
+
+    ![Logo](/img/authimage1.png)
+servers:
+  - url: https://api.paysecure.net
+paths:
+  /api/v1/purchases:
+    post:
+      summary: Create a Purchase
+      description: Creates a purchase with client details, products, and payment method.
+      operationId: createPurchase
+      tags:
+        - Purchases
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                client:
+                  type: object
+                  required:
+                    - email
+                    - full_name
+                    - country
+                    - city
+                    - street_address
+                    - zip_code
+                    - phone
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                    full_name:
+                      type: string
+                    country:
+                      type: string
+                      description: ISO country code (e.g., US)
+                    city:
+                      type: string
+                    stateCode:
+                      type: string
+                      description: State code (e.g., NYC)
+                    street_address:
+                      type: string
+                    zip_code:
+                      type: string
+                    phone:
+                      type: string
+                    tax_number:
+                      type: string
+                purchase:
+                  type: object
+                  required:
+                    - currency
+                    - products
+                  properties:
+                    currency:
+                      type: string
+                      description: ISO currency code (e.g., USD)
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        required:
+                          - name
+                          - price
+                        properties:
+                          name:
+                            type: string
+                          price:
+                            type: number
+                paymentMethod:
+                  type: string
+                  example: CRYPTO-BRIDGE
+                extraParam:
+                  type: object
+                  properties:
+                    clientFee:
+                      type: number
+                      example: 0.1
+                expiryinmin:
+                  type: string
+                  nullable: true
+                status:
+                  type: string
+                  example: created
+                brand_id:
+                  type: string
+                  format: uuid
+                merchantRef:
+                  type: string
+                platform:
+                  type: string
+                  example: woocommerce
+                send_receipt:
+                  type: string
+                  nullable: true
+                skip_capture:
+                  type: string
+                  nullable: true
+                success_redirect:
+                  type: string
+                  format: uri
+                failure_redirect:
+                  type: string
+                  format: uri
+                success_callback:
+                  type: string
+                  format: uri
+                failure_callback:
+                  type: string
+                  format: uri
+              example:
+                client:
+                  email: client@email.com
+                  full_name: Client Name
+                  country: US
+                  city: New York
+                  stateCode: NYC
+                  street_address: 123 5th Ave, New York, NY 10010
+                  zip_code: 10010
+                  phone: “9999999999”
+                  tax_number: “39933551809"
+                purchase:
+                  currency: USD
+                  products:
+                    - name: product name
+                      price: 5.86
+                paymentMethod: CRYPTO-BRIDGE
+                extraParam:
+                  clientFee: 0.1
+                expiryinmin: “”
+                status: created
+                brand_id: 30f7ce6e-3b7e-46a2-9b50-484fc55be689
+                merchantRef: dbwiebk
+                platform: woocommerce
+                send_receipt: “”
+                skip_capture: “”
+                success_redirect: https://your.success.redirect.com
+                failure_redirect: https://your.failure.redirect.com
+                success_callback: https://your.success.callback.com
+                failure_callback: https://your.failure.callback.com
+      responses:
+        ‘200’:
+          description: Purchase created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  purchaseId:
+                    type: string
+                    example: 123456
+                  status:
+                    type: string
+                    example: created
+        ‘400’:
+          description: Invalid request
+        ‘401’:
+          description: Unauthorized
+        ‘500’:
+          description: Internal server error
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

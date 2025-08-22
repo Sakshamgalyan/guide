@@ -1,0 +1,138 @@
+openapi: 3.0.3
+info:
+  title: ''
+
+servers:
+  - url: https://api.paysecure.net    
+
+paths:
+  /api/v1/purchases/{purchaseId}:
+    get:
+      tags: [REFUND]
+      summary: Get purchase details by purchaseId
+      parameters:
+        - in: path
+          name: purchaseId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200-REFUNDED':
+          description: Purchase refunded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  purchaseId:
+                    type: string
+                    example: 689dd84a5edb894379e4817d
+                  client:
+                    type: object
+                    properties:
+                      customerId: { type: string, example: NA }
+                      email: { type: string, example: alex@paysecure.net }
+                      phone: { type: string, example: 9999999999 }
+                      full_name: { type: string, example: Alex }
+                      date_of_birth: { type: string, example: 1800-01-01 }
+                      street_address: { type: string, example: Flat 402, Larkin House, 307 Kidbrooke Park Road }
+                      country: { type: string, example: GB }
+                      city: { type: string, example: LONDON }
+                      zip_code: { type: string, example: SE3 9GU }
+                      stateCode: { type: string, example: BS }
+                      cc: { type: array, items: {} }
+                      bcc: { type: array, items: {} }
+                  updated_on: { type: integer, example: 1755175649 }
+                  type: { type: string, example: purchase }
+                  paymentMethod: { type: string, example: MASTER }
+                  amountUnit: { type: string, example: MAJOR }
+                  errorMsg: { type: string, example: "" }
+                  redirectType: { type: string, example: POST }
+                  force_recurring: { type: boolean, example: false }
+                  created_on: { type: integer, example: 1755174986 }
+                  merchantRef: { type: string, example: 689dd84a5edb894379e4817d }
+                  merchantName: { type: string, example: arunsinghal }
+                  purchase:
+                    type: object
+                    properties:
+                      currency: { type: string, example: USD }
+                      products:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name: { type: string, example: product name }
+                            quantity: { type: integer, example: 1 }
+                            price: { type: number, example: 20 }
+                            discount: { type: number, example: 0 }
+                            tax_percent: { type: string, example: "0.00" }
+                      total: { type: number, example: 20 }
+                      language: { type: string, example: en }
+                      notes: { type: string, example: "" }
+                      debt: { type: number, example: 0 }
+                      total_formatted: { type: number, example: 1 }
+                      taxAmount: { type: number, example: 0 }
+                      taxPercent: { type: number, example: 0 }
+                      request_client_details: { type: array, items: {} }
+                      email_message: { type: string, example: "" }
+                  payment:
+                    type: object
+                    properties:
+                      is_outgoing: { type: boolean, example: false }
+                      payment_type: { type: string, example: PURCHASE }
+                      amount: { type: number, example: 20 }
+                      currency: { type: string, example: USD }
+                      net_amount: { type: number, example: 20 }
+                      fee_amount: { type: number, example: 0 }
+                      pending_amount: { type: number, example: 0 }
+                      pending_unfreeze_on: { type: string, nullable: true, example: null }
+                      description: { type: string, example: "" }
+                      paid_on: { type: integer, example: 1755175185 }
+                      remote_paid_on: { type: integer, example: 1755175185 }
+                  transaction_data:
+                    type: object
+                    properties:
+                      payment_method: { type: string, example: "" }
+                      flow: { type: string, example: payform }
+                      extra:
+                        type: object
+                        properties:
+                          expiry_month: { type: string, example: "05" }
+                          amount: { type: number, example: 20 }
+                          card_issuer: { type: string, example: REVOLUT LTD }
+                          masked_pan: { type: string, example: 51679479****9461 }
+                          card_brand: { type: string, example: MASTER }
+                          card_issuer_country: { type: string, example: IE }
+                          card_type: { type: string, example: DEBIT }
+                          cardholder_name: { type: string, example: Alex Frishchin }
+                          expiry_year: { type: string, example: "30" }
+                      country: { type: string, example: "" }
+                      attempts:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            client_ip: { type: string, example: 212.161.5.175 }
+                            type: { type: string, example: execute }
+                            payment_method: { type: string, example: MASTER }
+                            flow: { type: string, example: payform }
+                            successful: { type: boolean, example: true }
+                            country: { type: string, example: IE }
+                            processing_time: { type: integer, example: 1755175185 }
+                            extra: { type: object }
+                  status: { type: string, example: REFUNDED }
+                  status_history:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status: { type: string, example: created }
+                        timestamp: { type: integer, example: 1755174986 }
+                  viewedOn: { type: integer, example: 1755843190 }
+                  is_test: { type: boolean, example: false }
+                  brand_id: { type: string, example: 30f7ce6e-3b7e-46a2-9b50-484fc55be689 }
+                  success_redirect: { type: string, example: https://staging.paysecure.net/getResponse.jsp?issucces=true }
+                  failure_redirect: { type: string, example: https://staging.paysecure.net/getResponse.jsp?issucces=false }
+                  checkout_url: { type: string, example: https://api.choicepay.ca/payments/689dd84a5edb894379e4817d/ }
+                  direct_post_url: { type: string, example: https://api.choicepay.ca/api/v1/p/689dd84a5edb894379e4817d/ }
+                  payoutProcess: { type: boolean, example: false }

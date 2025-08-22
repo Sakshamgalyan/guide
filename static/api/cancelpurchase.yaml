@@ -1,0 +1,230 @@
+openapi: 3.0.3
+info:
+  title: ''
+
+servers:
+  - url: https://api.paysecure.net    
+
+paths:
+  /api/v1/purchases/{purchaseId}/cancel:
+    post:
+      tags: [Purchases]
+      summary: Cancel a purchase
+      parameters:
+        - name: purchaseId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the purchase to cancel
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Purchase cancelled successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  purchaseId:
+                    type: string
+                  client:
+                    type: object
+                    properties:
+                      customerId:
+                        type: string
+                      email:
+                        type: string
+                      full_name:
+                        type: string
+                      street_address:
+                        type: string
+                      country:
+                        type: string
+                      city:
+                        type: string
+                      zip_code:
+                        type: string
+                      cc:
+                        type: array
+                        items: {}
+                      bcc:
+                        type: array
+                        items: {}
+                      stateCode:
+                        type: string
+                  updated_on:
+                    type: integer
+                  type:
+                    type: string
+                  paymentMethod:
+                    type: string
+                  amountUnit:
+                    type: string
+                  errorMsg:
+                    type: string
+                  redirectType:
+                    type: string
+                  force_recurring:
+                    type: boolean
+                  created_on:
+                    type: integer
+                  extraParam:
+                    type: object
+                    properties:
+                      clientFee:
+                        type: number
+                  merchantRef:
+                    type: string
+                  merchantName:
+                    type: string
+                  purchase:
+                    type: object
+                    properties:
+                      currency:
+                        type: string
+                      products:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            quantity:
+                              type: integer
+                            price:
+                              type: number
+                            discount:
+                              type: number
+                            tax_percent:
+                              type: string
+                      total:
+                        type: number
+                      language:
+                        type: string
+                      notes:
+                        type: string
+                      debt:
+                        type: number
+                      total_formatted:
+                        type: number
+                      taxAmount:
+                        type: number
+                      taxPercent:
+                        type: number
+                      request_client_details:
+                        type: array
+                        items: {}
+                      email_message:
+                        type: string
+                  issuer_details:
+                    type: object
+                    properties:
+                      website:
+                        type: string
+                      legal_street_address:
+                        type: string
+                      legal_country:
+                        type: string
+                      legal_city:
+                        type: string
+                      legal_zip_code:
+                        type: string
+                      bank_accounts:
+                        type: array
+                        items: {}
+                      legal_name:
+                        type: string
+                      brand_name:
+                        type: string
+                      registration_number:
+                        type: string
+                      tax_number:
+                        type: string
+                  transaction_data:
+                    type: object
+                    properties:
+                      payment_method:
+                        type: string
+                      flow:
+                        type: string
+                      extra:
+                        type: object
+                      country:
+                        type: string
+                      attempts:
+                        type: array
+                        items: {}
+                  status:
+                    type: string
+                  status_history:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                        timestamp:
+                          type: integer
+                  is_test:
+                    type: boolean
+                  brand_id:
+                    type: string
+                  send_receipt:
+                    type: boolean
+                  is_recurring_token:
+                    type: boolean
+                  skip_capture:
+                    type: boolean
+                  reference_generated:
+                    type: string
+                  issued:
+                    type: string
+                  due:
+                    type: integer
+                  refund_upto:
+                    type: integer
+                  cc_descriptor:
+                    type: string
+                  fraudScore:
+                    type: string
+                  trustScore:
+                    type: string
+                  paidOn:
+                    type: integer
+                  taxAmount:
+                    type: number
+                  surcharge:
+                    type: number
+                  refund_availability:
+                    type: string
+                  refundable_amount:
+                    type: number
+                  success_redirect:
+                    type: string
+                  failure_redirect:
+                    type: string
+                  cancel_redirect:
+                    type: string
+                  success_callback:
+                    type: string
+                  failure_callback:
+                    type: string
+                  platform:
+                    type: string
+                  created_from_ip:
+                    type: string
+                  checkout_url:
+                    type: string
+                  direct_post_url:
+                    type: string
+                  payoutProcess:
+                    type: boolean
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -7,8 +7,9 @@ servers:
 
 paths:
   /api/v1/customer:
-    post:
-      tags: [CREATE CUSTOMER]
+    get:
+      tags: [CUSTOMER]
+      summary: Fetch customer details
       parameters:
         - in: header
           name: Authorization
@@ -26,33 +27,11 @@ paths:
               type: object
               required:
                 - merchantCustomerId
-                - fullName
-                - emailId
-                - dateOfBirth
-                - phoneNo
-                - city
-                - stateCode
-                - zipCode
-                - address
-                - country
-                - custRegDate
-                - successTxn
               properties:
                 merchantCustomerId: { type: string, example: testuser@gmail.com }
-                fullName: { type: string, example: Akshay Singh }
-                emailId: { type: string, format: email, example: testuser@gmail.com }
-                dateOfBirth: { type: string, format: date, example: 1992-11-28 }
-                phoneNo: { type: string, example: "2222222222" }
-                city: { type: string, example: jaipur }
-                stateCode: { type: string, example: ra }
-                zipCode: { type: string, example: 202020 }
-                address: { type: string, example: Mansarovar Jaipur }
-                country: { type: string, example: IN }
-                custRegDate: { type: string, format: date, example: 2024-11-27 }
-                successTxn: { type: integer, example: 32 }
       responses:
         '200':
-          description: Customer Created Successfully
+          description: Customer details retrieved successfully
           content:
             application/json:
               schema:
@@ -79,14 +58,5 @@ paths:
               schema:
                 type: object
                 properties:
-                  message: { type: string, example: Invalid Email Format }
-                  code: { type: string, example: invalid_email }
-        '401':
-          description: Unauthorized / Customer already exists
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message: { type: string, example: Customer already exists with this information }
-                  code: { type: string, example: customer_already_exists }
+                  message: { type: string, example: Customer with this information does not exist }
+                  code: { type: string, example: customer_does_not_exist }

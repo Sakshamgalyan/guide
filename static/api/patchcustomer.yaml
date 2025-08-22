@@ -6,12 +6,17 @@ servers:
   - url: https://api.paysecure.net    
 
 paths:
-  /api/v1/customer:
-    post:
-      tags: [CREATE CUSTOMER]
+  /api/v1/{customerId}/patchCustomer:
+    patch:
+      tags: [CUSTOMER]
+      summary: Update customer details
       parameters:
+        - in: path
+          name: customerId
+          required: true
+          schema: { type: string }
         - in: header
-          name: Authorization
+          name: Authorisation
           required: true
           schema: { type: string }
         - in: header
@@ -24,23 +29,9 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - merchantCustomerId
-                - fullName
-                - emailId
-                - dateOfBirth
-                - phoneNo
-                - city
-                - stateCode
-                - zipCode
-                - address
-                - country
-                - custRegDate
-                - successTxn
               properties:
-                merchantCustomerId: { type: string, example: testuser@gmail.com }
                 fullName: { type: string, example: Akshay Singh }
-                emailId: { type: string, format: email, example: testuser@gmail.com }
+                emailId: { type: string, format: email, example: testuserabcd@gmail.com }
                 dateOfBirth: { type: string, format: date, example: 1992-11-28 }
                 phoneNo: { type: string, example: "2222222222" }
                 city: { type: string, example: jaipur }
@@ -52,26 +43,29 @@ paths:
                 successTxn: { type: integer, example: 32 }
       responses:
         '200':
-          description: Customer Created Successfully
+          description: Customer details updated successfully
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  customerId: { type: string, example: 67c54bff81fd9953719186ff }
-                  merchantCustomerId: { type: string, example: testuser@gmail.com }
+                  customerId: { type: string, example: customerId }
+                  merchatCustomerID: { type: string, example: merchantProvidedCustomerId }
+                  brandId: { type: string, example: brandId }
                   fullName: { type: string, example: Akshay Singh }
-                  emailId: { type: string, example: testuser@gmail.com }
+                  emailId: { type: string, example: testuserabcd@gmail.com }
                   dateOfBirth: { type: string, example: 1992-11-28 }
                   phoneNo: { type: string, example: "2222222222" }
-                  brandID: { type: string, example: db8414b4-e527-4be6-b2bf-df5cb7a646c7 }
                   city: { type: string, example: jaipur }
+                  stateCode: { type: string, example: ra }
                   zipCode: { type: string, example: 202020 }
                   address: { type: string, example: Mansarovar Jaipur }
                   country: { type: string, example: IN }
-                  stateCode: { type: string, example: ra }
+                  createdOn: { type: string, example: 2025-02-27 }
                   custRegDate: { type: string, example: 2024-11-27 }
                   successTrans: { type: integer, example: 32 }
+                  lastActivity: { type: string, example: "" }
+                  lastUpdated: { type: string, example: "" }
         '400':
           description: Bad Request
           content:
@@ -79,14 +73,14 @@ paths:
               schema:
                 type: object
                 properties:
-                  message: { type: string, example: Invalid Email Format }
-                  code: { type: string, example: invalid_email }
-        '401':
-          description: Unauthorized / Customer already exists
+                  message: { type: string, example: Invalid Request }
+                  code: { type: string, example: invalid_request }
+        '404':
+          description: Customer Not Found
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message: { type: string, example: Customer already exists with this information }
-                  code: { type: string, example: customer_already_exists }
+                  message: { type: string, example: Customer not found }
+                  code: { type: string, example: customer_not_found }

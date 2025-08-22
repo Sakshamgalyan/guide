@@ -1,0 +1,47 @@
+openapi: 3.0.3
+info:
+  title: ''
+
+servers:
+  - url: https://api.paysecure.net    
+
+paths:
+  /api/v1/getBalance:
+    post:
+      tags: [Balance]
+      summary: Get balance for a specific payment method
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                paymentMethod:
+                  type: string
+                  example: SPEI
+      responses:
+        '200':
+          description: Successful balance retrieval
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paymentMethod:
+                    type: string
+                    example: SPEI
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        currency:
+                          type: string
+                          example: AUD
+                        balance:
+                          type: string
+                          example: "0.00"

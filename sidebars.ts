@@ -13,6 +13,34 @@ module.exports = {
         'api/interacexpress',
       ],
     },
+    {
+      type: 'category',
+      label: 'Customer APIs',       // Group cashier-apis items
+      items: [
+        'customer/create',
+        'customer/get',
+        'customer/patch',
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Verify Status',       // Group cashier-apis items
+      items: [
+        'verifystatus/payoutstatus',
+        'verifystatus/purchasestatus',
+        'verifystatus/refundstatus',
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Other Apis',       // Group cashier-apis items
+      items: [
+        'otherapi/getbalance',
+        'otherapi/paymentmethod',
+        'otherapi/cancelpurchase',
+      ]
+    },
+    
   ],
   apmDocs: [
     'overview',
