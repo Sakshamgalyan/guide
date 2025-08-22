@@ -26,7 +26,7 @@ export default function CustomFooter() {
                 <ul>
                   <li><Link to="/">Merchant Docs</Link></li>
                   <li><Link to="/docs/overview">Alternative Payment Methods (APM)</Link></li>
-                  <li><Link to="/docs/create">Set-up & optimize APMs</Link></li>
+                  <li><Link to="/">Set-up & optimize APMs</Link></li>
                 </ul>
                 </div>
 
