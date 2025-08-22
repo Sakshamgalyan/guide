@@ -112,7 +112,7 @@ export default function Home(): ReactNode {
                 </div>
               </Link>
 
-              <Link to='/docs/create' className={styles.docs}>
+              <Link to='/' className={styles.docs}>
                 <div className={styles.docsHeader}>
                   <img src="/img/api.svg" alt="" className={`${styles.docsIcon}  ${styles.activedocsIcon3}` } />
                   <img src="/img/nohoverarrow.svg" alt="" className={styles.arrowIcon} />
