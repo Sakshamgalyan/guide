@@ -281,6 +281,10 @@
   }
 }
 
+.activeCard:hover {
+  background-image: url('/img/bgcard1.svg');
+}
+
 .activeCard:hover span{
   color: #5a23b6;
 }

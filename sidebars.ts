@@ -1,9 +1,8 @@
 module.exports = {
   api: [
-    // 'create',
     {
       type: 'category',
-      label: 'PayIn APIs',       // Group cashier-apis items
+      label: 'PayIn APIs',     
       items: [
         'api/cryptobridge',
         'api/mobilemoney',
@@ -15,7 +14,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Customer APIs',       // Group cashier-apis items
+      label: 'Customer APIs',     
       items: [
         'customer/create',
         'customer/get',
@@ -24,7 +23,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Verify Status',       // Group cashier-apis items
+      label: 'Verify Status',     
       items: [
         'verifystatus/payoutstatus',
         'verifystatus/purchasestatus',
@@ -33,60 +32,78 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Other Apis',       // Group cashier-apis items
+      label: 'Other Apis',     
       items: [
         'otherapi/getbalance',
         'otherapi/paymentmethod',
         'otherapi/cancelpurchase',
       ]
     },
-    
+
   ],
   apmDocs: [
-    'overview',
-    'environments',
-    'Integration Steps',
-    'Webhook',
-    'Status and Error Codes',
     {
-      type: 'html',
-      value: '<div class="sidebar-section-label">Payment Methods</div>',
+      type: "doc",
+      id: "overview",
+      label: "Overview",
+    },
+    {
+      type: "doc",
+      id: "environments",
+      label: "Environments",
+    },
+    {
+      type: "doc",
+      id: "Integration Steps",
+      label: "Integration Steps",
+    },
+    {
+      type: "doc",
+      id: "Webhook",
+      label: "Webhook",
+    },
+    {
+      type: "doc",
+      id: "Status and Error Codes",
+      label: "Status and Error Codes",
     },
     {
       type: 'category',
-      label: 'Alternative Payment Methods',
-      className: 'sidebar-alternative',
+      // id: 'Payment Methods',
+      label: 'Payment Methods',
       items: [
-        'apm/Cards',
-        'apm/Interac E-Transfer',
-        'apm/Interac Express',
-        'apm/PIX',
-        'apm/Mobile Money',
-        'apm/SPEI',
-        'apm/Neosurf',
-        'apm/Crypto Bridge',
-        'apm/Crypto Wallet',
-        'apm/FawryPay',
-        'apm/PayID',
-        'apm/Bank Transfer',
-        'apm/OnRamp',
-        'apm/Openbanking',
+        {
+          type: 'category',
+          label: 'Banks',
+          items: [
+            'apm/Cards',
+            'apm/Bank Transfer',
+            'apm/OnRamp',
+            'apm/Openbanking',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Alternative Payment Methods',
+          items: [
+            'apm/Interac E-Transfer',
+            'apm/Interac Express',
+            'apm/PIX',
+            'apm/Mobile Money',
+            'apm/SPEI',
+            'apm/Neosurf',
+            'apm/Crypto Bridge',
+            'apm/Crypto Wallet',
+            'apm/FawryPay',
+            'apm/PayID',
+          ],
+        },
       ],
     },
     {
       type: 'category',
-      label: 'Cards',
-      className: 'sidebar-cards',
-      items: [
-        'apm/Cards',
-        'apm/Bank Transfer',
-        'apm/OnRamp',
-        'apm/Openbanking',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Trust-Score',       // Group cashier-apis items
+      // id: 'Trust-Score',
+      label: 'Trust-Score',
       items: [
         'trust-score/trustScoreDetailed',
         'trust-score/checkTransactionAllowed',
@@ -94,10 +111,11 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Cashier APIs',       // Group cashier-apis items
+      // id: 'Cashier APIs',
+      label: 'Cashier APIs',
       link: {
         type: 'doc',
-        id: 'cashier-apis/cashier-apis', // ← shows index.md content when clicking "Cashier APIs"
+        id: 'cashier-apis/cashier-apis',
       },
       items: [
         'cashier-apis/create-customer',
@@ -106,7 +124,7 @@ module.exports = {
         'cashier-apis/Payin',
         'cashier-apis/Payout',
         'cashier-apis/Check-Status',
-      
+
       ],
     },
   ],
