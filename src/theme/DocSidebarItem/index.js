@@ -3,6 +3,7 @@ import clsx from "clsx";
 import {useLocation} from "@docusaurus/router";
 import iconMap from "./iconMap";
 import {ChevronDown, ChevronRight} from "lucide-react";
+import Link from "@docusaurus/Link";
 
 export default function DocSidebarItemLink({item}) {
   const {href, label, className, type, items} = item;
@@ -72,17 +73,17 @@ export default function DocSidebarItemLink({item}) {
   // 📄 Normal doc/link
   return (
     <li className="menu__list-item">
-      <a
+      <Link
         className={clsx(
           "menu__link sidebar-link-with-icon",
           className,
           active && "menu__link--active"
         )}
-        href={href}
+        to={href}
       >
         {iconSrc && <img src={iconSrc} alt="" className="sidebar-icon" />}
         <span className="sidebar-text">{label}</span>
-      </a>
+      </Link>
     </li>
   );
 }

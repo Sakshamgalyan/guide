@@ -1,4 +1,8 @@
-# Cashier-APIs
+---
+id: cashier-apis
+title: Cashier APIs
+slug: /cashier-apis
+---
 
 ### **Overview**
 

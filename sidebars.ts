@@ -69,7 +69,6 @@ module.exports = {
     },
     {
       type: 'category',
-      // id: 'Payment Methods',
       label: 'Payment Methods',
       items: [
         {
@@ -102,7 +101,6 @@ module.exports = {
     },
     {
       type: 'category',
-      // id: 'Trust-Score',
       label: 'Trust-Score',
       items: [
         'trust-score/trustScoreDetailed',
@@ -111,7 +109,6 @@ module.exports = {
     },
     {
       type: 'category',
-      // id: 'Cashier APIs',
       label: 'Cashier APIs',
       link: {
         type: 'doc',
